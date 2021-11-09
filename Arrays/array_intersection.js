@@ -1,4 +1,4 @@
-//Given two integer arrays nums1 and nums2, return an
+// Given two integer arrays nums1 and nums2, return an
 // array of their intersection. Each element in the result 
 // must appear as many times as it shows in both arrays and 
 // you may return the result in any order.
@@ -12,8 +12,8 @@
  * @return {number[]}
 */
 var intersect = function(nums1, nums2) {
-  nums1.sort();
-  nums2.sort();
+  nums1.sort((a,b) => a-b);
+  nums2.sort((a,b) => a-b);
   let i = 0;
   let j = 0;
   let arrayIntersection = new Array();
