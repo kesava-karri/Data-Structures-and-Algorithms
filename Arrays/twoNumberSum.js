@@ -30,4 +30,24 @@ function twoNumberSum(array, targetSum) {
 	return [];
 }
 
+// Using two pointer
+function twoNumberSum(array, targetSum) {
+	array.sort((a, b) => a - b);
+
+	let leftPointer = 0;
+	let rightPointer = array.length - 1;
+	// loop until left is less than right
+	while(leftPointer < rightPointer) {
+		// Decrease the right pointer when the sum is greater than target sum
+		if (array[leftPointer] + array[rightPointer] > targetSum) {
+			rightPointer--;
+		} else if (array[leftPointer] + array[rightPointer] < targetSum) {
+			leftPointer++;
+		} else {
+			return [array[leftPointer], array[rightPointer]];
+		}
+	}
+	return [];
+}
+
 twoNumberSum([1,2,3,-1], 3);
