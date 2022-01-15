@@ -1,4 +1,5 @@
 // Naive approach (Brute-force)
+// Time Complexity: O(n*n); Space Complexity: O(1)
 function twoNumberSum(array, targetSum) {
 	// console.log('array', array);
 	// console.log('targetSum', targetSum);
@@ -15,6 +16,7 @@ function twoNumberSum(array, targetSum) {
 
 
 // Using Hash Table
+// Time Complexity: O(n); Space Complexity: O(n)
 function twoNumberSum(array, targetSum) {
 	let obj = {};
 	for (let i = 0; i < array.length; i++) {
@@ -31,6 +33,7 @@ function twoNumberSum(array, targetSum) {
 }
 
 // Using two pointer
+// Time Complexity: O(nlog(n)); Space Complexity: O(1)
 function twoNumberSum(array, targetSum) {
 	array.sort((a, b) => a - b);
 
