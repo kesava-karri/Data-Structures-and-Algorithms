@@ -4,15 +4,15 @@
 // It does not matter what you leave beyond the returned k (hence they are underscores).
 
 var removeDuplicates = function(nums) {
-    let j = 0;
-    nums.forEach(item => {
-      if (nums[j] !== item) {
-        j++;
-        nums[j] = item;
-      }
-    })
-    return j+1;
-  };
-  
-  
-  console.log(removeDuplicates([1,1,1,2,3]));
+		let j = 0;
+		nums.forEach(item => {
+			if (nums[j] !== item) {
+				j++;
+				nums[j] = item;
+			}
+		})
+		return j+1;
+	};
+	
+	
+	console.log(removeDuplicates([1,1,1,2,3]));

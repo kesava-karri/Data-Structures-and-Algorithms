@@ -13,9 +13,9 @@
 
 // 
  var rotate = function(nums, k) {
-    const temp = nums.splice(nums.length - k);
-    nums.unshift(...temp);
-    return nums
-  };
-  
-  console.log(rotate([1,2,3,4,5,6,7], 3));
+		const temp = nums.splice(nums.length - k);
+		nums.unshift(...temp);
+		return nums
+	};
+	
+	console.log(rotate([1,2,3,4,5,6,7], 3));
