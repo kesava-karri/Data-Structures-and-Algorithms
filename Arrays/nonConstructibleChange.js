@@ -5,7 +5,7 @@ function nonConstructibleChange(coins) {
 
   for (let i = 0; i < coins.length; i++) {
     if (coins[i] > currentChange + 1) return currentChange + 1;
-    currentChange += coins[i];
+    else currentChange += coins[i];
   }
   return currentChange + 1;
 }
