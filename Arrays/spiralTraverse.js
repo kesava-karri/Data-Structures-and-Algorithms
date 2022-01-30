@@ -1,3 +1,4 @@
+// Time Complexity: O(n); Space Complexity: O(n);
 function spiralTraverse(array) {
 	let result = [];
 	let startRow = 0;
