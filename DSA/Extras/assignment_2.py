@@ -1,3 +1,150 @@
+class ThreeConsecutiveOddsQ5:
+    def alt_approach_1(arr: list[int]) -> bool:
+        count = 0
+        idx = 0
+
+        while idx < len(arr):
+            if arr[idx] % 2 == 0:
+                count = 0
+            else:
+                count += 1
+                if count == 3:
+                    return True
+            idx += 1
+        return False
+
+    def alt_approach(arr: list[int]) -> bool:
+        count = 0
+        idx = 0
+
+        while count < 3 and idx < len(arr):
+            if arr[idx] % 2 != 0:
+                count += 1
+            else:
+                count = 0
+            idx += 1
+        return count == 3
+
+    def brute_force(arr: list[int]) -> bool:
+        count = 0
+
+        for i in range(len(arr)):
+            if arr[i] % 2 != 0:
+                count += 1
+                if count == 3:
+                    return True
+            else:
+                count = 0
+        return False
+
+q5Obj = ThreeConsecutiveOddsQ5
+print(q5Obj.alt_approach([2,6,4,1]))
+
+print(q5Obj.brute_force([2,6,4,1]))
+print(q5Obj.brute_force([1,2,34,3,4,5,7,23,12]))
+
+
+class MinAbsoluteDifferenceQ4:
+    def alt_approach(arr: list[int]) -> list[list[int]]:
+        minDiff = float("inf")
+        result = []
+
+        arr.sort()
+
+        for i in range(1, len(arr)):
+            currentDiff = arr[i] - arr[i - 1]
+            if currentDiff < minDiff:
+                minDiff = currentDiff
+                result = []
+            if currentDiff == minDiff:
+                result.append([arr[i - 1], arr[i]])
+
+        return result
+
+    def not_sure_bubble_sort(arr: list[int]) -> list[list[int]]:
+        minDiff = float("inf")
+        result = []
+        swapped = True
+
+        while swapped:
+            swapped = False
+            for i in range(1, len(arr)):
+                if arr[i - 1] > arr[i]:
+                    temp = arr[i - 1]
+                    arr[i - 1] = arr[i]
+                    arr[i] = temp
+                    swapped = True
+
+        for i in range(1, len(arr)):
+            currentDiff = arr[i] - arr[i - 1]
+            if currentDiff < minDiff:
+                minDiff = currentDiff
+
+        for i in range(1, len(arr)):
+            currentDiff = arr[i] - arr[i - 1]
+            if currentDiff == minDiff:
+                result.append([arr[i - 1], arr[i]])
+
+        return result
+
+    def brute_force(arr: list[int]) -> list[list[int]]:
+        minDiff = float("inf")
+        result = []
+        
+        for i in range(len(arr)):
+            for j in range(i, len(arr)):
+                if arr[i] > arr[j]:
+                    temp = arr[j]
+                    arr[j] = arr[i]
+                    arr[i] = temp
+
+        for i in range(1, len(arr)):
+            currentDiff = arr[i] - arr[i - 1]
+            if currentDiff < minDiff:
+                minDiff = currentDiff
+
+        for i in range(1, len(arr)):
+            currentDiff = arr[i] - arr[i - 1]
+            if currentDiff == minDiff:
+                result.append([arr[i - 1], arr[i]])
+
+        return result
+
+    def builtins(arr: list[int]) -> list[list[int]]:
+        arr.sort()
+        minDiff = float("inf")
+        result = []
+
+        for i in range(1, len(arr)):
+            currentDiff = arr[i] - arr[i - 1]
+            if currentDiff < minDiff:
+                minDiff = currentDiff
+
+        for i in range(1, len(arr)):
+            currentDiff = arr[i] - arr[i - 1]
+            if currentDiff == minDiff:
+                result.append([arr[i - 1], arr[i]])
+
+        return result
+
+q4Obj= MinAbsoluteDifferenceQ4
+
+"""
+print(q4Obj.not_sure_bubble_sort([4,2,1,3]))
+print(q4Obj.not_sure_bubble_sort([1,3,6,10,15]))
+print(q4Obj.not_sure_bubble_sort([3,8,-10,23,19,-4,-14,27]))
+
+
+print(q4Obj.brute_force([4,2,1,3]))
+print(q4Obj.brute_force([1,3,6,10,15]))
+print(q4Obj.brute_force([3,8,-10,23,19,-4,-14,27]))
+
+print(q4Obj.builtins([4,2,1,3]))
+print(q4Obj.builtins([1,3,6,10,15]))
+print(q4Obj.builtins([3,8,-10,23,19,-4,-14,27]))
+"""
+
+
 class JewelsAndStonesQ3:
     def solution(jewels: str, stones: str) -> int:
         jewelsSet = set(jewels)
@@ -26,7 +173,7 @@ class JewelsAndStonesQ3:
         return count
         
 q3Obj = JewelsAndStonesQ3
-print(q3Obj.solution("aA", "aAAbbbb"))
+# print(q3Obj.solution("aA", "aAAbbbb"))
 # print(q3Obj.alt_approach("aA", "aAAbbbb"))
 # print(q3Obj.brute_force("aA", "aAAbbbb"))
 
