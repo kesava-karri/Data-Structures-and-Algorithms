@@ -1,3 +1,23 @@
+class TransposeMatrixQ6:
+    def brute_force(matrix: list[list[int]]) -> list[list[int]]:
+        # Since it's transpose, the rows of transpose matrix will be the columns of matrix
+        new_rows = len(matrix[0]) # old columns
+        new_columns = len(matrix) # old rows
+        result = []
+
+        for j in range(new_rows):
+            row = []
+            for i in range(new_columns):
+                row.append(matrix[i][j])
+            result.append(row)
+        return result
+            
+
+
+q6Obj = TransposeMatrixQ6
+print(q6Obj.brute_force(matrix = [[1,2,3],[4,5,6],[7,8,9]]))
+print(q6Obj.brute_force(matrix = [[1,2,3],[4,5,6]]))
+
 class ThreeConsecutiveOddsQ5:
     def alt_approach_1(arr: list[int]) -> bool:
         count = 0
@@ -38,10 +58,10 @@ class ThreeConsecutiveOddsQ5:
         return False
 
 q5Obj = ThreeConsecutiveOddsQ5
-print(q5Obj.alt_approach([2,6,4,1]))
+# print(q5Obj.alt_approach([2,6,4,1]))
 
-print(q5Obj.brute_force([2,6,4,1]))
-print(q5Obj.brute_force([1,2,34,3,4,5,7,23,12]))
+# print(q5Obj.brute_force([2,6,4,1]))
+# print(q5Obj.brute_force([1,2,34,3,4,5,7,23,12]))
 
 
 class MinAbsoluteDifferenceQ4:
