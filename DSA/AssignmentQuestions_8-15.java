@@ -58,7 +58,8 @@ class MaxOfThreeQ1 {
     }
 }
 
-public class Main {
+class Main {
+
     public static void main(String[] args) {
         // int q3Median = new MedianElementQ3().usingMinAndMax(new int[] { 2, 5, 19 });
         int[] q3Median = new MedianElementQ3().bruteForce(new int[] { 10, 30, 20, 40 });
