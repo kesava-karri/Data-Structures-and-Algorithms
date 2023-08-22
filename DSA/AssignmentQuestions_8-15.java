@@ -1,3 +1,69 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class FirstEvenNumberQ8 {
+    public static int bruteForce(int[] nums) {
+        for (int num : nums) {
+            if (num % 2 == 0)
+                return num;
+        }
+        return -1;
+    }
+}
+
+class SumOfElementsQ7 {
+    public static int bruteForce(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        return sum;
+    }
+
+    public static int builtins(int[] nums) {
+        return Arrays.stream(nums).sum();
+    }
+}
+
+class OddElementsQ6 {
+    public static ArrayList<Integer> bruteForce(int[] nums) {
+        int lengthOfArray = nums.length;
+
+        // For dynamic re-size use ArrayList :)
+        ArrayList<Integer> result = new ArrayList<Integer>();
+
+        for (int i = 0; i < lengthOfArray; i++) {
+            int currentElement = nums[i];
+            if (currentElement % 2 != 0) {
+                result.add(currentElement);
+            }
+        }
+        return result;
+    }
+}
+
+class SeriesQ5 {
+    public static void bruteForce(int n) {
+        for (int i = n; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                System.out.print(j + 1);
+            }
+            System.out.println();
+        }
+    }
+}
+
+class SeriesQ4 {
+    public static void bruteForce(int n) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print(j + 1);
+            }
+            System.out.println();
+        }
+    }
+}
+
 class MedianElementQ3 {
     public int[] bruteForce(int[] elements) {
         int lengthOfElements = elements.length;
@@ -59,20 +125,37 @@ class MaxOfThreeQ1 {
 }
 
 class Main {
-
     public static void main(String[] args) {
-        // int q3Median = new MedianElementQ3().usingMinAndMax(new int[] { 2, 5, 19 });
-        int[] q3Median = new MedianElementQ3().bruteForce(new int[] { 10, 30, 20, 40 });
-        for (int i : q3Median) {
-            System.out.println(i);
-        }
+        System.out.println(FirstEvenNumberQ8.bruteForce(new int[] { 1, 2, 6, 3, 5 }));
+        System.out.println(FirstEvenNumberQ8.bruteForce(new int[] { 1, 7, 9, 3, 5 }));
+        System.out.println(FirstEvenNumberQ8.bruteForce(new int[] { 1, 7, 4, 8, 5 }));
 
-        MinOfThreeQ2 q2Obj = new MinOfThreeQ2();
+        // System.out.println(SumOfElementsQ7.builtins(new int[] { 1, 2, 6, 3, 5 }));
+        // System.out.println(SumOfElementsQ7.bruteForce(new int[] { 1, 2, 6, 3, 5 }));
+
+        // System.out.println(
+        // OddElementsQ6.bruteForce(new int[] { 1, 5, 6, 4, 3, 2, 8})
+        // );
+
+        // SeriesQ5.bruteForce(5);
+
+        // SeriesQ4.bruteForce(5);
+
+        /*
+         * int q3Median = new MedianElementQ3().usingMinAndMax(new int[] { 2, 5, 19 });
+         * int[] q3Median = new MedianElementQ3().bruteForce(new int[] { 10, 30, 20, 40
+         * });
+         * for (int i : q3Median) {
+         * System.out.println(i);
+         * }
+         */
+
+        // MinOfThreeQ2 q2Obj = new MinOfThreeQ2();
         // System.out.println(q2Obj.bruteForce(new int[] { 1, 4, 5 }));
         // System.out.println(q2Obj.bruteForce(new int[] { 4, 2, 5 }));
         // System.out.println(q2Obj.bruteForce(new int[] { 4, 5, 3 }));
 
-        MaxOfThreeQ1 q1Obj = new MaxOfThreeQ1();
+        // MaxOfThreeQ1 q1Obj = new MaxOfThreeQ1();
         // System.out.println(q1Obj.bruteForce(new int[] { 1, 2, 10 }));
         // System.out.println(q1Obj.bruteForce(new int[] { 20, 1, 2 }));
         // System.out.println(q1Obj.bruteForce(new int[] { 1, 30, 2 }));
