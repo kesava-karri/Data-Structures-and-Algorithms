@@ -1,5 +1,17 @@
 import java.util.Arrays;
 
+class RunningSumQ2 {
+    public static int[] solution(int[] nums) {
+        // Time Complexity: O(n); Space Complexity: O(1)
+        int temp = 0;
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = nums[i] + temp;
+            temp = nums[i];
+        }
+        return nums;
+    }
+}
+
 class MaximumWealthQ1 {
     public static int bruteForce(int[][] accounts) {
         // Time Complexity: O(n * m) ; n is the length of individual accounts, m is length of accounts array
@@ -44,6 +56,10 @@ class MaximumWealthQ1 {
 
 class Main {
     public static void main(String[] args) {
+        System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 1, 2, 3, 4 })));
+        System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 1, 1, 1, 1, 1 })));
+        System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 3, 1, 2, 10, 1 })));
+
         // System.out.println(MaximumWealthQ1.bruteForce(new int[][] { { 1, 2, 3 }, { 3, 2, 1 } }));
         // System.out.println(MaximumWealthQ1.bruteForce(new int[][] { { 1, 5 }, { 7, 3 }, { 3, 5 } }));
         // System.out.println(MaximumWealthQ1.bruteForce(new int[][] { { 2, 8, 7 }, { 7, 1, 3 }, { 1, 9, 5 } }));
