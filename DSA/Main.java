@@ -1,4 +1,43 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+class JewelsAndStonesQ3 {
+    public static int solution(String jewels, String stones) {
+        // Time Complexity: O(n + m) -> n, m are lengths of jewels & stones respectively.
+        // Space Complexity: O(n) -> n is length of jewels
+        int jewelsInStones = 0;
+        Map<Character, Integer> JewelsMap = new HashMap<Character, Integer>();
+
+        for (int i = 0; i < jewels.length(); i++) {
+            char jewel = jewels.charAt(i);
+            if (!JewelsMap.containsKey(jewel)) {
+                JewelsMap.put(jewel, 0);
+            }
+        }
+
+        for (int i = 0; i < stones.length(); i++) {
+            if (JewelsMap.containsKey(stones.charAt(i))) {
+                jewelsInStones += 1;
+            }
+        }
+        return jewelsInStones;
+    }
+
+    public static int builtins(String jewels, String stones) {
+        // Time Complexity: O(n * m); n, m are jewels & stones length respectively
+        // Space Complexity: O(1)
+        int jewelsInStones = 0;
+        for (String jewel : jewels.split("")) {
+            for (String stone : stones.split("")) {
+                if (stone.equals(jewel)) {
+                    jewelsInStones++;
+                }
+            }
+        }
+        return jewelsInStones;
+    }
+}
 
 class RunningSumQ2 {
     public static int[] solution(int[] nums) {
@@ -56,9 +95,14 @@ class MaximumWealthQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 1, 2, 3, 4 })));
-        System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 1, 1, 1, 1, 1 })));
-        System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 3, 1, 2, 10, 1 })));
+        System.out.println(JewelsAndStonesQ3.solution("aA", "aAAbbbb"));
+        System.out.println(JewelsAndStonesQ3.solution("z", "ZZ"));
+        // System.out.println(JewelsAndStonesQ3.builtins("aA", "aAAbbbb"));
+        // System.out.println(JewelsAndStonesQ3.builtins("z", "ZZ"));
+
+        // System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 1, 2, 3, 4 })));
+        // System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 1, 1, 1, 1, 1 })));
+        // System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 3, 1, 2, 10, 1 })));
 
         // System.out.println(MaximumWealthQ1.bruteForce(new int[][] { { 1, 2, 3 }, { 3, 2, 1 } }));
         // System.out.println(MaximumWealthQ1.bruteForce(new int[][] { { 1, 5 }, { 7, 3 }, { 3, 5 } }));
