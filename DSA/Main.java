@@ -1,6 +1,30 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+class MinimumAbsoluteDifferenceQ4 {
+    public static List<List<Integer>> builtins(int[] arr) {
+        // Time Complexity: O(nlogn + n) ≈ O(nlogn)
+        // Space Complexity: O(n)
+        int minDifference = Integer.MAX_VALUE;
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+
+        Arrays.sort(arr); // nlogn
+        for (int i = 1; i < arr.length; i++) { // n
+            int currentDiffernce = arr[i] - arr[i - 1];
+            if (currentDiffernce > minDifference) {
+                continue;
+            } else if (currentDiffernce < minDifference) {
+                result.clear();
+                minDifference = currentDiffernce;
+            }
+            result.add(Arrays.asList(arr[i - 1], arr[i]));
+        }
+        return result;
+    }
+}
 
 class JewelsAndStonesQ3 {
     public static int solution(String jewels, String stones) {
@@ -95,8 +119,12 @@ class MaximumWealthQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(JewelsAndStonesQ3.solution("aA", "aAAbbbb"));
-        System.out.println(JewelsAndStonesQ3.solution("z", "ZZ"));
+        // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 4, 2, 1, 3 }));
+        // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 1, 3, 6, 10, 15 }));
+        System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 3, 8, -10, 23, 19, -4, -14, 27 }));
+
+        // System.out.println(JewelsAndStonesQ3.solution("aA", "aAAbbbb"));
+        // System.out.println(JewelsAndStonesQ3.solution("z", "ZZ"));
         // System.out.println(JewelsAndStonesQ3.builtins("aA", "aAAbbbb"));
         // System.out.println(JewelsAndStonesQ3.builtins("z", "ZZ"));
 
