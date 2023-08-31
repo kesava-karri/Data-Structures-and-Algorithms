@@ -4,6 +4,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+class TransposeMatrixQ6 {
+    public static int[][] bruteForce(int[][] matrix) {
+        // Time Complexity: O(n * m); Space Complexity: O(m * n)
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int[][] transposeMatrix = new int[columns][rows]; // old rows would be new columns
+
+        for (int row = 0; row < rows; row++) {
+            for (int column = 0; column < columns; column++) {
+                transposeMatrix[column][row] = matrix[row][column];
+            }
+        }
+        return transposeMatrix;
+    }
+}
+
 class ThreeConsecutiveOddsQ5 {
     public static boolean altApproach(int[] arr) {
         // Time Complexity: O(n); Space Complexity: O(1)
@@ -149,12 +165,17 @@ class MaximumWealthQ1 {
 
 class Main {
     public static void main(String[] args) {
+        System.out.println(Arrays
+                .deepToString(TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } })));
+        System.out.println(Arrays
+                .deepToString(TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 } })));
+
         // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 2, 6, 4, 1 }));
         // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
         // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 1, 1 }));
-        System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 2, 6, 4, 1 }));
-        System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
-        System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 1, 1 }));
+        // System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 2, 6, 4, 1 }));
+        // System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
+        // System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 1, 1 }));
 
         // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 4, 2, 1, 3 }));
         // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 1, 3, 6, 10, 15 }));
