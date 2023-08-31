@@ -4,6 +4,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+class ThreeConsecutiveOddsQ5 {
+    public static boolean altApproach(int[] arr) {
+        // Time Complexity: O(n); Space Complexity: O(1)
+        for (int i = 1; i < arr.length - 1; i++) {
+            if (arr[i - 1] % 2 != 0
+                    && arr[i] % 2 != 0
+                    && arr[i + 1] % 2 != 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean bruteForce(int[] arr) {
+        // Time Complexity: O(n); Space Complexity: O(1)
+        int oddNumCounter = 0;
+        for (int num : arr) {
+            if (num % 2 != 0) {
+                oddNumCounter++;
+                if (oddNumCounter == 3) {
+                    return true;
+                }
+            } else {
+                oddNumCounter = 0;
+            }
+        }
+        return false;
+    }
+}
+
 class MinimumAbsoluteDifferenceQ4 {
     public static List<List<Integer>> builtins(int[] arr) {
         // Time Complexity: O(nlogn + n) ≈ O(nlogn)
@@ -119,9 +149,16 @@ class MaximumWealthQ1 {
 
 class Main {
     public static void main(String[] args) {
+        // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 2, 6, 4, 1 }));
+        // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
+        // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 1, 1 }));
+        System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 2, 6, 4, 1 }));
+        System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
+        System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 1, 1 }));
+
         // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 4, 2, 1, 3 }));
         // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 1, 3, 6, 10, 15 }));
-        System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 3, 8, -10, 23, 19, -4, -14, 27 }));
+        // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 3, 8, -10, 23, 19, -4, -14, 27 }));
 
         // System.out.println(JewelsAndStonesQ3.solution("aA", "aAAbbbb"));
         // System.out.println(JewelsAndStonesQ3.solution("z", "ZZ"));
