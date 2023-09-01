@@ -4,6 +4,65 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+class MoveZeroesQ8 {
+    public static void approach1(int[] nums) {
+        // Time Complexity: O(n)
+        // Auxiliary space: O(1)
+        int ptr = 0; // A pointer at the starting Index; also behaves as non zero counter
+        int length = nums.length;
+        for (int num : nums) {
+            if (num != 0) {
+                nums[ptr] = num;
+                ptr++;
+            }
+        }
+
+        int availableZeroes = length - ptr;
+        while (availableZeroes > 0) {
+            nums[length - 1] = 0;
+            availableZeroes--;
+            length--;
+        }
+        System.out.println(Arrays.toString(nums));
+    }
+}
+
+class MajorityElementQ7 {
+    public static int altApproach(int[] nums) {
+        // Time Complexity: O(n)
+        // Space Complexity: O(n)
+        Map<Integer, Integer> occurenceMap = new HashMap<Integer, Integer>();
+        int occurenceNeeded = nums.length / 2;
+        // In this approach we are avoiding both containsKey & containsValue which take most time.
+        for (int num : nums) {
+            occurenceMap.putIfAbsent(num, 0);
+            occurenceMap.put(num, occurenceMap.get(num) + 1);
+            if (occurenceMap.get(num) > occurenceNeeded) {
+                return num;
+            }
+        }
+        return -1;
+    }
+
+    public static int bruteForce(int[] nums) {
+        // Time complexity: O(n* (n + n)) ~ O(n^2)
+        // Space complexity: O(n)
+        Map<Integer, Integer> occurenceMap = new HashMap<Integer, Integer>();
+        int occurenceNeeded = nums.length / 2;
+        for (int num : nums) {
+            if (!occurenceMap.containsKey(num)) { // O(n)
+                occurenceMap.put(num, 0);
+            } else {
+                occurenceMap.put(num, occurenceMap.get(num) + 1);
+            }
+            if (occurenceMap.containsValue(occurenceNeeded)) { // O(n)
+                return num;
+            }
+        }
+        return -1;
+    }
+}
+
 class TransposeMatrixQ6 {
     public static int[][] bruteForce(int[][] matrix) {
         // Time Complexity: O(n * m); Space Complexity: O(m * n)
@@ -165,10 +224,18 @@ class MaximumWealthQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(Arrays
-                .deepToString(TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } })));
-        System.out.println(Arrays
-                .deepToString(TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 } })));
+        MoveZeroesQ8.approach1(new int[] { 0, 1, 0, 3, 12 });
+        MoveZeroesQ8.approach1(new int[] { 0 });
+
+        // System.out.println(MajorityElementQ7.bruteForce(new int[] { 3, 2, 3 }));
+        // System.out.println(MajorityElementQ7.bruteForce(new int[] { 2, 2, 1, 1, 1, 2, 2 }));
+        // System.out.println(MajorityElementQ7.altApproach(new int[] { 3, 2, 3 }));
+        // System.out.println(MajorityElementQ7.altApproach(new int[] { 2, 2, 1, 1, 1, 2, 2 }));
+
+        // System.out.println(Arrays
+        //         .deepToString(TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } })));
+        // System.out.println(Arrays
+        //         .deepToString(TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 } })));
 
         // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 2, 6, 4, 1 }));
         // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
