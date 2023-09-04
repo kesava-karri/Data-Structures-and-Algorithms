@@ -1,5 +1,88 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+
+class MergeSortedArrayQ3 {
+    static void solution(int[] nums1, int m, int[] nums2, int n) {
+        // TC: O(nlogn); SC: O(1)
+        int j = 0;
+        for (int i = m; i < m + n; i++) {
+            nums1[i] = nums2[j];
+            j++;
+        }
+        Arrays.sort(nums1);
+    }
+
+    static void attempt1(int[] nums1, int m, int[] nums2, int n) {
+        int i = 0;
+        int j = 0;
+
+        if (n == 0) {
+            System.out.println(Arrays.toString(nums1));
+            return;
+        }
+        if (m == 0) {
+            while (n-- > 0) {
+                nums1[n] = nums2[n];
+                System.out.println(Arrays.toString(nums1));
+                return;
+            }
+        }
+
+        for (int k = 0; k < m; k++) {
+            if (nums1[i] <= nums2[j]) {
+                i++;
+            } else if (nums2[j] < nums1[i]) {
+                int temp = nums1[i];
+                nums1[i] = nums2[j];
+                nums2[j] = temp;
+            }
+            System.out.println("nums1: " + Arrays.toString(nums1));
+            System.out.println("nums2: " + Arrays.toString(nums2));
+        }
+
+        for (int p = m; p < m + n; p++) {
+            nums1[p] = nums2[j];
+            j++;
+        }
+        System.out.println(Arrays.toString(nums1));
+    }
+
+    static void notAccepted(int[] nums1, int m, int[] nums2, int n) {
+        List<Integer> result = new ArrayList<Integer>();
+        int i = 0;
+        int j = 0;
+
+        if (n == 0) {
+            System.out.println(Arrays.toString(nums1));
+            return;
+        }
+        if (m == 0) {
+            nums1 = nums2;
+            System.out.println(Arrays.toString(nums1));
+            return;
+        }
+
+        for (int k = 0; k < m + n; k++) {
+            if (nums1[i] == 0) {
+                result.add(nums2[j]);
+                j++;
+            } else if (nums1[i] <= nums2[j]) {
+                result.add(k, nums1[i]);
+                i++;
+            } else if (nums2[j] < nums1[i]) {
+                result.add(k, nums2[j]);
+                j++;
+            }
+        }
+        for (int k = 0; k < m + n; k++) {
+            nums1[k] = result.get(k);
+        }
+        // nums1 = result.stream().mapToInt(Integer::intValue).toArray();
+        System.out.println(Arrays.toString(nums1));
+    }
+}
 
 class TwoSumIIQ2 {
     // Note: Given array is sorted in non-decreasing order & it's 1-indexed array
@@ -168,6 +251,12 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
+        // MergeSortedArrayQ3.bruteForce(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
+        // MergeSortedArrayQ3.bruteForce(new int[] { 1 }, 1, new int[] {}, 0);
+        // MergeSortedArrayQ3.bruteForce(new int[] { 0 }, 0, new int[] { 1 }, 1);
+        // MergeSortedArrayQ3.bruteForce(new int[] { 4,5,6,0,0,0 }, 3, new int[] { 1,2,3 }, 3);
+        // MergeSortedArrayQ3.solution(new int[] { 4, 5, 6, 0, 0, 0 }, 3, new int[] { 1, 2, 3 }, 3);
+
         // System.out.println(Arrays.toString(TwoSumIIQ2.usingTwoPointers(new int[] { 2, 7, 11, 15 }, 9)));
         // System.out.println(Arrays.toString(TwoSumIIQ2.usingTwoPointers(new int[] { 2, 3, 4 }, 6)));
         // System.out.println(Arrays.toString(TwoSumIIQ2.usingTwoPointers(new int[] { -1, 0 }, -1)));
