@@ -4,6 +4,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+class PascalsTriangleQ5 {
+    static List<Integer> bruteForce(int rowIndex) {
+        int[][] result = new int[rowIndex + 1][rowIndex + 1];
+        for (int line = 0; line <= rowIndex; line++) {
+            int[] temp = new int[line + 1];
+            for (int i = 0; i <= line; i++) {
+                if (i == 0 || i == line) {
+                    temp[i] = 1;
+                } else {
+                    temp[i] = result[line - 1][i - 1] + result[line - 1][i];
+                }
+            }
+            result[line] = temp;
+        }
+        int[] necessaryRow = result[rowIndex];
+        return Arrays.stream(necessaryRow).map(i -> Integer.valueOf(i)).boxed().collect(Collectors.toList());
+    }
+}
+
 class PascalsTriangleQ4 {
     static List<List<Integer>> check(int numRows) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
@@ -293,7 +312,11 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(PascalsTriangleQ4.bruteForce(5));
+        System.out.println(PascalsTriangleQ5.bruteForce(3));
+        System.out.println(PascalsTriangleQ5.bruteForce(0));
+        System.out.println(PascalsTriangleQ5.bruteForce(1));
+
+        // System.out.println(PascalsTriangleQ4.bruteForce(5));
 
         // MergeSortedArrayQ3.bruteForce(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
         // MergeSortedArrayQ3.bruteForce(new int[] { 1 }, 1, new int[] {}, 0);
