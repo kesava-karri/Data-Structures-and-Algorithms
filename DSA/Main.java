@@ -2,6 +2,48 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+
+class PascalsTriangleQ4 {
+    static List<List<Integer>> check(int numRows) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        System.out.println(result);
+
+        for (int line = 0; line < numRows; line++) {
+            int[] temp = new int[line + 1];
+            for (int i = 0; i <= line; i++) {
+                System.out.println("line: " + line + "\ti: " + i);
+                if (i == 0 || i == line) {
+                    temp[i] = 1;
+                } else {
+                    temp[i] = result.get(line - 1).get(i - 1) + result.get(line - 1).get(i);
+                }
+            }
+            System.out.println(temp);
+            // result.set(line, Arrays.asList(temp));
+        }
+        return result;
+    }
+
+    static List<List<Integer>> bruteForce(int numRows) {
+        // TC: O(n*n); SC: O(n*n)
+        int[][] result = new int[numRows][numRows];
+        for (int line = 0; line < numRows; line++) {
+            int[] temp = new int[line + 1];
+            for (int i = 0; i <= line; i++) {
+                if (i == 0 || i == line) {
+                    temp[i] = 1;
+                } else {
+                    temp[i] = result[line - 1][i - 1] + result[line - 1][i];
+                }
+            }
+            result[line] = temp;
+        }
+        return Arrays.stream(result)
+                .map(row -> Arrays.stream(row).boxed().collect(Collectors.toList()))
+                .collect(Collectors.toList());
+    }
+}
 
 class MergeSortedArrayQ3 {
     static void solution(int[] nums1, int m, int[] nums2, int n) {
@@ -251,6 +293,8 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
+        System.out.println(PascalsTriangleQ4.bruteForce(5));
+
         // MergeSortedArrayQ3.bruteForce(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
         // MergeSortedArrayQ3.bruteForce(new int[] { 1 }, 1, new int[] {}, 0);
         // MergeSortedArrayQ3.bruteForce(new int[] { 0 }, 0, new int[] { 1 }, 1);
