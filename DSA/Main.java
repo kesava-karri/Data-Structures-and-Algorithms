@@ -4,6 +4,48 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+class BestTimeToBuyAndSellStocksQ6 {
+    static int solution(int[] prices) {
+        int min = prices[0];
+        int len = prices.length;
+        int[] profits = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            profits[i] = prices[i] - min;
+            if (min > prices[i]) {
+                min = prices[i];
+            }
+        }
+
+        int maxProfit = -1;
+
+        for (int profit: profits) {
+            if (profit > maxProfit) {
+                maxProfit = profit;
+            }
+        }
+
+        return maxProfit;
+    }
+
+    static int bruteForce(int[] prices) {
+        // TLE - 'cause given constraint is 1 <= prices.length <= 10^5 and TC goes upto 10^10 
+        // which is over 10^8 & throws Time Limit Exceeded (TLE)
+        int length = prices.length;
+        int maxProfit = -1;
+
+        for (int i = 0; i < length; i++) {
+            for (int j = i + 1; j < length; j++) {
+                int currentProfit = prices[j] - prices[i];
+                if (currentProfit > maxProfit) {
+                    maxProfit = currentProfit;
+                }
+            }
+        }
+        return maxProfit > 0 ? maxProfit : 0;
+    }
+}
+
 class PascalsTriangleQ5 {
     static List<Integer> bruteForce(int rowIndex) {
         int[][] result = new int[rowIndex + 1][rowIndex + 1];
@@ -312,9 +354,13 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(PascalsTriangleQ5.bruteForce(3));
-        System.out.println(PascalsTriangleQ5.bruteForce(0));
-        System.out.println(PascalsTriangleQ5.bruteForce(1));
+        System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 7, 1, 5, 3, 6, 4 }));
+        // System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 2,1,4 }));
+        // System.out.println(BestTimeToBuyAndSellStocksQ6.bruteForce(new int[] { 7, 1, 5, 3, 6, 4 }));
+
+        // System.out.println(PascalsTriangleQ5.bruteForce(3));
+        // System.out.println(PascalsTriangleQ5.bruteForce(0));
+        // System.out.println(PascalsTriangleQ5.bruteForce(1));
 
         // System.out.println(PascalsTriangleQ4.bruteForce(5));
 
