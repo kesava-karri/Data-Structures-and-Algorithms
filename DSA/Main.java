@@ -4,6 +4,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+class BestTimeToBuyAndSellStockIIQ7 {
+    static int approach2(int[] prices) {
+        int length = prices.length;
+        int maxProfit = 0;
+
+        for (int i = 1; i < length; i++) {
+            // If the next element is greater than current then it is a profit
+            // and in turn lead to maxProfit than buying it once & waiting for the max price it could be to sell it.
+            int currentProfit = prices[i] - prices[i-1];
+            if (currentProfit > 0) {
+                maxProfit = maxProfit + currentProfit;
+            }
+        }
+        return maxProfit;
+    }
+
+    static int approach1(int[] prices) {
+        // Fails for [1, 2, 3, 4, 5]
+        int maxProfit = 0;
+        int min = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            int currentPrice = prices[i];
+            if (currentPrice < min || min == 0) {
+                min = currentPrice;
+            } else if (currentPrice > min && min != 0) {
+                maxProfit = maxProfit + currentPrice - min;
+                min = 0;
+            }
+        }
+        return maxProfit;
+    }
+}
+
 class BestTimeToBuyAndSellStocksQ6 {
     static int solution(int[] prices) {
         int min = prices[0];
@@ -354,7 +387,11 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 7, 1, 5, 3, 6, 4 }));
+        System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7, 1, 5, 3, 6, 4 }));
+        System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 1,2,3,4,5 }));
+        System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7,6,4,3,1 }));
+        
+        // System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 7, 1, 5, 3, 6, 4 }));
         // System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 2,1,4 }));
         // System.out.println(BestTimeToBuyAndSellStocksQ6.bruteForce(new int[] { 7, 1, 5, 3, 6, 4 }));
 
