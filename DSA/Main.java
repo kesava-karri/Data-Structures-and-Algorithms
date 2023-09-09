@@ -4,6 +4,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+class MajorityElementIIQ9 {
+    // Return elements occuring more than n/3 times
+    static List<Integer> approach1(int[] nums) {
+        HashMap<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();
+        List<Integer> result = new ArrayList<Integer>();
+        for (int num : nums) {
+            frequencyMap.putIfAbsent(num, 0);
+            frequencyMap.put(num, frequencyMap.get(num) + 1);
+        }
+
+        frequencyMap.entrySet().forEach(set -> {
+            if (set.getValue() > nums.length/3) {
+                result.add(set.getKey());
+            }
+        });
+        return result;
+    }
+}
+
+class MajorityElementQ8 {
+    static int usingSorting(int[] nums) {
+        // since it is given that the majority element always exists & occurs more than n/2 times
+        // Based on the array size the mid index will always have our majority element since it needs to occur more than n/2 times
+        Arrays.sort(nums);
+        int len = nums.length;
+        return len % 2 != 0 ? nums[len/2] : nums[len/2 - 1];
+    }
+}
+
 class BestTimeToBuyAndSellStockIIQ7 {
     static int approach2(int[] prices) {
         int length = prices.length;
@@ -11,7 +40,7 @@ class BestTimeToBuyAndSellStockIIQ7 {
 
         for (int i = 1; i < length; i++) {
             // If the next element is greater than current then it is a profit
-            // and in turn lead to maxProfit than buying it once & waiting for the max price it could be to sell it.
+            // and in turn lead to maxProfit than buying it once & waiting for the max price to sell it.
             int currentProfit = prices[i] - prices[i-1];
             if (currentProfit > 0) {
                 maxProfit = maxProfit + currentProfit;
@@ -387,9 +416,13 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7, 1, 5, 3, 6, 4 }));
-        System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 1,2,3,4,5 }));
-        System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7,6,4,3,1 }));
+        System.out.println(MajorityElementIIQ9.approach1(new int[] {2, 1, 1, 1}));
+        
+        // System.out.println(MajorityElementQ8.usingSorting(new int[] {2, 1, 1, 1}));
+
+        // System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7, 1, 5, 3, 6, 4 }));
+        // System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 1,2,3,4,5 }));
+        // System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7,6,4,3,1 }));
         
         // System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 7, 1, 5, 3, 6, 4 }));
         // System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 2,1,4 }));
