@@ -4,6 +4,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+class MissingRangesQ10 {
+    static List<String> approach1(int[] nums, int lower, int upper) {
+        // assuming nums[0] is lower & having a pointer to first element;
+        int last = 0;
+        List<String> result = new ArrayList<>();
+        
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[last] + 1 == nums[i]) {
+                last = i;
+                continue;
+            }
+            result.add(getRange(nums[last], nums[i]));
+            last = i;
+        }
+        if (nums[last] != upper) {
+            result.add(getRange(nums[last], upper + 1));
+        }
+        return result;
+    }
+
+    private static String getRange(int lastValue, int currentValue) {
+        if (lastValue + 1 == currentValue - 1) {
+            return String.valueOf(lastValue + 1);
+        } 
+        return String.valueOf(lastValue + 1)  + "->" + String.valueOf(currentValue - 1);
+    }
+}
+
 class MajorityElementIIQ9 {
     // Return elements occuring more than n/3 times
     static List<Integer> approach1(int[] nums) {
@@ -416,7 +444,10 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(MajorityElementIIQ9.approach1(new int[] {2, 1, 1, 1}));
+        System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 3, 50, 75 }, 0, 99));
+        System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 2, 3, 7 }, 0, 7));
+
+        // System.out.println(MajorityElementIIQ9.approach1(new int[] {2, 1, 1, 1}));
         
         // System.out.println(MajorityElementQ8.usingSorting(new int[] {2, 1, 1, 1}));
 
