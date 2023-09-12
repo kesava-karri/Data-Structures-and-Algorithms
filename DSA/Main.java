@@ -1,8 +1,105 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Set;
+
+class threeSumQ11 {
+    static List<List<Integer>> solution(int[] nums) {
+        int len = nums.length;
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+
+        for (int i = 0; i < len - 2; i++) {
+            // if same adjacent element is present then it might already have been added
+            // to the triplet, so skip it
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            int tempSum = nums[i];
+            int j = i + 1;
+            int k = len - 1;
+
+            while (j < k) {
+                // System.out.println("Values at i: " + nums[i] + " j: " + nums[j] + " k: " + nums[k]);
+                List<Integer> triplet = new ArrayList<Integer>();
+                if (nums[j] + nums[k] == - tempSum) {
+                    triplet.add(Integer.valueOf(nums[i]));
+                    triplet.add(Integer.valueOf(nums[j]));
+                    triplet.add(Integer.valueOf(nums[k]));
+                    result.add(triplet);
+                    while (j < k && nums[j] == nums[j + 1]) {
+                        j++;
+                    }
+
+                    while (j < k && nums[k] == nums[k - 1]) {
+                        k--;
+                    }
+
+                    k--;
+                    j++;
+                } else if (nums[j] + nums[k] > - tempSum) {
+                    k--;
+                } else {
+                    j++;
+                }
+            }
+        }
+        return result;
+    }
+
+    static List<List<Integer>> brokenApproach(int[] nums) {
+        int len = nums.length;
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+
+        for (int i = 0; i < len; i++) {
+            int tempSum = nums[i];
+            int j = i+1;
+            int k = len - 1;
+
+            while (j < k) {
+            List<Integer> triplet = new ArrayList<Integer>();
+                if (i == j) {
+                    j++;
+                }
+                if (i == k) {
+                    k--;
+                }
+                System.out.println("Values at i: " + nums[i] + " j: " + nums[j] + " k: " + nums[k]);
+                if (nums[j] + nums[k] == - tempSum) {
+                    triplet.add(Integer.valueOf(nums[i]));
+                    triplet.add(Integer.valueOf(nums[j]));
+                    triplet.add(Integer.valueOf(nums[k]));
+                    result.add(triplet);
+                    k--;
+                    j++;
+                    continue;
+                } else if (nums[j] + nums[k] > tempSum) {
+                    k--;
+                } else {
+                    j++;
+                }
+            }
+        }
+
+        // remove duplicates
+        Set<Set<Integer>> setToAvoidDuplicates = new HashSet<>();
+        List<List<Integer>> resultNoDuplicates = new ArrayList<>();
+        for (List<Integer> subArray: result) {
+            Set<Integer> innerSet = new HashSet<>(subArray);
+            if (!setToAvoidDuplicates.contains(innerSet)) {
+                resultNoDuplicates.add(subArray);
+                setToAvoidDuplicates.add(innerSet);
+            }
+        }
+
+        return resultNoDuplicates;
+    }
+}
 
 class MissingRangesQ10 {
     static List<String> approach1(int[] nums, int lower, int upper) {
@@ -444,8 +541,14 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 3, 50, 75 }, 0, 99));
-        System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 2, 3, 7 }, 0, 7));
+        System.out.println(threeSumQ11.solution(new int[] { -1,0,1,2,-1,-4 }));
+        System.out.println(threeSumQ11.solution(new int[] { -1,0,1 }));
+        System.out.println(threeSumQ11.solution(new int[] { -2,0,1,1,2 }));
+        System.out.println(threeSumQ11.solution(new int[] { -1,0,1,0 }));
+        System.out.println(threeSumQ11.solution(new int[] { 1,-1,-1,0 }));
+
+        // System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 3, 50, 75 }, 0, 99));
+        // System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 2, 3, 7 }, 0, 7));
 
         // System.out.println(MajorityElementIIQ9.approach1(new int[] {2, 1, 1, 1}));
         
