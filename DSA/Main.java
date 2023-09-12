@@ -6,7 +6,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Set;
 
-class threeSumQ11 {
+class ThreeSumSmallerQ12 {
+    static int approach1(int[] nums, int target) {
+        int len = nums.length;
+        Arrays.sort(nums);
+        int count = 0;
+
+        for (int i = 0; i < len - 2; i++) {
+            int j = i + 1;
+            int k = len - 1;
+
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+
+                if (sum < target) {
+                    count += k - j; // since even the biggest element nums[k] is added and still less than target, and as it's sorted every element between j & k will also satisfy the condition.
+                    j++;
+                } else if (sum >= target) {
+                    k--;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+class ThreeSumQ11 {
     static List<List<Integer>> solution(int[] nums) {
         int len = nums.length;
         List<List<Integer>> result = new ArrayList<List<Integer>>();
@@ -541,11 +566,14 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(threeSumQ11.solution(new int[] { -1,0,1,2,-1,-4 }));
-        System.out.println(threeSumQ11.solution(new int[] { -1,0,1 }));
-        System.out.println(threeSumQ11.solution(new int[] { -2,0,1,1,2 }));
-        System.out.println(threeSumQ11.solution(new int[] { -1,0,1,0 }));
-        System.out.println(threeSumQ11.solution(new int[] { 1,-1,-1,0 }));
+        System.out.println(ThreeSumSmallerQ12.approach1(new int[] { -2, 0, 1, 3 }, 2));
+        System.out.println(ThreeSumSmallerQ12.approach1(new int[] { -2,0,-1,3 }, 2));
+
+        // System.out.println(threeSumQ11.solution(new int[] { -1,0,1,2,-1,-4 }));
+        // System.out.println(threeSumQ11.solution(new int[] { -1,0,1 }));
+        // System.out.println(threeSumQ11.solution(new int[] { -2,0,1,1,2 }));
+        // System.out.println(threeSumQ11.solution(new int[] { -1,0,1,0 }));
+        // System.out.println(threeSumQ11.solution(new int[] { 1,-1,-1,0 }));
 
         // System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 3, 50, 75 }, 0, 99));
         // System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 2, 3, 7 }, 0, 7));
