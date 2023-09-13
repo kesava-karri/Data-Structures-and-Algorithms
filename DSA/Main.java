@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -5,6 +7,62 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Set;
+
+class ThreeSumClosestQ13 {
+    static int approach1(int[] nums, int target) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        // int min = 
+        int result = nums[0] + nums[1] + nums[2];
+
+        for (int i = 0; i < len - 2; i++) {
+            int j = i + 1;
+            int k = len - 1;
+
+            while(j < k) {
+                int currentSum = nums[i] + nums[j] + nums[k];
+                int absDiff = Math.abs(target - currentSum);
+
+                if (absDiff < Math.abs(target - result)) {
+                    result = currentSum;
+                }
+
+                if (currentSum < target) {
+                    j++;
+                } else {
+                    k--;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    static int brokenApproach(int[] nums, int target) {
+        // Exceeds Time Limit
+        List<Integer> sumArray = new ArrayList<>();
+        int len = nums.length;
+        for (int i = 0; i < len - 2; i++) {
+            for (int j = i + 1; j < len - 1; j++) {
+                for (int k = j + 1; k < len; k++) {
+                    sumArray.add(nums[i] + nums[j] + nums[k]);
+                }
+            }
+        }
+        System.out.println(sumArray);
+        int min = Integer.MAX_VALUE;
+        int result = Integer.MAX_VALUE;
+
+        for (int sum: sumArray) {
+            int absDiff = Math.abs(sum - target);
+            if (absDiff < min) {
+                min = absDiff;
+                result = sum;
+            }
+        }
+        return result;
+    }
+}
 
 class ThreeSumSmallerQ12 {
     static int approach1(int[] nums, int target) {
@@ -566,8 +624,12 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(ThreeSumSmallerQ12.approach1(new int[] { -2, 0, 1, 3 }, 2));
-        System.out.println(ThreeSumSmallerQ12.approach1(new int[] { -2,0,-1,3 }, 2));
+        System.out.println(ThreeSumClosestQ13.approach1(new int[] { 4,0,5,-5,3,3,0,-4,-5 }, -2));
+        // System.out.println(ThreeSumClosestQ13.approach1(new int[] { -1, 2, 1, -4 }, 1));
+        // System.out.println(ThreeSumClosestQ13.approach1(new int[] { 0,0,0 }, 1));
+        
+        // System.out.println(ThreeSumSmallerQ12.approach1(new int[] { -2, 0, 1, 3 }, 2));
+        // System.out.println(ThreeSumSmallerQ12.approach1(new int[] { -2,0,-1,3 }, 2));
 
         // System.out.println(threeSumQ11.solution(new int[] { -1,0,1,2,-1,-4 }));
         // System.out.println(threeSumQ11.solution(new int[] { -1,0,1 }));
