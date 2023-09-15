@@ -2,11 +2,89 @@ import java.lang.Math;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Set;
+
+class RotateImageQ15 {
+    static void approach1(int[][] matrix) {
+        int len = matrix.length;
+
+        // Transpose
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j && i < j) { // to not double swap the condition i < j is added
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+        }
+
+        // swap columns
+        for (int i = 0; i < len; i++) {
+            int j = 0;
+            int k = len - 1;
+            while (j < k) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][k];
+                matrix[i][k] = temp;
+                j++;
+                k--;
+            }
+        }
+
+        for (int[] subArray: matrix) {
+            System.out.println(Arrays.toString(subArray));
+        }
+    }
+}
+
+class FourSumQ14 {
+    static List<List<Integer>> approach1(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        Set<List<Integer>> set = new HashSet<>();
+        int len = nums.length;
+        Arrays.sort(nums); 
+
+        for (int i = 0; i < len - 3; i++) {
+            for (int j = i + 1; j < len - 2; j++) {
+                int k = j + 1;
+                int l = len - 1;
+
+                while (k < l) {
+
+                    long sum = (long) nums[i] + nums[j] + nums[k] + nums[l];
+                    if (sum == target) {
+                        List<Integer> tempArray = new ArrayList<>();
+                        Collections.addAll(tempArray, nums[i], nums[j], nums[k], nums[l]);
+                        set.add(tempArray);
+
+                        while (k < l && nums[k] == nums[k + 1]) {
+                            k++;
+                        }
+
+                        while (k < l && nums[l] == nums[l - 1]) {
+                            l--;
+                        }
+                        k++;
+                        l--;
+                    } else if (sum > target) {
+                        l--;
+                    } else {
+                        k++;
+                    }
+                }
+            }
+        }
+
+        set.stream().forEach(subArray -> result.add(subArray));
+        return result;
+    }
+}
 
 class ThreeSumClosestQ13 {
     static int approach1(int[] nums, int target) {
@@ -624,7 +702,14 @@ class TwoSumQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(ThreeSumClosestQ13.approach1(new int[] { 4,0,5,-5,3,3,0,-4,-5 }, -2));
+        RotateImageQ15.approach1(new int[][] { { 1,2,3 }, {4,5,6},{7,8,9}});
+        RotateImageQ15.approach1(new int[][] { { 5,1,9,11 }, {2,4,8,10 },{13,3,6,7},{15,14,12,16}});
+        
+        // System.out.println(FourSumQ14.approach1(new int[] { 1,0,-1,0,-2,2 }, 0));
+        // System.out.println(FourSumQ14.approach1(new int[] { 1000000000,1000000000,1000000000,1000000000 }, -294967296));
+        // System.out.println(FourSumQ14.approach1(new int[] { 1, 2, 3, 4 }, 10));
+
+        // System.out.println(ThreeSumClosestQ13.approach1(new int[] { 4,0,5,-5,3,3,0,-4,-5 }, -2));
         // System.out.println(ThreeSumClosestQ13.approach1(new int[] { -1, 2, 1, -4 }, 1));
         // System.out.println(ThreeSumClosestQ13.approach1(new int[] { 0,0,0 }, 1));
         
