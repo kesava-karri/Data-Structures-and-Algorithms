@@ -8,7 +8,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+class RangeSumQuery2DImmutableQ6 {
+    private int[][] matrix;
 
+    public RangeSumQuery2DImmutableQ6(int[][] matrix) {
+        this.matrix = matrix;
+    }
+
+    public int sumRegion(int row1, int col1, int row2, int col2) {
+        int sum = 0;
+        for (int i = row1; i <= row2; i++) {
+            for (int j = col1; j <= col2; j++) {
+                sum += matrix[i][j];
+            }
+        }
+        return sum;
+    }
+}
 
 class RangeSumQueryImmutableQ5 {
     private int[] nums;
@@ -151,8 +167,13 @@ class MoveZeroesQ1 {
 
 class Main {
     public static void main(String[] args) {
-        RangeSumQueryImmutableQ5 q5Obj = new RangeSumQueryImmutableQ5(new int[] {-2, 0, 3, -5, 2, -1});
-        System.out.println(q5Obj.sumRange(0, 2));
+        RangeSumQuery2DImmutableQ6 q6Obj = new RangeSumQuery2DImmutableQ6(new int[][] {
+            {3, 0, 1, 4, 2 }, {5, 6, 3, 2, 1}, {1, 2, 0, 1, 5}, {4, 1, 0, 1, 7}, {1, 0, 3, 0, 5}
+        });
+        System.out.println(q6Obj.sumRegion(2, 1, 4, 3));
+
+        // RangeSumQueryImmutableQ5 q5Obj = new RangeSumQueryImmutableQ5(new int[] {-2, 0, 3, -5, 2, -1});
+        // System.out.println(q5Obj.sumRange(0, 2));
 
         // System.out.println(SummaryRangesQ4.approach1(new int[] { 0,2,3,4,6,8,9 }));
         // System.out.println(SummaryRangesQ4.approach1(new int[] { 0,1,2,4,5,7 }));
