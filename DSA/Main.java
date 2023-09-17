@@ -8,6 +8,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+
+class RangeSumQueryImmutableQ5 {
+    private int[] nums;
+
+    public RangeSumQueryImmutableQ5(int[] nums) {
+        this.nums = nums;
+    }
+    
+    public int sumRange(int left, int right) {
+        int sum = 0;
+        for (int i = left; i <= right; i++) {
+            sum += nums[i];
+        }
+        return sum;
+    }
+}
+
 class SummaryRangesQ4 {
     static List<String> approach1(int[] nums) {
         int start = 0;
@@ -133,7 +151,8 @@ class MoveZeroesQ1 {
 
 class Main {
     public static void main(String[] args) {
-
+        RangeSumQueryImmutableQ5 q5Obj = new RangeSumQueryImmutableQ5(new int[] {-2, 0, 3, -5, 2, -1});
+        System.out.println(q5Obj.sumRange(0, 2));
 
         // System.out.println(SummaryRangesQ4.approach1(new int[] { 0,2,3,4,6,8,9 }));
         // System.out.println(SummaryRangesQ4.approach1(new int[] { 0,1,2,4,5,7 }));
