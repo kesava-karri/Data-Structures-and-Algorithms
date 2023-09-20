@@ -10,6 +10,104 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Set;
 
+class NextGreaterElementIIIQ12 {
+    static int approach1(int n) {
+        // Input: n = 12; // 12443322
+        // Output: 21
+
+        String[] str = Integer.toString(n).split("");
+        List<Integer> nums = Arrays.stream(str).map(i -> Integer.parseInt(i)).collect(Collectors.toList());
+        StringBuilder result = new StringBuilder();
+        
+        // find the number less than right adj
+        int i = nums.size() - 2;
+        while (i >= 0 && nums.get(i) >= nums.get(i + 1)) {
+            i--;
+        }
+
+        // If the elements are present in decreasing order, then we could never find a num less than right adj
+        if (i == - 1) {
+            return -1;
+        }
+
+        // find the next biggest element to swap the with above element 
+        int j = nums.size() - 1;
+        while (j >= 0 && nums.get(j) <= nums.get(i)) {
+            j--;
+        }
+
+        swap(i, j, nums);
+        
+        // Now take all the elements till i
+        for (int k = 0; k <= i; k++) {
+            result.append(nums.get(k));
+        }
+
+        // Append all elements from end
+        for (int l = nums.size() - 1; l > i; l--) {
+            result.append(nums.get(l));
+        }
+
+        return Long.parseLong(result.toString()) <= Integer.MAX_VALUE ? Integer.parseInt(result.toString()) : -1;
+    }
+
+    static void swap(int i, int j, List<Integer> nums) {
+        int temp = nums.get(i);
+        nums.set(i, nums.get(j));
+        nums.set(j, temp);
+    }
+}
+
+class NextGreaterElementIIQ11 {
+    static int[] approach1(int[] nums) {
+        int len = nums.length;
+        int[] ans = new int[len];
+
+        outerLoop:
+        for (int i = 0; i < len; i++) {
+            int currIthNum = nums[i];
+            for (int j = i + 1 ; j < i + 1 + len; j++) {
+                int currJthNum = nums[j % len];
+                if (currJthNum > currIthNum) {
+                    ans[i] = currJthNum;
+                    continue outerLoop;
+                }
+            }
+            ans[i] = -1;
+        }
+        return ans;
+    }
+}
+
+class NextGreaterElementQ10 {
+    static int[] approach1(int[] nums1, int[] nums2) {
+        // Input: nums1 = [4,1,2], nums2 = [1,3,4,2]
+        // Output: [-1,3,-1]
+        int[] ans = new int[nums1.length];
+
+        outerLoop: for (int i = 0; i < nums1.length; i++) {
+            int currIthNum = nums1[i];
+            int ptr = -1;
+            for (int j = 0; j < nums2.length; j++) {
+                int currJthElement = nums2[j];
+                // Chose Integer.MAX_VALUE to avoid entering the second condition when not needed :)
+                int matchedNum = ptr == -1 ? Integer.MAX_VALUE : nums2[ptr];
+
+                if (currIthNum == currJthElement) {
+                    ptr = j;
+                    continue;
+                }
+                if (currJthElement > matchedNum) {
+                    ans[i] = currJthElement;
+                    continue outerLoop;
+                }
+            }
+            ans[i] = -1;
+        }
+        return ans;
+    }
+}
+
 class IntersectionOfTwoArraysIIQ9 {
     static int[] approach1(int[] nums1, int[] nums2) {
         // Input: nums1 = [1,2,2,1], nums2 = [2,2]
@@ -38,16 +136,17 @@ class IntersectionOfTwoArraysIIQ9 {
         }
 
         map1.forEach((key, value) -> {
-            if (map2.containsKey(key)){
+            if (map2.containsKey(key)) {
                 int leastOccurence = value < map2.get(key) ? value : map2.get(key);
                 for (int j = 0; j < leastOccurence; j++) {
                     intersection.add(key);
-                } 
+                }
             }
         });
 
         return intersection.stream().mapToInt(Integer::intValue).toArray();
     }
+
     static int[] brokenApproach(int[] nums1, int[] nums2) {
         // Input: nums1 = [1,2,2,1], nums2 = [2,2]
         // Output: [2,2]
@@ -264,8 +363,20 @@ class MoveZeroesQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
-        System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {4,9,5}, new int[] {9,4,9,8,4})));
+        // System.out.println(NextGreaterElementIIIQ12.approach1(12));
+        // System.out.println(NextGreaterElementIIIQ12.approach1(11452));
+        // System.out.println(NextGreaterElementIIIQ12.approach1(6537421));
+        // System.out.println(NextGreaterElementIIIQ12.approach1(12345));
+        // System.out.println(NextGreaterElementIIIQ12.approach1(2147483486));
+        System.out.println(NextGreaterElementIIIQ12.approach1(12443322)); // 13443222 // 13222344
+
+        // System.out.println(Arrays.toString(NextGreaterElementIIQ11.approach1(new int[] {1, 2, 1})));
+        // System.out.println(Arrays.toString(NextGreaterElementIIQ11.approach1(new int[] {1,5,3,6,8})));
+
+        // System.out.println(Arrays.toString(NextGreaterElementQ10.approach1(new int[] {4, 1, 2}, new int[] {1, 3, 4, 2})));
+
+        // System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
+        // System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {4,9,5}, new int[] {9,4,9,8,4})));
 
         // System.out.println(Arrays.toString(IntersectionOfTwoArraysQ8.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
 
