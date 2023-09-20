@@ -4,9 +4,87 @@ import java.lang.Integer;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Set;
+
+class IntersectionOfTwoArraysIIQ9 {
+    static int[] approach1(int[] nums1, int[] nums2) {
+        // Input: nums1 = [1,2,2,1], nums2 = [2,2]
+        // Output: [2,2]
+        
+        Map<Integer, Integer> map1 = new HashMap<>();
+        Map<Integer, Integer> map2 = new HashMap<>();
+        List<Integer> intersection = new ArrayList<>();
+
+        for (int i = 0; i < nums1.length; i++) {
+            int currentNum = nums1[i];
+            if (!map1.containsKey(currentNum)) {
+                map1.put(currentNum, 1);
+            } else {
+                map1.replace(currentNum, map1.get(currentNum) + 1);
+            }
+        }
+
+        for (int i = 0; i < nums2.length; i++) {
+            int currentNum = nums2[i];
+            if (!map2.containsKey(currentNum)) {
+                map2.put(currentNum, 1);
+            } else {
+                map2.replace(currentNum, map2.get(currentNum) + 1);
+            }
+        }
+
+        map1.forEach((key, value) -> {
+            if (map2.containsKey(key)){
+                int leastOccurence = value < map2.get(key) ? value : map2.get(key);
+                for (int j = 0; j < leastOccurence; j++) {
+                    intersection.add(key);
+                } 
+            }
+        });
+
+        return intersection.stream().mapToInt(Integer::intValue).toArray();
+    }
+    static int[] brokenApproach(int[] nums1, int[] nums2) {
+        // Input: nums1 = [1,2,2,1], nums2 = [2,2]
+        // Output: [2,2]
+        // Doesn't check for element that has already been added, E.g: nums1 = [1, 2, 2, 1]; nums2 = [2]; o/p: [2, 2]
+
+        List<Integer> intersection = new ArrayList<>();
+
+        outerLoop: for (int i = 0; i < nums1.length; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                if (nums1[i] == nums2[j]) {
+                    intersection.add(Integer.valueOf(nums1[i]));
+                    continue outerLoop;
+                }
+            }
+        }
+        return intersection.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
+
+class IntersectionOfTwoArraysQ8 {
+    static int[] approach1(int[] nums1, int[] nums2) {
+        // Input: nums1 = [1,2,2,1], nums2 = [2,2]
+        // Output: [2]
+
+        Set<Integer> set = new HashSet<>();
+        outerLoop: for (int i = 0; i < nums1.length; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                if (nums1[i] == nums2[j] && !set.contains(nums1[i])) {
+                    set.add(Integer.valueOf(nums1[i]));
+                    continue outerLoop; // Given only unique values needed, so once I add a value, it's not needed to compare that ith with rest of values in nums2
+                }
+            }
+        }
+        return set.stream().mapToInt(Integer::intValue).toArray();
+        // .map(i -> i.intValue()).collect(Collectors.toList());
+    }
+}
 
 class RemoveElementQ7 {
     static int approach1(int[] nums, int val) {
@@ -186,7 +264,12 @@ class MoveZeroesQ1 {
 
 class Main {
     public static void main(String[] args) {
-        System.out.println(RemoveElementQ7.approach1(new int[] { 0,1,2,2,3,0,4,2 }, 2));
+        System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
+        System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {4,9,5}, new int[] {9,4,9,8,4})));
+
+        // System.out.println(Arrays.toString(IntersectionOfTwoArraysQ8.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
+
+        // System.out.println(RemoveElementQ7.approach1(new int[] { 0,1,2,2,3,0,4,2 }, 2));
 
         // RangeSumQuery2DImmutableQ6 q6Obj = new RangeSumQuery2DImmutableQ6(new int[][] {
         //     {3, 0, 1, 4, 2 }, {5, 6, 3, 2, 1}, {1, 2, 0, 1, 5}, {4, 1, 0, 1, 7}, {1, 0, 3, 0, 5}
