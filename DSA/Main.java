@@ -3,12 +3,83 @@ import java.lang.Integer;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Set;
+
+class ReduceArraySizeToHalfQ14 {
+    static int approach1(int[] arr) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : arr) {
+            if (!map.containsKey(num)) {
+                map.put(num, 1);
+            } else {
+                map.put(num, map.get(num) + 1);
+            }
+        }
+
+        List<Integer> frequencies = new ArrayList<>();
+        for (int value : map.values()) {
+            frequencies.add(value);
+        }
+
+        Collections.sort(frequencies);
+
+        int ans = 0;
+        int freqCounter = 0;
+        int halfLen = arr.length / 2;
+
+        if (frequencies.size() == 1 && frequencies.get(0) >= halfLen) {
+            return ++ans;
+        }
+
+        for (int i = frequencies.size() - 1; i > 0; i--) {
+            int currentFreq = frequencies.get(i);
+            if (currentFreq >= halfLen) {
+                ans++;
+                return ans;
+            }
+            if (freqCounter >= halfLen) {
+                return ans;
+            }
+            freqCounter += currentFreq;
+            ans++;
+        }
+        return ans;
+    }
+
+    static int brokenApproach(int[] arr) {
+        // Doesn't account when more elements are at the end after sort :) E.g: [1000, 1000, 3, 7]
+        Arrays.sort(arr);
+        int maxCount = 0;
+        int currentMaxCount = 1;
+        int len = arr.length;
+        int halfLen = len / 2;
+        int ans = 0;
+
+        for (int i = 1; i < len - 1; i++) {
+            if (arr[i] == arr[i - 1]) {
+                currentMaxCount++;
+                if (currentMaxCount >= halfLen) {
+                    return 1;
+                }
+            } else {
+                ans++; // increase for every transition to new num
+                maxCount = maxCount + currentMaxCount;
+                currentMaxCount = 1; // Reset counter for the start of new transition
+            }
+
+            if (maxCount >= halfLen) {
+                return ans;
+            }
+        }
+        return 1;
+    }
+}
 
 class NextGreaterElementIIIQ12 {
     static int approach1(int n) {
@@ -18,7 +89,7 @@ class NextGreaterElementIIIQ12 {
         String[] str = Integer.toString(n).split("");
         List<Integer> nums = Arrays.stream(str).map(i -> Integer.parseInt(i)).collect(Collectors.toList());
         StringBuilder result = new StringBuilder();
-        
+
         // find the number less than right adj
         int i = nums.size() - 2;
         while (i >= 0 && nums.get(i) >= nums.get(i + 1)) {
@@ -26,7 +97,7 @@ class NextGreaterElementIIIQ12 {
         }
 
         // If the elements are present in decreasing order, then we could never find a num less than right adj
-        if (i == - 1) {
+        if (i == -1) {
             return -1;
         }
 
@@ -37,7 +108,7 @@ class NextGreaterElementIIIQ12 {
         }
 
         swap(i, j, nums);
-        
+
         // Now take all the elements till i
         for (int k = 0; k <= i; k++) {
             result.append(nums.get(k));
@@ -63,10 +134,9 @@ class NextGreaterElementIIQ11 {
         int len = nums.length;
         int[] ans = new int[len];
 
-        outerLoop:
-        for (int i = 0; i < len; i++) {
+        outerLoop: for (int i = 0; i < len; i++) {
             int currIthNum = nums[i];
-            for (int j = i + 1 ; j < i + 1 + len; j++) {
+            for (int j = i + 1; j < i + 1 + len; j++) {
                 int currJthNum = nums[j % len];
                 if (currJthNum > currIthNum) {
                     ans[i] = currJthNum;
@@ -112,7 +182,7 @@ class IntersectionOfTwoArraysIIQ9 {
     static int[] approach1(int[] nums1, int[] nums2) {
         // Input: nums1 = [1,2,2,1], nums2 = [2,2]
         // Output: [2,2]
-        
+
         Map<Integer, Integer> map1 = new HashMap<>();
         Map<Integer, Integer> map2 = new HashMap<>();
         List<Integer> intersection = new ArrayList<>();
@@ -167,6 +237,28 @@ class IntersectionOfTwoArraysIIQ9 {
 }
 
 class IntersectionOfTwoArraysQ8 {
+    static int[] hashing(int[] nums1, int[] nums2) {
+        // since the frequency doesn't matter considering a HashSet
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+        List<Integer> result = new ArrayList<>();
+
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        for (int num : nums2) {
+            set2.add(num);
+        }
+
+        for (int num : set1) {
+            if (set2.contains(num)) {
+                result.add(num);
+            }
+        }
+        return result.stream().mapToInt(Integer::valueOf).toArray();
+    }
+
     static int[] approach1(int[] nums1, int[] nums2) {
         // Input: nums1 = [1,2,2,1], nums2 = [2,2]
         // Output: [2]
@@ -228,7 +320,7 @@ class RangeSumQueryImmutableQ5 {
     public RangeSumQueryImmutableQ5(int[] nums) {
         this.nums = nums;
     }
-    
+
     public int sumRange(int left, int right) {
         int sum = 0;
         for (int i = left; i <= right; i++) {
@@ -291,8 +383,7 @@ class ContainsDuplicateIIQ3 {
 
     static boolean brokenApproach(int[] nums, int k) {
         // to preserve the indices
-        List<Integer> copyOfNums = 
-            Arrays.stream(nums).boxed().collect(Collectors.toList());
+        List<Integer> copyOfNums = Arrays.stream(nums).boxed().collect(Collectors.toList());
         Arrays.sort(nums);
 
         int ptr = 0;
@@ -314,7 +405,7 @@ class ContainsDuplicateIIQ3 {
         // and thus making it broken appraoch.
         while (firstIndex < lastIndex) {
             if (Math.abs(firstIndex - lastIndex) <= k
-                && copyOfNums.get(lastIndex) == copyOfNums.get(firstIndex)) {
+                    && copyOfNums.get(lastIndex) == copyOfNums.get(firstIndex)) {
                 return true;
             }
             lastIndex--;
@@ -361,14 +452,78 @@ class MoveZeroesQ1 {
     }
 }
 
-class Main {
+class TrappingRainWater {
+    static int approach1(int[] height) {
+        // Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+        // Output: 6
+        int len = height.length;
+        List<Integer> maxiesLeft = new ArrayList<>();
+        int[] maxiesRight = new int[len]; // Had to choose an array over ArrayList to add the final element at last index
+
+        maxiesLeft.add(0); // Since there's no bar on the left of first bar
+
+        // find maxies for each bar to their left
+        for (int i = 1; i < len; i++) {
+            int maxLeft = Math.max(maxiesLeft.get(i - 1), height[i - 1]);
+            maxiesLeft.add(i, maxLeft);
+        }
+
+        maxiesRight[len - 1] = 0; // Since there's no bar on the left of first bar
+
+        // find maxies for each bar to the right
+        for (int j = len - 2; j > 0; j--) {
+            int maxRight = Math.max(maxiesRight[j + 1], height[j + 1]);
+            maxiesRight[j] = maxRight;
+        }
+
+        int waterThatCanBeStored = 0;
+        for (int i = 0; i < len; i++) {
+            int minWater = Math.min(maxiesLeft.get(i), maxiesRight[i]);
+            if (height[i] < minWater) {
+                waterThatCanBeStored += minWater - height[i];
+            }
+        }
+
+        return waterThatCanBeStored;
+    }
+}
+
+class BuildArrayFromPermutation {
+
+    static int[] approach1(int[] nums) {
+        // Input: nums = [0,2,1,5,3,4]
+        // Output: [0,1,2,4,5,3]
+        int len = nums.length;
+        int[] ans = new int[len];
+        for (int i = 0; i < len; i++) {
+            ans[i] = nums[nums[i]];
+        }
+        return ans;
+    }
+}
+
+public class Main {
     public static void main(String[] args) {
+        System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 3, 2, 1, 0 })));
+        // System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 5, 0, 1, 2, 3, 4 })));
+        // System.out.println(Arrays.toString(BuildArrayFromPermutation.approach1(new int[] { 0,2,1,5,3,4 })));
+
+        // System.out.println(TrappingRainWater.approach1(new int[] {0,1,0,2,1,0,1,3,2,1,2,1}));
+
+        // System.out.println(ReduceArraySizeToHalfQ14.approach1(new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 }));
+        // System.out.println(ReduceArraySizeToHalfQ14.approach1(new int[] { 7, 7, 7, 7, 7, 7 }));
+        // System.out.println(ReduceArraySizeToHalfQ14.approach1(new int[] { 1000, 1000, 3, 7 }));
+
+        // System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"AZC","ZAC"}));
+        // System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"ABC","ACB","ABC","ACB","ACB"}));
+        // System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"ZMNAGUEDSJYLBOPHRQICWFXTVK"}));
+
         // System.out.println(NextGreaterElementIIIQ12.approach1(12));
         // System.out.println(NextGreaterElementIIIQ12.approach1(11452));
         // System.out.println(NextGreaterElementIIIQ12.approach1(6537421));
         // System.out.println(NextGreaterElementIIIQ12.approach1(12345));
         // System.out.println(NextGreaterElementIIIQ12.approach1(2147483486));
-        System.out.println(NextGreaterElementIIIQ12.approach1(12443322)); // 13443222 // 13222344
+        // System.out.println(NextGreaterElementIIIQ12.approach1(12443322)); // 13443222 // 13222344
 
         // System.out.println(Arrays.toString(NextGreaterElementIIQ11.approach1(new int[] {1, 2, 1})));
         // System.out.println(Arrays.toString(NextGreaterElementIIQ11.approach1(new int[] {1,5,3,6,8})));
@@ -378,6 +533,7 @@ class Main {
         // System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
         // System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {4,9,5}, new int[] {9,4,9,8,4})));
 
+        // System.out.println(Arrays.toString(IntersectionOfTwoArraysQ8.hashing(new int[] {1,2,2,1}, new int[] {2, 2})));
         // System.out.println(Arrays.toString(IntersectionOfTwoArraysQ8.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
 
         // System.out.println(RemoveElementQ7.approach1(new int[] { 0,1,2,2,3,0,4,2 }, 2));
