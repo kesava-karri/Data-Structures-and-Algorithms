@@ -489,6 +489,28 @@ class TrappingRainWater {
 }
 
 class BuildArrayFromPermutation {
+    static int[] constSpace(int[] nums) {
+        // We need nums[nums[i]]
+        // Input: nums = [5,0,1,2,3,4]
+        // Output: [4,5,0,1,2,3]
+
+        int len = nums.length;
+
+        for (int i = 0; i < len; i++) {
+            // since the given values would be between 0 to n - 1 gives the chance to use mod
+            // We need to retain new value and old value (which would be overwritten)
+            // So we to store a num such that we can get both old & new values from it.
+            // and by playing with those numbers we come up with this equation (pretty similar to "Dividend Formula")
+            // a[i] = old value + 6 * (new value % 6);
+            nums[i] = nums[i] + len * (nums[nums[i]] % len);
+        }
+
+        for (int i = 0; i < len; i++) {
+            nums[i] = nums[i] / len;
+        }
+
+        return nums;
+    }
 
     static int[] approach1(int[] nums) {
         // Input: nums = [0,2,1,5,3,4]
@@ -502,9 +524,74 @@ class BuildArrayFromPermutation {
     }
 }
 
+class MissingNumber {
+    static int linearTime(int[] nums) {
+        // Using XOR property :),
+        // We know that XOR of two same numbers gives 0 i.e., cancels those numbers
+
+        int maxValue = -1;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (currentNum > maxValue) {
+                maxValue = currentNum;
+            }
+        }
+    }
+
+    static int brokenApproach(int[] nums) {
+        // 111 / 122 testcases passed
+        // Given nums would have [0, n]
+        // That implies we could use sum of first n natural numbers :)
+        int maxValue = -1;
+        int sumOfNums = 0;
+        
+        // since given range is [0, n]
+        // if input has single element
+        if (nums.length == 1) {
+            if (nums[0] != 0) {
+                return 0;
+            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            int currentNum = nums[i];
+            sumOfNums += currentNum;
+            if (currentNum > maxValue) {
+                maxValue = currentNum;
+            }
+        }
+
+        // using the maxValue in nums to find out sum
+        int sumOfNaturalNums = (maxValue * (maxValue + 1)) / 2;
+
+
+        // Since it hasn't been mentioned what to return when no missing number exist ([0, 1] for example)
+        // We can assume that 1 is (n - 1)th value, so increment the maxValue and return it
+        if (sumOfNaturalNums == sumOfNums) {
+            return maxValue + 1;
+        } 
+        return sumOfNaturalNums - sumOfNums;
+    }
+
+    static int approach1(int[] nums) {
+        // TC: O(nlogn)
+        Arrays.sort(nums);
+        int i = 0;
+        for (i = 0; i < nums.length; i++) {
+            if (nums[i] != i) {
+                break;
+            }
+        }
+        return i;
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 3, 2, 1, 0 })));
+        System.out.println(MissingNumber.linearTime(new int[] { 3,0,1 }));
+        System.out.println(MissingNumber.approach1(new int[] { 3,0,1 }));
+
+        // System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 3, 2, 1, 0 })));
         // System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 5, 0, 1, 2, 3, 4 })));
         // System.out.println(Arrays.toString(BuildArrayFromPermutation.approach1(new int[] { 0,2,1,5,3,4 })));
 
