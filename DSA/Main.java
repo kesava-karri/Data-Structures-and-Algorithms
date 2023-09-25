@@ -81,6 +81,36 @@ class ReduceArraySizeToHalfQ14 {
     }
 }
 
+class RankTeamsByVotesQ13 {
+    static String approach1(String[] votes) {
+        // Input: votes = ["ABC","ACB","ABC","ACB","ACB"]
+        // Output: "ACB"
+
+        int numTeams = votes[0].length();
+
+        List<Map<Character, Integer>> positionVotes = new ArrayList<>();
+        for (int i = 0; i < numTeams; i++) {
+            positionVotes.add(new HashMap<>());
+        }
+
+        if (votes.length == 1) {
+            return votes[0];
+        }
+
+        for (String vote : votes) {
+            for (int i = 0; i < numTeams; i++) {
+                char team = vote.charAt(i);
+                positionVotes.get(i).put(team, positionVotes.get(i).getOrDefault(team, 0) + 1);
+            }
+        }
+        System.out.println(positionVotes);
+        List<Set<Character>> teamList = new ArrayList<>();
+        for (int i = 0; i < positionVotes.size(); i++) {
+            teamList.add(positionVotes.get(i).keySet());
+        }
+    }
+}
+
 class NextGreaterElementIIIQ12 {
     static int approach1(int n) {
         // Input: n = 12; // 12443322
@@ -527,15 +557,16 @@ class BuildArrayFromPermutation {
 class MissingNumber {
     static int linearTime(int[] nums) {
         // Using XOR property :),
-        // We know that XOR of two same numbers gives 0 i.e., cancels those numbers
+        // We know that XOR of two same numbers gives 0 i.e., cancels those duplicate numbers
 
-        int maxValue = -1;
-
+        // Input: nums = [3,0,1]
+        // Output: 2
+        int ans = 0; // since 0 XOR a value returns that value
         for (int i = 0; i < nums.length; i++) {
-            if (currentNum > maxValue) {
-                maxValue = currentNum;
-            }
+            ans ^= i ^ nums[i];
         }
+        // since the last element is not included in the loop, XOR w that element while returning
+        return ans ^ nums.length;
     }
 
     static int brokenApproach(int[] nums) {
@@ -586,10 +617,62 @@ class MissingNumber {
     }
 }
 
+class PrisonCellsAfterNDays {
+    static int[] approach1(int[] cells, int n) {
+        // Input: cells = [0,1,0,1,1,0,0,1], n = 7
+        // Output: [0,0,1,1,0,0,0,0]
+        // Note that n could go till 10 ^ 9 and max operations is 10 ^ 8, so we would get TLE if we iterate.
+        // That implies the problem has to be solved without iterating, look for some patterns
+        // Day 0: [0, 1, 0, 1, 1, 0, 0, 1] -> Input
+
+        // Day 1: [0, 1, 1, 0, 0, 0, 0, 0]
+        // Day 2: [0, 0, 0, 0, 1, 1, 1, 0]
+        // Day 3: [0, 1, 1, 0, 0, 1, 0, 0]
+        // Day 4: [0, 0, 0, 0, 0, 1, 0, 0]
+        // Day 5: [0, 1, 1, 1, 0, 1, 0, 0]
+        // Day 6: [0, 0, 1, 0, 1, 1, 0, 0]
+        // Day 7: [0, 0, 1, 1, 0, 0, 0, 0]
+        // Day 8: [0, 0, 0, 0, 0, 1, 1, 0]
+        // Day 9: [0, 1, 1, 1, 0, 0, 0, 0]
+        //Day 10: [0, 0, 1, 0, 0, 1, 1, 0]
+        //Day 11: [0, 0, 1, 0, 0, 0, 0, 0]
+        //Day 12: [0, 0, 1, 0, 1, 1, 1, 0]
+        //Day 13: [0, 0, 1, 1, 0, 1, 0, 0]
+        //Day 14: [0, 0, 0, 0, 1, 1, 0, 0]
+        
+        //Day 15: [0, 1, 1, 0, 0, 0, 0, 0] -> Repeats Day 1
+        //Day 16: [0, 0, 0, 0, 1, 1, 1, 0] -> Repeats Day 2
+        // That implies the pattern keeps repeating from 15, so 1 to 14 would be our pattern and anything above can be looked in these days with %14 
+
+        n = n % 14 == 0 ? 14 : n % 14;
+        
+        int len = cells.length; // 8
+        int[] temp = new int[8];
+        for (int i = 0; i < n; i++) { // for Number of days
+            for (int j = 1; j < len - 1; j++) { // all changes for each day
+                if (cells[j - 1] == cells[j + 1]) {
+                    temp[j] = 1;
+                } else {
+                    temp[j] = 0;
+                }
+            }
+            for (int k = 0; k < len; k++) { // assigning all values of temp to cells before end of each day :)
+                cells[k] = temp[k];
+            }
+        }
+        return cells;
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println(MissingNumber.linearTime(new int[] { 3,0,1 }));
-        System.out.println(MissingNumber.approach1(new int[] { 3,0,1 }));
+        // System.out.println(Arrays.toString(PrisonCellsAfterNDays.approach1(new int[] { 0,1,0,1,1,0,0,1 }, 7)));
+        // System.out.println(Arrays.toString(PrisonCellsAfterNDays.approach1(new int[] { 1,0,0,1,0,0,1,0 }, 1000000000)));
+        // System.out.println(Arrays.toString(PrisonCellsAfterNDays.approach1(new int[] { 1,1,0,1,1,0,0,1 }, 300663720)));
+
+        // System.out.println(MissingNumber.linearTime(new int[] { 9,6,4,2,3,5,7,0,1 }));
+        // System.out.println(MissingNumber.linearTime(new int[] { 3,0,1 }));
+        // System.out.println(MissingNumber.approach1(new int[] { 3,0,1 }));
 
         // System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 3, 2, 1, 0 })));
         // System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 5, 0, 1, 2, 3, 4 })));
@@ -601,7 +684,7 @@ public class Main {
         // System.out.println(ReduceArraySizeToHalfQ14.approach1(new int[] { 7, 7, 7, 7, 7, 7 }));
         // System.out.println(ReduceArraySizeToHalfQ14.approach1(new int[] { 1000, 1000, 3, 7 }));
 
-        // System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"AZC","ZAC"}));
+        System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"AZC","ZAC"}));
         // System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"ABC","ACB","ABC","ACB","ACB"}));
         // System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"ZMNAGUEDSJYLBOPHRQICWFXTVK"}));
 
