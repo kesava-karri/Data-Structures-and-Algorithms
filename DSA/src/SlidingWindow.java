@@ -7,6 +7,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 public class SlidingWindow {
+    public static class ContainsDuplicateQ2 {
+        public static boolean solution(int[] nums, int k) {
+
+            return false;
+        }
+    }
+
+    public static class ContainsDuplicateQ1 {
+        public static boolean solution(int[] nums) {
+            // Input: nums = [1,2,3,1]
+            // Output: true
+            Set<Integer> set = new HashSet<>();
+
+            for (int i = 0; i < nums.length; i++) {
+                int currentNum = nums[i];
+                if (set.contains(currentNum)) {
+                    return true;
+                }
+                set.add(currentNum);
+            }
+            return false;
+        }
+    }
+
     public static class FindAllAnagrams {
         static Map<Character, Integer> map = new HashMap<>();
         static Map<Character, Integer> pmap = new HashMap<>();

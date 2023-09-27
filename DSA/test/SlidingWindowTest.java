@@ -2,12 +2,15 @@ package test;
 
 import org.junit.Test;
 
+import src.SlidingWindow.ContainsDuplicateQ1;
 import src.SlidingWindow.FindAllAnagrams;
 import src.SlidingWindow.LongestSubstringWithoutRepeatingCharacters;
 import src.SlidingWindow.MaxSumOfkConsecutive;
 import src.SlidingWindow.SubstringsOfSizeThreeWithDistinctCharacters;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class SlidingWindowTest {
     // Please refrain from checking the outputs of a same class together since the classes are static and might result
@@ -17,6 +20,12 @@ public class SlidingWindowTest {
     public SlidingWindowTest() {
     }
 
+    @Test
+    public void testContainsDuplicate() {
+        assertTrue(ContainsDuplicateQ1.solution(new int[] { 1, 2, 3, 1 }));
+        assertFalse(ContainsDuplicateQ1.solution(new int[] { 1,2,3,4 }));
+        assertTrue(ContainsDuplicateQ1.solution(new int[] { 1,1,1,3,3,4,3,2,4,2 }));
+    }
 
     @Test
     public void testFindAllAnagrams() {
