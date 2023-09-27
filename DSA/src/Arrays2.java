@@ -1,3 +1,5 @@
+package src;
+
 import java.lang.StringBuilder;
 import java.lang.Integer;
 
@@ -108,6 +110,7 @@ class RankTeamsByVotesQ13 {
         for (int i = 0; i < positionVotes.size(); i++) {
             teamList.add(positionVotes.get(i).keySet());
         }
+        return "";
     }
 }
 
@@ -664,70 +667,70 @@ class PrisonCellsAfterNDays {
     }
 }
 
-public class Main {
+public class Arrays2 {
     public static void main(String[] args) {
-        // System.out.println(Arrays.toString(PrisonCellsAfterNDays.approach1(new int[] { 0,1,0,1,1,0,0,1 }, 7)));
-        // System.out.println(Arrays.toString(PrisonCellsAfterNDays.approach1(new int[] { 1,0,0,1,0,0,1,0 }, 1000000000)));
-        // System.out.println(Arrays.toString(PrisonCellsAfterNDays.approach1(new int[] { 1,1,0,1,1,0,0,1 }, 300663720)));
+        // System.out.println(Arrays.toString(src.PrisonCellsAfterNDays.approach1(new int[] { 0,1,0,1,1,0,0,1 }, 7)));
+        // System.out.println(Arrays.toString(src.PrisonCellsAfterNDays.approach1(new int[] { 1,0,0,1,0,0,1,0 }, 1000000000)));
+        // System.out.println(Arrays.toString(src.PrisonCellsAfterNDays.approach1(new int[] { 1,1,0,1,1,0,0,1 }, 300663720)));
 
-        // System.out.println(MissingNumber.linearTime(new int[] { 9,6,4,2,3,5,7,0,1 }));
-        // System.out.println(MissingNumber.linearTime(new int[] { 3,0,1 }));
-        // System.out.println(MissingNumber.approach1(new int[] { 3,0,1 }));
+        // System.out.println(src.MissingNumber.linearTime(new int[] { 9,6,4,2,3,5,7,0,1 }));
+        // System.out.println(src.MissingNumber.linearTime(new int[] { 3,0,1 }));
+        // System.out.println(src.MissingNumber.approach1(new int[] { 3,0,1 }));
 
-        // System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 3, 2, 1, 0 })));
-        // System.out.println(Arrays.toString(BuildArrayFromPermutation.constSpace(new int[] { 5, 0, 1, 2, 3, 4 })));
-        // System.out.println(Arrays.toString(BuildArrayFromPermutation.approach1(new int[] { 0,2,1,5,3,4 })));
+        // System.out.println(Arrays.toString(src.BuildArrayFromPermutation.constSpace(new int[] { 3, 2, 1, 0 })));
+        // System.out.println(Arrays.toString(src.BuildArrayFromPermutation.constSpace(new int[] { 5, 0, 1, 2, 3, 4 })));
+        // System.out.println(Arrays.toString(src.BuildArrayFromPermutation.approach1(new int[] { 0,2,1,5,3,4 })));
 
-        // System.out.println(TrappingRainWater.approach1(new int[] {0,1,0,2,1,0,1,3,2,1,2,1}));
+        // System.out.println(src.TrappingRainWater.approach1(new int[] {0,1,0,2,1,0,1,3,2,1,2,1}));
 
-        // System.out.println(ReduceArraySizeToHalfQ14.approach1(new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 }));
-        // System.out.println(ReduceArraySizeToHalfQ14.approach1(new int[] { 7, 7, 7, 7, 7, 7 }));
-        // System.out.println(ReduceArraySizeToHalfQ14.approach1(new int[] { 1000, 1000, 3, 7 }));
+        // System.out.println(src.ReduceArraySizeToHalfQ14.approach1(new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 }));
+        // System.out.println(src.ReduceArraySizeToHalfQ14.approach1(new int[] { 7, 7, 7, 7, 7, 7 }));
+        // System.out.println(src.ReduceArraySizeToHalfQ14.approach1(new int[] { 1000, 1000, 3, 7 }));
 
         System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"AZC","ZAC"}));
-        // System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"ABC","ACB","ABC","ACB","ACB"}));
-        // System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"ZMNAGUEDSJYLBOPHRQICWFXTVK"}));
+        // System.out.println(src.RankTeamsByVotesQ13.approach1(new String[] {"ABC","ACB","ABC","ACB","ACB"}));
+        // System.out.println(src.RankTeamsByVotesQ13.approach1(new String[] {"ZMNAGUEDSJYLBOPHRQICWFXTVK"}));
 
-        // System.out.println(NextGreaterElementIIIQ12.approach1(12));
-        // System.out.println(NextGreaterElementIIIQ12.approach1(11452));
-        // System.out.println(NextGreaterElementIIIQ12.approach1(6537421));
-        // System.out.println(NextGreaterElementIIIQ12.approach1(12345));
-        // System.out.println(NextGreaterElementIIIQ12.approach1(2147483486));
-        // System.out.println(NextGreaterElementIIIQ12.approach1(12443322)); // 13443222 // 13222344
+        // System.out.println(src.NextGreaterElementIIIQ12.approach1(12));
+        // System.out.println(src.NextGreaterElementIIIQ12.approach1(11452));
+        // System.out.println(src.NextGreaterElementIIIQ12.approach1(6537421));
+        // System.out.println(src.NextGreaterElementIIIQ12.approach1(12345));
+        // System.out.println(src.NextGreaterElementIIIQ12.approach1(2147483486));
+        // System.out.println(src.NextGreaterElementIIIQ12.approach1(12443322)); // 13443222 // 13222344
 
-        // System.out.println(Arrays.toString(NextGreaterElementIIQ11.approach1(new int[] {1, 2, 1})));
-        // System.out.println(Arrays.toString(NextGreaterElementIIQ11.approach1(new int[] {1,5,3,6,8})));
+        // System.out.println(Arrays.toString(src.NextGreaterElementIIQ11.approach1(new int[] {1, 2, 1})));
+        // System.out.println(Arrays.toString(src.NextGreaterElementIIQ11.approach1(new int[] {1,5,3,6,8})));
 
-        // System.out.println(Arrays.toString(NextGreaterElementQ10.approach1(new int[] {4, 1, 2}, new int[] {1, 3, 4, 2})));
+        // System.out.println(Arrays.toString(src.NextGreaterElementQ10.approach1(new int[] {4, 1, 2}, new int[] {1, 3, 4, 2})));
 
-        // System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
-        // System.out.println(Arrays.toString(IntersectionOfTwoArraysIIQ9.approach1(new int[] {4,9,5}, new int[] {9,4,9,8,4})));
+        // System.out.println(Arrays.toString(src.IntersectionOfTwoArraysIIQ9.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
+        // System.out.println(Arrays.toString(src.IntersectionOfTwoArraysIIQ9.approach1(new int[] {4,9,5}, new int[] {9,4,9,8,4})));
 
-        // System.out.println(Arrays.toString(IntersectionOfTwoArraysQ8.hashing(new int[] {1,2,2,1}, new int[] {2, 2})));
-        // System.out.println(Arrays.toString(IntersectionOfTwoArraysQ8.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
+        // System.out.println(Arrays.toString(src.IntersectionOfTwoArraysQ8.hashing(new int[] {1,2,2,1}, new int[] {2, 2})));
+        // System.out.println(Arrays.toString(src.IntersectionOfTwoArraysQ8.approach1(new int[] {1,2,2,1}, new int[] {2, 2})));
 
-        // System.out.println(RemoveElementQ7.approach1(new int[] { 0,1,2,2,3,0,4,2 }, 2));
+        // System.out.println(src.RemoveElementQ7.approach1(new int[] { 0,1,2,2,3,0,4,2 }, 2));
 
-        // RangeSumQuery2DImmutableQ6 q6Obj = new RangeSumQuery2DImmutableQ6(new int[][] {
+        // src.RangeSumQuery2DImmutableQ6 q6Obj = new src.RangeSumQuery2DImmutableQ6(new int[][] {
         //     {3, 0, 1, 4, 2 }, {5, 6, 3, 2, 1}, {1, 2, 0, 1, 5}, {4, 1, 0, 1, 7}, {1, 0, 3, 0, 5}
         // });
         // System.out.println(q6Obj.sumRegion(2, 1, 4, 3));
 
-        // RangeSumQueryImmutableQ5 q5Obj = new RangeSumQueryImmutableQ5(new int[] {-2, 0, 3, -5, 2, -1});
+        // src.RangeSumQueryImmutableQ5 q5Obj = new src.RangeSumQueryImmutableQ5(new int[] {-2, 0, 3, -5, 2, -1});
         // System.out.println(q5Obj.sumRange(0, 2));
 
-        // System.out.println(SummaryRangesQ4.approach1(new int[] { 0,2,3,4,6,8,9 }));
-        // System.out.println(SummaryRangesQ4.approach1(new int[] { 0,1,2,4,5,7 }));
-        // System.out.println(SummaryRangesQ4.approach1(new int[] { }));
-        // System.out.println(SummaryRangesQ4.approach1(new int[] { 42 }));
-        // System.out.println(SummaryRangesQ4.approach1(new int[] {-3, -1, 0, 3}));
-        // System.out.println(SummaryRangesQ4.approach1(new int[] {1, 3, 5, 7, 9}));
+        // System.out.println(src.SummaryRangesQ4.approach1(new int[] { 0,2,3,4,6,8,9 }));
+        // System.out.println(src.SummaryRangesQ4.approach1(new int[] { 0,1,2,4,5,7 }));
+        // System.out.println(src.SummaryRangesQ4.approach1(new int[] { }));
+        // System.out.println(src.SummaryRangesQ4.approach1(new int[] { 42 }));
+        // System.out.println(src.SummaryRangesQ4.approach1(new int[] {-3, -1, 0, 3}));
+        // System.out.println(src.SummaryRangesQ4.approach1(new int[] {1, 3, 5, 7, 9}));
 
-        // System.out.println(ContainsDuplicateIIQ3.approach1(new int[] {1,2,3,1,2,3}, 2));
-        // System.out.println(ContainsDuplicateIIQ3.approach1(new int[] {1,2,3,1}, 3));
+        // System.out.println(src.ContainsDuplicateIIQ3.approach1(new int[] {1,2,3,1,2,3}, 2));
+        // System.out.println(src.ContainsDuplicateIIQ3.approach1(new int[] {1,2,3,1}, 3));
 
-        // ContainsDuplicateQ2.approach1(new int[] {1,2,3,1});
+        // src.ContainsDuplicateQ2.approach1(new int[] {1,2,3,1});
 
-        // MoveZeroesQ1.approach1(new int[] { 0,1,0,3,12 });
+        // src.MoveZeroesQ1.approach1(new int[] { 0,1,0,3,12 });
     }
 }

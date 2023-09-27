@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -222,46 +224,46 @@ class MaximumWealthQ1 {
     }
 }
 
-class Main {
+class Warmup2 {
     public static void main(String[] args) {
         MoveZeroesQ8.approach1(new int[] { 0, 1, 0, 3, 12 });
         MoveZeroesQ8.approach1(new int[] { 0 });
 
-        // System.out.println(MajorityElementQ7.bruteForce(new int[] { 3, 2, 3 }));
-        // System.out.println(MajorityElementQ7.bruteForce(new int[] { 2, 2, 1, 1, 1, 2, 2 }));
-        // System.out.println(MajorityElementQ7.altApproach(new int[] { 3, 2, 3 }));
-        // System.out.println(MajorityElementQ7.altApproach(new int[] { 2, 2, 1, 1, 1, 2, 2 }));
+        // System.out.println(src.MajorityElementQ7.bruteForce(new int[] { 3, 2, 3 }));
+        // System.out.println(src.MajorityElementQ7.bruteForce(new int[] { 2, 2, 1, 1, 1, 2, 2 }));
+        // System.out.println(src.MajorityElementQ7.altApproach(new int[] { 3, 2, 3 }));
+        // System.out.println(src.MajorityElementQ7.altApproach(new int[] { 2, 2, 1, 1, 1, 2, 2 }));
 
         // System.out.println(Arrays
-        //         .deepToString(TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } })));
+        //         .deepToString(src.TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } })));
         // System.out.println(Arrays
-        //         .deepToString(TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 } })));
+        //         .deepToString(src.TransposeMatrixQ6.bruteForce(new int[][] { { 1, 2, 3 }, { 4, 5, 6 } })));
 
-        // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 2, 6, 4, 1 }));
-        // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
-        // System.out.println(ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 1, 1 }));
-        // System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 2, 6, 4, 1 }));
-        // System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
-        // System.out.println(ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 1, 1 }));
+        // System.out.println(src.ThreeConsecutiveOddsQ5.bruteForce(new int[] { 2, 6, 4, 1 }));
+        // System.out.println(src.ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
+        // System.out.println(src.ThreeConsecutiveOddsQ5.bruteForce(new int[] { 1, 2, 1, 1 }));
+        // System.out.println(src.ThreeConsecutiveOddsQ5.altApproach(new int[] { 2, 6, 4, 1 }));
+        // System.out.println(src.ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 34, 3, 4, 5, 7, 23, 12 }));
+        // System.out.println(src.ThreeConsecutiveOddsQ5.altApproach(new int[] { 1, 2, 1, 1 }));
 
-        // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 4, 2, 1, 3 }));
-        // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 1, 3, 6, 10, 15 }));
-        // System.out.println(MinimumAbsoluteDifferenceQ4.builtins(new int[] { 3, 8, -10, 23, 19, -4, -14, 27 }));
+        // System.out.println(src.MinimumAbsoluteDifferenceQ4.builtins(new int[] { 4, 2, 1, 3 }));
+        // System.out.println(src.MinimumAbsoluteDifferenceQ4.builtins(new int[] { 1, 3, 6, 10, 15 }));
+        // System.out.println(src.MinimumAbsoluteDifferenceQ4.builtins(new int[] { 3, 8, -10, 23, 19, -4, -14, 27 }));
 
-        // System.out.println(JewelsAndStonesQ3.solution("aA", "aAAbbbb"));
-        // System.out.println(JewelsAndStonesQ3.solution("z", "ZZ"));
-        // System.out.println(JewelsAndStonesQ3.builtins("aA", "aAAbbbb"));
-        // System.out.println(JewelsAndStonesQ3.builtins("z", "ZZ"));
+        // System.out.println(src.JewelsAndStonesQ3.solution("aA", "aAAbbbb"));
+        // System.out.println(src.JewelsAndStonesQ3.solution("z", "ZZ"));
+        // System.out.println(src.JewelsAndStonesQ3.builtins("aA", "aAAbbbb"));
+        // System.out.println(src.JewelsAndStonesQ3.builtins("z", "ZZ"));
 
-        // System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 1, 2, 3, 4 })));
-        // System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 1, 1, 1, 1, 1 })));
-        // System.out.println(Arrays.toString(RunningSumQ2.solution(new int[] { 3, 1, 2, 10, 1 })));
+        // System.out.println(Arrays.toString(src.RunningSumQ2.solution(new int[] { 1, 2, 3, 4 })));
+        // System.out.println(Arrays.toString(src.RunningSumQ2.solution(new int[] { 1, 1, 1, 1, 1 })));
+        // System.out.println(Arrays.toString(src.RunningSumQ2.solution(new int[] { 3, 1, 2, 10, 1 })));
 
-        // System.out.println(MaximumWealthQ1.bruteForce(new int[][] { { 1, 2, 3 }, { 3, 2, 1 } }));
-        // System.out.println(MaximumWealthQ1.bruteForce(new int[][] { { 1, 5 }, { 7, 3 }, { 3, 5 } }));
-        // System.out.println(MaximumWealthQ1.bruteForce(new int[][] { { 2, 8, 7 }, { 7, 1, 3 }, { 1, 9, 5 } }));
-        // System.out.println(MaximumWealthQ1.builtins(new int[][] { { 1, 2, 3 }, { 3, 2, 1 } }));
-        // System.out.println(MaximumWealthQ1.builtins(new int[][] { { 1, 5 }, { 7, 3 }, { 3, 5 } }));
-        // System.out.println(MaximumWealthQ1.builtins(new int[][] { { 2, 8, 7 }, { 7, 1, 3 }, { 1, 9, 5 } }));
+        // System.out.println(src.MaximumWealthQ1.bruteForce(new int[][] { { 1, 2, 3 }, { 3, 2, 1 } }));
+        // System.out.println(src.MaximumWealthQ1.bruteForce(new int[][] { { 1, 5 }, { 7, 3 }, { 3, 5 } }));
+        // System.out.println(src.MaximumWealthQ1.bruteForce(new int[][] { { 2, 8, 7 }, { 7, 1, 3 }, { 1, 9, 5 } }));
+        // System.out.println(src.MaximumWealthQ1.builtins(new int[][] { { 1, 2, 3 }, { 3, 2, 1 } }));
+        // System.out.println(src.MaximumWealthQ1.builtins(new int[][] { { 1, 5 }, { 7, 3 }, { 3, 5 } }));
+        // System.out.println(src.MaximumWealthQ1.builtins(new int[][] { { 2, 8, 7 }, { 7, 1, 3 }, { 1, 9, 5 } }));
     }
 }

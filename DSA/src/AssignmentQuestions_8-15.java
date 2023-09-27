@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -124,38 +126,38 @@ class MaxOfThreeQ1 {
     }
 }
 
-class Main {
+class AssignmentQuestions1 {
     public static void main(String[] args) {
         System.out.println(FirstEvenNumberQ8.bruteForce(new int[] { 1, 2, 6, 3, 5 }));
         System.out.println(FirstEvenNumberQ8.bruteForce(new int[] { 1, 7, 9, 3, 5 }));
         System.out.println(FirstEvenNumberQ8.bruteForce(new int[] { 1, 7, 4, 8, 5 }));
 
-        // System.out.println(SumOfElementsQ7.builtins(new int[] { 1, 2, 6, 3, 5 }));
-        // System.out.println(SumOfElementsQ7.bruteForce(new int[] { 1, 2, 6, 3, 5 }));
+        // System.out.println(src.SumOfElementsQ7.builtins(new int[] { 1, 2, 6, 3, 5 }));
+        // System.out.println(src.SumOfElementsQ7.bruteForce(new int[] { 1, 2, 6, 3, 5 }));
 
         // System.out.println(
-        // OddElementsQ6.bruteForce(new int[] { 1, 5, 6, 4, 3, 2, 8})
+        // src.OddElementsQ6.bruteForce(new int[] { 1, 5, 6, 4, 3, 2, 8})
         // );
 
-        // SeriesQ5.bruteForce(5);
+        // src.SeriesQ5.bruteForce(5);
 
-        // SeriesQ4.bruteForce(5);
+        // src.SeriesQ4.bruteForce(5);
 
         /*
-         * int q3Median = new MedianElementQ3().usingMinAndMax(new int[] { 2, 5, 19 });
-         * int[] q3Median = new MedianElementQ3().bruteForce(new int[] { 10, 30, 20, 40
+         * int q3Median = new src.MedianElementQ3().usingMinAndMax(new int[] { 2, 5, 19 });
+         * int[] q3Median = new src.MedianElementQ3().bruteForce(new int[] { 10, 30, 20, 40
          * });
          * for (int i : q3Median) {
          * System.out.println(i);
          * }
          */
 
-        // MinOfThreeQ2 q2Obj = new MinOfThreeQ2();
+        // src.MinOfThreeQ2 q2Obj = new src.MinOfThreeQ2();
         // System.out.println(q2Obj.bruteForce(new int[] { 1, 4, 5 }));
         // System.out.println(q2Obj.bruteForce(new int[] { 4, 2, 5 }));
         // System.out.println(q2Obj.bruteForce(new int[] { 4, 5, 3 }));
 
-        // MaxOfThreeQ1 q1Obj = new MaxOfThreeQ1();
+        // src.MaxOfThreeQ1 q1Obj = new src.MaxOfThreeQ1();
         // System.out.println(q1Obj.bruteForce(new int[] { 1, 2, 10 }));
         // System.out.println(q1Obj.bruteForce(new int[] { 20, 1, 2 }));
         // System.out.println(q1Obj.bruteForce(new int[] { 1, 30, 2 }));

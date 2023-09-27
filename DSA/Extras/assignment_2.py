@@ -1,4 +1,4 @@
-class TransposeMatrixQ6:
+class src.TransposeMatrixQ6:
     def brute_force(matrix: list[list[int]]) -> list[list[int]]:
         # Since it's transpose, the rows of transpose matrix will be the columns of matrix
         new_rows = len(matrix[0]) # old columns
@@ -14,11 +14,11 @@ class TransposeMatrixQ6:
             
 
 
-q6Obj = TransposeMatrixQ6
+q6Obj = src.TransposeMatrixQ6
 print(q6Obj.brute_force(matrix = [[1,2,3],[4,5,6],[7,8,9]]))
 print(q6Obj.brute_force(matrix = [[1,2,3],[4,5,6]]))
 
-class ThreeConsecutiveOddsQ5:
+class src.ThreeConsecutiveOddsQ5:
     def alt_approach_1(arr: list[int]) -> bool:
         count = 0
         idx = 0
@@ -57,7 +57,7 @@ class ThreeConsecutiveOddsQ5:
                 count = 0
         return False
 
-q5Obj = ThreeConsecutiveOddsQ5
+q5Obj = src.ThreeConsecutiveOddsQ5
 # print(q5Obj.alt_approach([2,6,4,1]))
 
 # print(q5Obj.brute_force([2,6,4,1]))
@@ -165,7 +165,7 @@ print(q4Obj.builtins([3,8,-10,23,19,-4,-14,27]))
 """
 
 
-class JewelsAndStonesQ3:
+class src.JewelsAndStonesQ3:
     def solution(jewels: str, stones: str) -> int:
         jewelsSet = set(jewels)
         jewels_in_stones = 0
@@ -192,12 +192,12 @@ class JewelsAndStonesQ3:
                     count += 1
         return count
         
-q3Obj = JewelsAndStonesQ3
+q3Obj = src.JewelsAndStonesQ3
 # print(q3Obj.solution("aA", "aAAbbbb"))
 # print(q3Obj.alt_approach("aA", "aAAbbbb"))
 # print(q3Obj.brute_force("aA", "aAAbbbb"))
 
-class RunningSumQ2:
+class src.RunningSumQ2:
     def solution(nums: list[int]) -> list[int]:
         sum = 0
         for idx in range(len(nums)):
@@ -212,11 +212,11 @@ class RunningSumQ2:
             idx += 1
         return nums
 
-q2Obj = RunningSumQ2
+q2Obj = src.RunningSumQ2
 # print(q2Obj.solution([1,2,3,4]))
 # print(q2Obj.brute_force([1,2,3,4]))
 
-class MaximumWealthQ1:
+class src.MaximumWealthQ1:
     def solution(accounts: list[list[int]]) -> int:
         max_wealth = 0
         
@@ -249,7 +249,7 @@ class MaximumWealthQ1:
         return max(total_individual_wealth)
 
 """
-q1Obj = MaximumWealthQ1
+q1Obj = src.MaximumWealthQ1
 print(q1Obj.solution([[1,2,3],[3,2,1]]))
 print(q1Obj.solution([[1,5],[7,3],[3,5]]))
 print(q1Obj.solution([[2,8,7],[7,1,3],[1,9,5]]))

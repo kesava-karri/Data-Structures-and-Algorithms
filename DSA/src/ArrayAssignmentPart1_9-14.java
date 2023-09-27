@@ -1,3 +1,5 @@
+package src;
+
 import java.lang.Math;
 
 import java.util.ArrayList;
@@ -700,21 +702,21 @@ class TwoSumQ1 {
     }
 }
 
-class Main {
+class Arrays1 {
     public static void main(String[] args) {
         RotateImageQ15.approach1(new int[][] { { 1,2,3 }, {4,5,6},{7,8,9}});
         RotateImageQ15.approach1(new int[][] { { 5,1,9,11 }, {2,4,8,10 },{13,3,6,7},{15,14,12,16}});
         
-        // System.out.println(FourSumQ14.approach1(new int[] { 1,0,-1,0,-2,2 }, 0));
-        // System.out.println(FourSumQ14.approach1(new int[] { 1000000000,1000000000,1000000000,1000000000 }, -294967296));
-        // System.out.println(FourSumQ14.approach1(new int[] { 1, 2, 3, 4 }, 10));
+        // System.out.println(src.FourSumQ14.approach1(new int[] { 1,0,-1,0,-2,2 }, 0));
+        // System.out.println(src.FourSumQ14.approach1(new int[] { 1000000000,1000000000,1000000000,1000000000 }, -294967296));
+        // System.out.println(src.FourSumQ14.approach1(new int[] { 1, 2, 3, 4 }, 10));
 
-        // System.out.println(ThreeSumClosestQ13.approach1(new int[] { 4,0,5,-5,3,3,0,-4,-5 }, -2));
-        // System.out.println(ThreeSumClosestQ13.approach1(new int[] { -1, 2, 1, -4 }, 1));
-        // System.out.println(ThreeSumClosestQ13.approach1(new int[] { 0,0,0 }, 1));
+        // System.out.println(src.ThreeSumClosestQ13.approach1(new int[] { 4,0,5,-5,3,3,0,-4,-5 }, -2));
+        // System.out.println(src.ThreeSumClosestQ13.approach1(new int[] { -1, 2, 1, -4 }, 1));
+        // System.out.println(src.ThreeSumClosestQ13.approach1(new int[] { 0,0,0 }, 1));
         
-        // System.out.println(ThreeSumSmallerQ12.approach1(new int[] { -2, 0, 1, 3 }, 2));
-        // System.out.println(ThreeSumSmallerQ12.approach1(new int[] { -2,0,-1,3 }, 2));
+        // System.out.println(src.ThreeSumSmallerQ12.approach1(new int[] { -2, 0, 1, 3 }, 2));
+        // System.out.println(src.ThreeSumSmallerQ12.approach1(new int[] { -2,0,-1,3 }, 2));
 
         // System.out.println(threeSumQ11.solution(new int[] { -1,0,1,2,-1,-4 }));
         // System.out.println(threeSumQ11.solution(new int[] { -1,0,1 }));
@@ -722,51 +724,51 @@ class Main {
         // System.out.println(threeSumQ11.solution(new int[] { -1,0,1,0 }));
         // System.out.println(threeSumQ11.solution(new int[] { 1,-1,-1,0 }));
 
-        // System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 3, 50, 75 }, 0, 99));
-        // System.out.println(MissingRangesQ10.approach1(new int[] { 0, 1, 2, 3, 7 }, 0, 7));
+        // System.out.println(src.MissingRangesQ10.approach1(new int[] { 0, 1, 3, 50, 75 }, 0, 99));
+        // System.out.println(src.MissingRangesQ10.approach1(new int[] { 0, 1, 2, 3, 7 }, 0, 7));
 
-        // System.out.println(MajorityElementIIQ9.approach1(new int[] {2, 1, 1, 1}));
+        // System.out.println(src.MajorityElementIIQ9.approach1(new int[] {2, 1, 1, 1}));
         
-        // System.out.println(MajorityElementQ8.usingSorting(new int[] {2, 1, 1, 1}));
+        // System.out.println(src.MajorityElementQ8.usingSorting(new int[] {2, 1, 1, 1}));
 
-        // System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7, 1, 5, 3, 6, 4 }));
-        // System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 1,2,3,4,5 }));
-        // System.out.println(BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7,6,4,3,1 }));
+        // System.out.println(src.BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7, 1, 5, 3, 6, 4 }));
+        // System.out.println(src.BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 1,2,3,4,5 }));
+        // System.out.println(src.BestTimeToBuyAndSellStockIIQ7.approach2(new int[] { 7,6,4,3,1 }));
         
-        // System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 7, 1, 5, 3, 6, 4 }));
-        // System.out.println(BestTimeToBuyAndSellStocksQ6.solution(new int[] { 2,1,4 }));
-        // System.out.println(BestTimeToBuyAndSellStocksQ6.bruteForce(new int[] { 7, 1, 5, 3, 6, 4 }));
+        // System.out.println(src.BestTimeToBuyAndSellStocksQ6.solution(new int[] { 7, 1, 5, 3, 6, 4 }));
+        // System.out.println(src.BestTimeToBuyAndSellStocksQ6.solution(new int[] { 2,1,4 }));
+        // System.out.println(src.BestTimeToBuyAndSellStocksQ6.bruteForce(new int[] { 7, 1, 5, 3, 6, 4 }));
 
-        // System.out.println(PascalsTriangleQ5.bruteForce(3));
-        // System.out.println(PascalsTriangleQ5.bruteForce(0));
-        // System.out.println(PascalsTriangleQ5.bruteForce(1));
+        // System.out.println(src.PascalsTriangleQ5.bruteForce(3));
+        // System.out.println(src.PascalsTriangleQ5.bruteForce(0));
+        // System.out.println(src.PascalsTriangleQ5.bruteForce(1));
 
-        // System.out.println(PascalsTriangleQ4.bruteForce(5));
+        // System.out.println(src.PascalsTriangleQ4.bruteForce(5));
 
-        // MergeSortedArrayQ3.bruteForce(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
-        // MergeSortedArrayQ3.bruteForce(new int[] { 1 }, 1, new int[] {}, 0);
-        // MergeSortedArrayQ3.bruteForce(new int[] { 0 }, 0, new int[] { 1 }, 1);
-        // MergeSortedArrayQ3.bruteForce(new int[] { 4,5,6,0,0,0 }, 3, new int[] { 1,2,3 }, 3);
-        // MergeSortedArrayQ3.solution(new int[] { 4, 5, 6, 0, 0, 0 }, 3, new int[] { 1, 2, 3 }, 3);
+        // src.MergeSortedArrayQ3.bruteForce(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
+        // src.MergeSortedArrayQ3.bruteForce(new int[] { 1 }, 1, new int[] {}, 0);
+        // src.MergeSortedArrayQ3.bruteForce(new int[] { 0 }, 0, new int[] { 1 }, 1);
+        // src.MergeSortedArrayQ3.bruteForce(new int[] { 4,5,6,0,0,0 }, 3, new int[] { 1,2,3 }, 3);
+        // src.MergeSortedArrayQ3.solution(new int[] { 4, 5, 6, 0, 0, 0 }, 3, new int[] { 1, 2, 3 }, 3);
 
-        // System.out.println(Arrays.toString(TwoSumIIQ2.usingTwoPointers(new int[] { 2, 7, 11, 15 }, 9)));
-        // System.out.println(Arrays.toString(TwoSumIIQ2.usingTwoPointers(new int[] { 2, 3, 4 }, 6)));
-        // System.out.println(Arrays.toString(TwoSumIIQ2.usingTwoPointers(new int[] { -1, 0 }, -1)));
-        // System.out.println(Arrays.toString(TwoSumIIQ2.usingTwoPointers(new int[] { 5, 25, 75 }, 100)));
+        // System.out.println(Arrays.toString(src.TwoSumIIQ2.usingTwoPointers(new int[] { 2, 7, 11, 15 }, 9)));
+        // System.out.println(Arrays.toString(src.TwoSumIIQ2.usingTwoPointers(new int[] { 2, 3, 4 }, 6)));
+        // System.out.println(Arrays.toString(src.TwoSumIIQ2.usingTwoPointers(new int[] { -1, 0 }, -1)));
+        // System.out.println(Arrays.toString(src.TwoSumIIQ2.usingTwoPointers(new int[] { 5, 25, 75 }, 100)));
 
-        // System.out.println(Arrays.toString(TwoSumQ1.usingHashMap(new int[] { 2, 7, 11, 15 }, 9)));
-        // System.out.println(Arrays.toString(TwoSumQ1.usingHashMap(new int[] { 3, 2, 4 }, 6)));
-        // System.out.println(Arrays.toString(TwoSumQ1.usingHashMap(new int[] { 2, 5, 5, 11 }, 6)));
+        // System.out.println(Arrays.toString(src.TwoSumQ1.usingHashMap(new int[] { 2, 7, 11, 15 }, 9)));
+        // System.out.println(Arrays.toString(src.TwoSumQ1.usingHashMap(new int[] { 3, 2, 4 }, 6)));
+        // System.out.println(Arrays.toString(src.TwoSumQ1.usingHashMap(new int[] { 2, 5, 5, 11 }, 6)));
 
-        // System.out.println(Arrays.toString(TwoSumQ1.usingBinarySearch(new int[] { 2, 7, 11, 15 }, 9)));
-        // System.out.println(Arrays.toString(TwoSumQ1.usingBinarySearch(new int[] { 3, 2, 4 }, 6)));
-        // System.out.println(Arrays.toString(TwoSumQ1.usingBinarySearch(new int[] { 2, 5, 5, 11 }, 6)));
+        // System.out.println(Arrays.toString(src.TwoSumQ1.usingBinarySearch(new int[] { 2, 7, 11, 15 }, 9)));
+        // System.out.println(Arrays.toString(src.TwoSumQ1.usingBinarySearch(new int[] { 3, 2, 4 }, 6)));
+        // System.out.println(Arrays.toString(src.TwoSumQ1.usingBinarySearch(new int[] { 2, 5, 5, 11 }, 6)));
 
-        // System.out.println(Arrays.toString(TwoSumQ1.usingBinarySearch(new int[] { 3, 3 }, 6)));
+        // System.out.println(Arrays.toString(src.TwoSumQ1.usingBinarySearch(new int[] { 3, 3 }, 6)));
 
-        // System.out.println(Arrays.toString(TwoSumQ1.usingTwoPointers(new int[] { 2, 7, 11, 15 }, 9)));
+        // System.out.println(Arrays.toString(src.TwoSumQ1.usingTwoPointers(new int[] { 2, 7, 11, 15 }, 9)));
 
-        // TwoSumQ1 q1 = new TwoSumQ1();
+        // src.TwoSumQ1 q1 = new src.TwoSumQ1();
         // System.out.println(Arrays.toString(q1.bruteForce(new int[] { 2,7,11,15 }, 9)));
         // System.out.println(Arrays.toString(q1.bruteForce(new int[] { 3, 2, 4 }, 6)));
         // System.out.println(Arrays.toString(q1.bruteForce(new int[] { 3, 3 }, 6)));

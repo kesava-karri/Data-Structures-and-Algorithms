@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 import java.lang.String;
 import java.util.Arrays;
@@ -203,45 +205,45 @@ class SumOfElementsQ1 {
     }
 }
 
-class Main {
+class WarmUp1 {
     public static void main(String[] args) {
         System.out.println(BalancedArrayBonusQ.solution(new int[] { 1, 5, 3, 2 }));
         System.out.println(BalancedArrayBonusQ.solution(new int[] { 1, 2, 1, 2, 1, 3 }));
 
-        // System.out.println(FascinatingNumberQ10.altApproach(192));
-        // System.out.println(FascinatingNumberQ10.altApproach(853));
-        // System.out.println(FascinatingNumberQ10.bruteForce(192));
-        // System.out.println(FascinatingNumberQ10.bruteForce(853));
+        // System.out.println(src.FascinatingNumberQ10.altApproach(192));
+        // System.out.println(src.FascinatingNumberQ10.altApproach(853));
+        // System.out.println(src.FascinatingNumberQ10.bruteForce(192));
+        // System.out.println(src.FascinatingNumberQ10.bruteForce(853));
 
-        // System.out.println(SumOfSeriesQ9.altApproach(1));
-        // System.out.println(SumOfSeriesQ9.bruteForce(5));
+        // System.out.println(src.SumOfSeriesQ9.altApproach(1));
+        // System.out.println(src.SumOfSeriesQ9.bruteForce(5));
 
-        // System.out.println(ArrayExceptGreatestTwoQ8.bruteForce(new int[] { 2, 8, 7, 1, 5 }));
-        // System.out.println(ArrayExceptGreatestTwoQ8.bruteForce(new int[] { 7, -2, 3, 4, 9, -1 }));
-        // System.out.println(Arrays.toString(ArrayExceptGreatestTwoQ8.builtins(new int[] { 2, 8, 7, 1, 5 })));
-        // System.out.println(Arrays.toString(ArrayExceptGreatestTwoQ8.builtins(new int[] { 7, -2, 3, 4, 9, -1 })));
+        // System.out.println(src.ArrayExceptGreatestTwoQ8.bruteForce(new int[] { 2, 8, 7, 1, 5 }));
+        // System.out.println(src.ArrayExceptGreatestTwoQ8.bruteForce(new int[] { 7, -2, 3, 4, 9, -1 }));
+        // System.out.println(Arrays.toString(src.ArrayExceptGreatestTwoQ8.builtins(new int[] { 2, 8, 7, 1, 5 })));
+        // System.out.println(Arrays.toString(src.ArrayExceptGreatestTwoQ8.builtins(new int[] { 7, -2, 3, 4, 9, -1 })));
 
-        // System.out.println(FinalElementQ7.builtins(new int[] { 7, 8, 3, 4, 2, 9, 5 }));
-        // System.out.println(FinalElementQ7.builtins(new int[] { 8, 1, 2, 9, 4, 3, 7, 5 }));
+        // System.out.println(src.FinalElementQ7.builtins(new int[] { 7, 8, 3, 4, 2, 9, 5 }));
+        // System.out.println(src.FinalElementQ7.builtins(new int[] { 8, 1, 2, 9, 4, 3, 7, 5 }));
 
-        // System.out.println(PalindromeArrayQ6.altApproach(new int[] { 1, 2, 3, 2, 1 }));
-        // System.out.println(PalindromeArrayQ6.twoPointer(new int[] { 1, 2, 3, 2, 1 }));
-        // System.out.println(PalindromeArrayQ6.twoPointer(new int[] { 1, 2, 3, 4, 5 }));
+        // System.out.println(src.PalindromeArrayQ6.altApproach(new int[] { 1, 2, 3, 2, 1 }));
+        // System.out.println(src.PalindromeArrayQ6.twoPointer(new int[] { 1, 2, 3, 2, 1 }));
+        // System.out.println(src.PalindromeArrayQ6.twoPointer(new int[] { 1, 2, 3, 4, 5 }));
 
-        // System.out.println(ElementsEqualsIndexValueQ5.bruteForce(new int[] { 15, 2, 45, 12, 7 }));
-        // System.out.println(ElementsEqualsIndexValueQ5.bruteForce(new int[] { 1 }));
+        // System.out.println(src.ElementsEqualsIndexValueQ5.bruteForce(new int[] { 15, 2, 45, 12, 7 }));
+        // System.out.println(src.ElementsEqualsIndexValueQ5.bruteForce(new int[] { 1 }));
 
-        // AlternateElementsQ4.bruteForce(new int[] { 1, 2, 3, 4 });
-        // AlternateElementsQ4.bruteForce(new int[] { 1, 2, 3, 4, 5 });
+        // src.AlternateElementsQ4.bruteForce(new int[] { 1, 2, 3, 4 });
+        // src.AlternateElementsQ4.bruteForce(new int[] { 1, 2, 3, 4, 5 });
 
-        // System.out.println(CountElementsLessThanOrEqualToGivenNumberQ3.bruteForce(new
+        // System.out.println(src.CountElementsLessThanOrEqualToGivenNumberQ3.bruteForce(new
         // int[] { 1, 2, 4, 5, 8, 10 }, 9));
-        // System.out.println(CountElementsLessThanOrEqualToGivenNumberQ3.bruteForce(new int[] { 1, 2, 2, 2, 5, 7, 9 }, 2));
+        // System.out.println(src.CountElementsLessThanOrEqualToGivenNumberQ3.bruteForce(new int[] { 1, 2, 2, 2, 5, 7, 9 }, 2));
 
         // ArrayList<Integer> arr = new ArrayList<Integer>(Arrays.asList(10, 20, 30, 40, 50, 60, 70));
-        // System.out.println(ElementAtIndexQ2.whenArrayList(arr, 4));
-        // System.out.println(ElementAtIndexQ2.bruteForce(new int[] { 10, 20, 30, 40, 50}, 2));
+        // System.out.println(src.ElementAtIndexQ2.whenArrayList(arr, 4));
+        // System.out.println(src.ElementAtIndexQ2.bruteForce(new int[] { 10, 20, 30, 40, 50}, 2));
 
-        // System.out.println(SumOfElementsQ1.bruteForce(new int[] { 5, 8, 3, 10, 22, 45 }));
+        // System.out.println(src.SumOfElementsQ1.bruteForce(new int[] { 5, 8, 3, 10, 22, 45 }));
     }
 }

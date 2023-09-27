@@ -1,3 +1,5 @@
+package src;
+
 class ReverseString {
     public static void approach1(char[] s) {
         recursion(s, 0, s.length - 1);
@@ -13,7 +15,7 @@ class ReverseString {
 }
 
 class PowerOfTwo {
-    public static boolean isPowerOfTwo(int n) {
+    public boolean isPowerOfTwo(int n) {
         return divideByTwo(n);
     }
 
@@ -24,9 +26,9 @@ class PowerOfTwo {
     }
 }
 
-class GFG {
+class Recursion {
     public static void main (String[] args) {
-        ReverseString.approach1(new char[] {'h','e','l','l','o'});
-        System.out.println(PowerOfTwo.isPowerOfTwo(16));
+//        ReverseString.approach1(new char[] {'h','e','l','l','o'});
+//        System.out.println(PowerOfTwo.isPowerOfTwo(16));
     }
 }
