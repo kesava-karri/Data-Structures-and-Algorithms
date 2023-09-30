@@ -10,6 +10,25 @@ import java.util.Map;
 import java.util.Set;
 
 public class SlidingWindow {
+    public class LongestSubstringKRepeatingCharactersQ5 {
+        public int approach(String s, int k) {
+            // alphabet frequency array
+            // return sum of elements greater than k of the array
+
+            int[] freq = new int[26];
+            int ans = 0;
+            for (int i = 0; i < s.length(); i++) {
+                freq[s.charAt(i) - 97]++;
+            }
+            System.out.println(Arrays.toString(freq));
+            for (int i = 0; i < 26; i++) {
+                if (freq[i] >= k) {
+                    ans += freq[i];
+                }
+            }
+            return ans > 0 ? ans : 0;
+        }
+    }
     public class SlidingWindowMaximumQ4 {
         public int[] approach(int[] nums, int k) {
             List<Integer> ans = new ArrayList();
@@ -191,7 +210,7 @@ public class SlidingWindow {
             // Output: [0,6]
 
             // find p's anagrams in s & return start indices
-            // since anagram would have same same length as p, implies it could be the size of window
+            // since anagram would have same length as p, implies it could be the size of window
             List<Integer> ans = new ArrayList<>();
             int ptr = 0;
             int lenOfWindow = p.length();
