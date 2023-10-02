@@ -9,7 +9,6 @@ import src.SlidingWindow.ContainsDuplicateIIIQ3;
 import src.SlidingWindow.ContainsDuplicateIIQ2;
 import src.SlidingWindow.ContainsDuplicateIQ1;
 import src.SlidingWindow.FindAllAnagrams;
-import src.SlidingWindow.LongestSubstringKRepeatingCharactersQ5;
 import src.SlidingWindow.LongestSubstringWithoutRepeatingCharacters;
 import src.SlidingWindow.MaxSumOfkConsecutive;
 import src.SlidingWindow.SlidingWindowMaximumQ4;
@@ -28,16 +27,6 @@ public class SlidingWindowTest {
     /* Constructor Injection */
     public SlidingWindowTest() {
     }
-
-    @Test
-    public void testLongestSubstringKRepeatingCharactersQ5() {
-        LongestSubstringKRepeatingCharactersQ5 o1 = slidingWindow.new LongestSubstringKRepeatingCharactersQ5();
-        System.out.println(o1.approach("aaabb", 3));
-
-        LongestSubstringKRepeatingCharactersQ5 o2 = slidingWindow.new LongestSubstringKRepeatingCharactersQ5();
-        System.out.println(o2.approach("ababacb", 3));
-    }
-
     @Test
     public void testSlidingWindowMaximumQ4() {
         SlidingWindowMaximumQ4 o1 = slidingWindow.new SlidingWindowMaximumQ4();
