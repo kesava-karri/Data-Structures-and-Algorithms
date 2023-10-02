@@ -7,6 +7,58 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Queue1 {
+    public class LinkedListCycleII {
+        public Node solution(Node head) {
+            Node tortoise = head;
+            Node hare = head;
+            // Divide into smaller problems
+
+            // Check if cycle exists
+            while (hare != null && hare.next != null) {
+                tortoise = tortoise.next;
+                hare = hare.next.next;
+                if (hare == tortoise) break;
+            }
+
+            if (hare == null || hare.next == null) {
+                return null;
+            } else {
+                // If cycle exists find starting Node of the cycle
+                hare = head; // move either one of them to head
+                while (hare != tortoise) {
+                    tortoise = tortoise.next;
+                    hare = hare.next; // make 1 jump now
+                }
+            }
+            return hare;
+        }
+    }
+    public class LinkedListCycle {
+        // Using Node class as it's similar
+
+        /**
+         * Definition for singly-linked list.
+         * class ListNode {
+         *     int val;
+         *     ListNode next;
+         *     ListNode(int x) {
+         *         val = x;
+         *         next = null;
+         *     }
+         * }
+         */
+        public boolean solution(Node head) {
+            Node tortoise = head;
+            Node hare = head;
+
+            while (hare != null && hare.next != null) {
+                tortoise = tortoise.next;
+                hare = hare.next.next;
+                if (tortoise == hare) return true;
+            }
+            return false;
+        }
+    }
 
     public class TimeNeededToBuyTickets {
         public int approach(int[] tickets, int k) {

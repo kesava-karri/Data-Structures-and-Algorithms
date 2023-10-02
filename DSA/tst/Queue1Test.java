@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 import src.Queue1;
 import src.Queue1.FindNByKthNodeInLinkedList;
+import src.Queue1.LinkedListCycle;
 import src.Queue1.MiddleOfTheLinkedList;
 import src.Queue1.MinimizeTheSum;
 import src.Queue1.Node;
@@ -16,17 +17,32 @@ import src.Queue1.ListNode;
 
 public class Queue1Test {
     Queue1 queue1 = new Queue1();
+    
+    @Test
+    public void testLinkedListCycle() {
+        int[] arr = new int[] { 3,2,0,-4 };
+        Node head = generateLinkedList(arr);
+        Node temp = head;
+        Node pos = null;
+        int i = 0;
+        while (temp.next != null) {
+            if (arr[i] == 2) {
+                pos = temp;
+            }
+            temp = temp.next;
+            i++;
+        }
+
+        temp.next = pos;
+
+        LinkedListCycle o1 = queue1.new LinkedListCycle();
+        System.out.println(o1.solution(head));
+    }
 
     @Test
     public void testFindNByKthNodeInLinkedList() {
         int[] arr = new int[] { 2, 7, 9, 3, 5 };
-        Node head = queue1.new Node(arr[0]);
-        Node temp = head;
-        for (int i = 1; i < arr.length; i++) {
-            Node node = queue1.new Node(arr[i]);
-            temp.next = node;
-            temp = node;
-        }
+        Node head = generateLinkedList(arr);
         /*Node temp1 = head;
 
         for (int i = 0; i <= arr.length; i++) {
@@ -87,5 +103,16 @@ public class Queue1Test {
         assertEquals(8,o1.approach(new int[] { 5,1,1,1 }, 0));
     }
 
+
+    private Node generateLinkedList(int[] arr) {
+        Node head = queue1.new Node(arr[0]);
+        Node temp = head;
+        for (int i = 1; i < arr.length; i++) {
+            Node node = queue1.new Node(arr[i]);
+            temp.next = node;
+            temp = node;
+        }
+        return head;
+    }
 }
 
