@@ -10,6 +10,7 @@ import src.Queue1.LinkedListCycle;
 import src.Queue1.MiddleOfTheLinkedList;
 import src.Queue1.MinimizeTheSum;
 import src.Queue1.Node;
+import src.Queue1.RemoveNthNodeFromEndOfList;
 import src.Queue1.TimeNeededToBuyTickets;
 
 // Helper imports
@@ -17,6 +18,23 @@ import src.Queue1.ListNode;
 
 public class Queue1Test {
     Queue1 queue1 = new Queue1();
+
+    @Test
+    public void testRemoveNthNodeFromEndOfList() {
+        int[] arr = new int[] { 1, 2, 3, 4, 5 };
+        int[] arr2 = new int[] { 1, 2 };
+
+        ListNode head = generateLinkedListReturnListNode(arr);
+        ListNode head2 = generateLinkedListReturnListNode(arr2);
+
+        RemoveNthNodeFromEndOfList q1 = queue1.new RemoveNthNodeFromEndOfList();
+
+        printLinkedList(q1.solution(head, 2));
+
+//        printLinkedList(q1.solution(queue1.new ListNode(1, null), 1));
+
+//        printLinkedList(q1.solution(head2, 1));
+    }
     
     @Test
     public void testLinkedListCycle() {
@@ -103,6 +121,26 @@ public class Queue1Test {
         assertEquals(8,o1.approach(new int[] { 5,1,1,1 }, 0));
     }
 
+    private ListNode generateLinkedListReturnListNode(int[] arr) {
+        ListNode head = queue1.new ListNode(arr[0]);
+        ListNode temp = head;
+        for (int i = 1; i < arr.length; i++) {
+            ListNode node = queue1.new ListNode(arr[i]);
+            temp.next = node;
+            temp = node;
+        }
+        return head;
+    }
+
+    private void printLinkedList(ListNode head) {
+        System.out.println("\nStart of Linked List");
+        ListNode curr = head;
+        while (curr != null) {
+            System.out.println(curr.val);
+            curr = curr.next;
+        }
+        System.out.println("End of Linked List\n");
+    }
 
     private Node generateLinkedList(int[] arr) {
         Node head = queue1.new Node(arr[0]);

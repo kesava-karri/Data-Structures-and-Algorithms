@@ -1,12 +1,131 @@
 package src;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Queue1 {
+    public class RemoveNthNodeFromEndOfList {
+        public ListNode solution(ListNode head, int n) {
+            ListNode prev = new ListNode(1357, head);
+            ListNode curr = head;
+
+            int len = 1; // as curr node is starting from first node :)
+            while (curr.next != null) {
+                curr = curr.next;
+                len++;
+            }
+
+            int indexToBeRemoved = len - n; // 3    (5-2)
+            int count = 0;
+
+            while (count <= indexToBeRemoved) {
+                prev = curr;
+                curr = curr.next;
+                count++;
+                if (count == indexToBeRemoved) {
+                    prev.next = curr.next;
+                    break;
+                }
+            }
+            if (prev == null) {
+                return head.next;
+            } else {
+                prev.next = curr.next;
+                return head;
+            }
+        }
+
+        public ListNode brokenApproach(ListNode head, int n) {
+            ListNode prev = new ListNode(1357, head);
+            ListNode curr = head;
+            ListNode nextNode = head.next;
+
+            int len = 1; // as curr node is starting from first node :)
+            while (curr.next != null) {
+                curr = curr.next;
+                len++;
+            }
+
+            if (len == n) {
+                head = head.next;
+                return head;
+            }
+
+
+            int count = 0;
+            int indexToBeRemoved = len - n;
+
+            if (indexToBeRemoved == count) return head.next = null;
+            if (nextNode.next == null) {
+                head.next = null;
+                return head;
+            }
+
+            while (nextNode.next != null && indexToBeRemoved != count) {
+                prev = curr;
+                curr = nextNode;
+                nextNode = nextNode.next;
+                count++;
+            }
+
+            prev.next = nextNode;
+
+            // if (nextNode.next == null) {
+            //     head.next = null;
+            // }
+
+            return head;
+        }
+    }
+
+    public class ReverseNodesInKGroup {
+        public ListNode approach(ListNode head, int k) {
+            ListNode curr = head;
+            ListNode prev = null;
+            ListNode next = null;
+
+            ListNode startOfGroupHead = head;
+            ListNode endOfPrevGroup = new ListNode(1234, head);
+
+            while (curr.next != null) {
+                int count = 0;
+                curr = startOfGroupHead;
+                prev = endOfPrevGroup;
+                while (count < k && curr.next != null) {
+                    next = curr.next;
+                    curr.next = prev;
+                    prev = curr;
+                    curr = next;
+                    count++;
+                }
+                startOfGroupHead.next = curr;
+                endOfPrevGroup.next = prev;
+                endOfPrevGroup = startOfGroupHead;
+                startOfGroupHead = curr;
+            }
+            return head;
+        }
+    }
+
+    public class ReverseLinkedList {
+        public ListNode solution(ListNode head) {
+            ListNode temp = null;
+            ListNode curr = head;
+            ListNode prev = null;
+
+            while (curr != null) {
+                temp = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = temp;
+            }
+            head = prev;
+            return head;
+        }
+    }
+
     public class LinkedListCycleII {
         public Node solution(Node head) {
             Node tortoise = head;
@@ -33,6 +152,7 @@ public class Queue1 {
             return hare;
         }
     }
+
     public class LinkedListCycle {
         // Using Node class as it's similar
 
