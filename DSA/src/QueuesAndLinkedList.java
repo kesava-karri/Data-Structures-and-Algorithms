@@ -1,11 +1,177 @@
 package src;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class Queue1 {
+public class QueuesAndLinkedList {
+    public class RemoveLinkedListElements {
+        public ListNode solution(ListNode head, int val) {
+            if (head == null) {
+                return null;
+            }
+
+            ListNode dummy = new ListNode(1357, head); // any random int :)
+
+            ListNode curr = dummy;
+            while(curr.next != null) {
+                if (curr.next.val == val) {
+                    curr.next = curr.next.next;
+                    //    curr = curr.next;
+                    // Shouldn't move my curr to curr.next 'cause what if the curr.next has also the val we need to delete then we leave that out & check next.val if we move it:)
+                } else {
+                    curr = curr.next;
+                }
+            }
+            return dummy.next;
+
+        }
+        public ListNode brokenApproach(ListNode head, int val) {
+            // ListNode prev = null;
+            ListNode curr = head;
+            ListNode prev = new ListNode(1357, head);
+
+            // while (curr.next != null && prev.next != null) {
+            while (prev.next != null) {
+                if (prev!=null) System.out.println("1. " + prev.val);
+                System.out.println("2. " + curr.val);
+                if (curr.val != val) {
+                    prev = curr;
+                    curr = curr.next;
+                    System.out.println("3. " + prev.val);
+                    System.out.println("4. " + curr.val);
+                    // if (curr.next == null) break;
+                } else {
+                    if (curr.next != null && curr.next.val == val) {
+                        prev = curr;
+                        curr = curr.next;
+                        head = prev;
+                    } else {
+                        // if (prev == null) break;
+                        prev.next = curr.next;
+                        curr = curr.next;
+                        System.out.println("5. " + prev.val);
+                        if (curr != null) {
+                            System.out.println("6. " + curr.val);
+                        }
+                        // if (curr == null) break;
+                    }
+                    // if (curr == null) break;
+                }
+            }
+            if (prev.val == val) {
+                head = null;
+                System.out.println("Head has been reset");
+            }
+            return head;
+
+        }
+
+        public ListNode previousApproach(ListNode head, int val) {
+            if (head == null) return null;
+            ListNode curr = head;
+            ListNode nextNode = head.next;
+
+            while (nextNode.next != null) {
+                if (curr.val == val && nextNode.val == val) {
+                    head = nextNode.next;
+                } else if (curr.val == val) {
+                    curr.next = nextNode;
+                    nextNode = nextNode.next;
+                }
+                curr = nextNode;
+                nextNode = nextNode.next;
+            }
+            return head.val == val ? null : head;
+        }
+    }
+    public class DeleteNodeInALinkedList {
+        public void solution(Node node) {
+            node.data = node.next.data;
+            node.next = node.next.next;
+        }
+    }
+    public class RemoveZeroSumConsecutiveNodes {
+
+        public ListNode approach(ListNode head) {
+            ListNode curr = head;
+            List<Integer> arr = new ArrayList<>();
+            List<Integer> updatedArr = new ArrayList<>();
+            int sum = 0;
+
+            while (curr != null) {
+                arr.add(curr.val);
+                curr = curr.next;
+            }
+            updatedArr = arr;
+            for (int i = 0; i < updatedArr.size(); i++) {
+                for (int j = i; j < updatedArr.size(); j++) {
+                    sum += arr.get(j);
+                    if (sum == 0) {
+                        if (j < updatedArr.size() - 1) {
+                            if (i != 0) {
+                                updatedArr.subList(i, j + 1).clear();
+                            } else {
+                                System.out.println("1. " + "i: " + i + " j: " + j + " arr: " + updatedArr);
+                                updatedArr = updatedArr.subList(j+1, updatedArr.size());
+                                System.out.println("2. " + "i: " + i + " j: " + j + " size: " + updatedArr);
+                            }
+                        } else if (j == updatedArr.size() - 1) {
+                            if (i != 0) {
+                                updatedArr = updatedArr.subList(0, i);
+                            } else {
+                                head = null;
+                                return head;
+                            }
+                        }
+                        break;
+                    }
+                }
+                sum = 0;
+            }
+
+            head = generateLinkedList(updatedArr.stream().mapToInt(Integer::intValue).toArray());
+
+            return head.val == 0 ? null: head;
+        }
+
+        private ListNode generateLinkedList(int[] arr) {
+            ListNode head = new ListNode(arr[0]);
+            ListNode temp = head;
+            for (int i = 1; i < arr.length; i++) {
+                ListNode node = new ListNode(arr[i]);
+                temp.next = node;
+                temp = node;
+            }
+            return head;
+        }
+    }
+    public class DeleteNNodesAfterMNodes {
+        public Node approach(Node head, int m, int n) {
+            Node temp = new Node(-1);
+            temp.next = head;
+            Node newNode = new Node(-1);
+            newNode.next = head;
+
+            while (newNode.next != null) {
+                for (int i = 0; i < m; i++) {
+                    if (temp.next == null) break;
+                    temp = temp.next;
+                }
+                newNode = temp;
+                for (int i = 0; i < n; i++) {
+                    if (newNode.next == null) break;
+                    newNode = newNode.next;
+                }
+                temp.next = newNode.next;
+                temp = newNode;
+            }
+
+            return head;
+        }
+    }
     public class RemoveNthNodeFromEndOfList {
         public ListNode solution(ListNode head, int n) {
             ListNode prev = new ListNode(1357, head);
