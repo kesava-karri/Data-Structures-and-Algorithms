@@ -192,6 +192,7 @@ public class QueuesAndLinkedList {
             return head;
         }
     }
+
     public class RemoveNthNodeFromEndOfList {
         public ListNode solution(ListNode head, int n) {
             if (head == null) return null; //base case

@@ -1,8 +1,10 @@
 package src;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +32,30 @@ public class SlidingWindow {
         }
     }
     public class SlidingWindowMaximumQ4 {
+        public int[] solution(int[] nums, int k) {
+            List<Integer> ans = new ArrayList<>();
+            Deque<Integer> deck = new ArrayDeque<>();
+
+            for (int i = 0; i < nums.length; i++) {
+                // if (!deck.isEmpty() && deck.size() > k) { // if deck size is going over the window size then remove the first element as it wouldn't be in given window size
+                if (deck.size() != 0 && deck.getFirst() == i - k) {
+                    deck.removeFirst();
+                }
+
+                // This makes sure that our max element always stays at the first of deck
+                while(!deck.isEmpty() && nums[i] > nums[deck.getLast()]) {
+                    deck.removeLast();
+                }
+
+                deck.addLast(i);
+                // if (i >= k - 1) {
+                if (i + 1 >= k) {
+                    ans.add(nums[deck.getFirst()]);
+                }
+            }
+            return ans.stream().mapToInt(Integer::intValue).toArray();
+        }
+
         public int[] approach(int[] nums, int k) {
             List<Integer> ans = new ArrayList();
             List<Integer> temp = new ArrayList();
@@ -67,17 +93,37 @@ public class SlidingWindow {
     }
     public class ContainsDuplicateIIIQ3 {
         Map<Integer, Integer> shortMap = new HashMap<>();
-        public boolean approach1(int[] nums, int indexDiff, int valueDiff) {
-            System.out.println("1. " + shortMap);
-            int windowSize = indexDiff + 1;
-            int ptr = 0;
-            int firstWindowLen = windowSize > nums.length ? nums.length : windowSize;
-            // first window
-            for (int i = 0; i < firstWindowLen; i++) {
-                shortMap.put(i, nums[i]);
-            }
-            System.out.println("2. " + shortMap);
+        public boolean solution(int[] nums, int indexDiff, int valueDiff) {
+            // The approach is to create buckets and any 2 values from the bucket should have difference <= valueDiff
+            int len = nums.length;
+            Map<Long, Long> mp = new HashMap<>();
 
+            for (int i = 0; i < len; ++i) {
+                // calculate the bucket value; + 1 in the denominator to have same valueDiff in the same bucket; take an example to understand
+                long bucket = (long) (nums[i] / (valueDiff + 1));
+                // for -ve values there is a chance that they could belong to the same bucket but their abs diff is greater than valueDiff, so we assign the bucket value one less.
+                if (nums[i] < 0) {
+                    bucket = bucket - 1;
+                }
+
+                if (mp.containsKey(bucket)) return true;
+                else {
+                    mp.put(bucket, (long)nums[i]);
+                    // there's a possibility where previous or next bucket satisfy the difference with the element of current bucket, so check that along with the difference
+                    if (mp.containsKey(bucket - 1) && (long) nums[i] - mp.get(bucket - 1) <= valueDiff) return true;
+                    if (mp.containsKey(bucket + 1) && (long) mp.get(bucket + 1) - nums[i] <= valueDiff) return true;
+
+                    // After checking with those buckets, our window if crosses the given indexDiff then we remove the bucket containing that element
+                    if (mp.size() > indexDiff) {
+                        long del = (long) (nums[i - indexDiff] / (valueDiff + 1));
+
+                        if (nums[i - indexDiff] < 0) {
+                            del = del - 1;
+                        }
+                        mp.remove(del);
+                    }
+                }
+            }
             return false;
         }
 

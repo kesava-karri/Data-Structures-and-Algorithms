@@ -3,7 +3,6 @@ package tst;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import org.junit.jupiter.api.Disabled;
 import src.SlidingWindow;
 import src.SlidingWindow.ContainsDuplicateIIIQ3;
 import src.SlidingWindow.ContainsDuplicateIIQ2;
@@ -41,7 +40,7 @@ public class SlidingWindowTest {
     @Test
     public void testSlidingWindowMaximumQ4() {
         SlidingWindowMaximumQ4 o1 = slidingWindow.new SlidingWindowMaximumQ4();
-        assertTrue(Arrays.equals(new int[] {3, 3, 5, 5, 6, 7}, o1.approach(new int[] { 1,3,-1,-3,5,3,6,7 }, 3)));
+        assertTrue(Arrays.equals(new int[] {3, 3, 5, 5, 6, 7}, o1.solution(new int[] { 1,3,-1,-3,5,3,6,7 }, 3)));
 
         SlidingWindowMaximumQ4 o2 = slidingWindow.new SlidingWindowMaximumQ4();
         assertTrue(Arrays.equals(new int[] { 1,-1 }, o2.approach(new int[] { 1,-1 }, 1)));
@@ -56,7 +55,7 @@ public class SlidingWindowTest {
         assertTrue(o2.approach1(new int[] {1,2,3,1}, 3, 0));
 */
         ContainsDuplicateIIIQ3 o1 = slidingWindow.new ContainsDuplicateIIIQ3();
-        assertFalse(o1.approach1(new int[] {1,5,9,1,5,9}, 2, 3));
+        assertFalse(o1.solution(new int[] {1,5,9,1,5,9}, 2, 3));
     }
 
     @Test
