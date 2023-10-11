@@ -6,6 +6,7 @@ import java.lang.Integer;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -84,7 +85,47 @@ class ReduceArraySizeToHalfQ14 {
 }
 
 class RankTeamsByVotesQ13 {
-    static String approach1(String[] votes) {
+    static String solution(String[] votes) {
+        // Olympic standings :)
+        // Comparator sorting
+
+        // Let's take 26 x 26 matrix as each vote would be only English uppercase letter
+
+        // finding the number of places to compete for
+        int totalRanks = votes[0].length();
+        List<Character> allTeams = new ArrayList<>();
+        for (char ch : votes[0].toCharArray()) { // allTeams
+            allTeams.add(ch);
+        }
+
+        int[][] matrix = new int[totalRanks][26]; // max of competingTeams would be 26, so inner loop takes constant time.
+
+        for (int i = 0; i < votes.length; i++) {
+            for (int j = 0; j < votes[i].length(); j++) {
+                matrix[j][votes[i].charAt(j) - 'A']++;
+            }
+        }
+
+        allTeams.sort(new Comparator<Character>() {
+            @Override
+            public int compare(Character c1, Character c2) {
+                for (int i = 0; i < totalRanks; i++) {
+                    if (matrix[i][c1 - 'A'] != matrix[i][c2 - 'A']) {
+                        return matrix[i][c2 - 'A'] - matrix[i][c1 - 'A'];
+                    }
+                }
+                return c1 - c2;
+            }
+        });
+        StringBuilder sb = new StringBuilder();
+        for (Character ch : allTeams) {
+            sb.append(ch);
+        }
+
+        return sb.toString();
+    }
+
+    static String brokenApproach(String[] votes) {
         // Input: votes = ["ABC","ACB","ABC","ACB","ACB"]
         // Output: "ACB"
 
@@ -687,7 +728,7 @@ public class Arrays2 {
         // System.out.println(src.ReduceArraySizeToHalfQ14.approach1(new int[] { 7, 7, 7, 7, 7, 7 }));
         // System.out.println(src.ReduceArraySizeToHalfQ14.approach1(new int[] { 1000, 1000, 3, 7 }));
 
-        System.out.println(RankTeamsByVotesQ13.approach1(new String[] {"AZC","ZAC"}));
+        System.out.println(RankTeamsByVotesQ13.solution(new String[] {"AZC","ZAC"}));
         // System.out.println(src.RankTeamsByVotesQ13.approach1(new String[] {"ABC","ACB","ABC","ACB","ACB"}));
         // System.out.println(src.RankTeamsByVotesQ13.approach1(new String[] {"ZMNAGUEDSJYLBOPHRQICWFXTVK"}));
 
