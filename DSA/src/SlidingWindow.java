@@ -253,6 +253,33 @@ public class SlidingWindow {
         public static int solution(String s) {
             // Input: s = "abcabcbb"
             // Output: 3
+            // since we don't know the window size, we can have change the window size on the go and let's start with first element as window
+            Map<Character, Integer> map = new HashMap<>();
+            int ans = 0;
+
+            // base case
+            if (s.length() == 0) {
+                return 0;
+            }
+
+            int start = 0;
+            for (int end = 0; end < s.length(); end++) {
+                if (!map.containsKey(s.charAt(end)) || map.get(s.charAt(end)) < start) {
+                    map.put(s.charAt(end), end);
+                    ans = Math.max(ans, end - start + 1);
+                } else {
+                    // if the currChar is present in the map then move the start ptr
+                    // to the pos after the char that got repeated :)
+                    start = map.get(s.charAt(end)) + 1;
+                    map.put(s.charAt(end), end); // update map w new index
+                }
+            }
+            return ans;
+        }
+
+        public static int approach(String s) {
+            // Input: s = "abcabcbb"
+            // Output: 3
             int maxLen = 0;
             int left = 0;
             Map<Character, Integer> map = new HashMap<>();
@@ -275,6 +302,9 @@ public class SlidingWindow {
         public static int brokenApproach(String s) {
             // Input: s = "abcabcbb"
             // Output: 3
+            // Why not this: Using set might be a bad idea, as when using the window, we should also know to the index that we would like to move our start ptr :)
+            // abcab
+            // It's definitely not impossible but why go for broken approach when you can finish it in lesser complexity
             Set<Character> set = new HashSet<>();
             int len = 0;
             int maxLen = 0;
