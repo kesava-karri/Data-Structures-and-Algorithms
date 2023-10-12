@@ -1,8 +1,10 @@
 package src;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -94,6 +96,24 @@ public class QueuesAndLinkedList {
         }
     }
     public class RemoveZeroSumConsecutiveNodes {
+        public ListNode solution(ListNode head) {
+            int sum = 0;
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            Map<Integer, ListNode> map = new HashMap<>();
+
+            map.put(0, dummy);
+            for (ListNode i = dummy; i != null; i = i.next) {
+                sum += i.val;
+                map.put(sum, i);
+            }
+            sum = 0;
+            for (ListNode i = dummy; i != null; i = i.next) {
+                sum += i.val;
+                i.next = map.get(sum).next;
+            }
+            return dummy.next;
+        }
 
         public ListNode approach(ListNode head) {
             ListNode curr = head;
@@ -174,6 +194,22 @@ public class QueuesAndLinkedList {
     }
     public class RemoveNthNodeFromEndOfList {
         public ListNode solution(ListNode head, int n) {
+            if (head == null) return null; //base case
+            ListNode slow = head;
+            ListNode fast = head;
+            for (int i = 0; i < n; i++) {
+                fast = fast.next;
+            }
+            if (fast == null) return head.next; // edge case
+            while (fast.next != null) {
+                fast = fast.next;
+                slow = slow.next;
+            }
+            slow.next = slow.next.next; // got to know why not fast
+            return head;
+        }
+
+        public ListNode brokenApproach1(ListNode head, int n) {
             ListNode prev = new ListNode(1357, head);
             ListNode curr = head;
 
