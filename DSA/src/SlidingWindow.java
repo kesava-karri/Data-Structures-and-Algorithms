@@ -13,6 +13,26 @@ import java.util.Set;
 
 public class SlidingWindow {
     public class LongestSubstringKRepeatingCharactersQ5 {
+        public int solution(String s, int k) {
+            if (s.length() < k && s.length() == 0) return 0;
+            if (k <= 1) return s.length();
+            Map<Character, Integer> map = new HashMap<>();
+            for (char ch : s.toCharArray()) {
+                map.put(ch, map.getOrDefault(ch, 0) + 1);
+            }
+            int l = 0;
+            for (int i = 0; i < s.length() && map.get(s.charAt(i)) >= k; i++) {
+                l++;
+            }
+            if (l > s.length() - 1) return l;
+            int l1 = solution(s.substring(0, l), k);
+            while (l < s.length() && map.get(s.charAt(l)) < k) {
+                l++;
+            }
+            int l2 = solution(s.substring(l), k);
+            return Math.max(l1, l2);
+        }
+
         public int approach(String s, int k) {
             // alphabet frequency array
             // return sum of elements greater than k of the array

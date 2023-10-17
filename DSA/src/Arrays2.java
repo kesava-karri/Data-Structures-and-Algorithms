@@ -86,6 +86,33 @@ class ReduceArraySizeToHalfQ14 {
 
 class RankTeamsByVotesQ13 {
     static String solution(String[] votes) {
+        int len = votes[0].length();
+        int[][] mp = new int[26][len + 1]; // len+1 -> extra column to store the corresponding alphabet at the end :)
+        for (int i = 0; i < votes.length; i++) {
+            String s = votes[i];
+            for (int j = 0; j < len; j++) {
+                mp[s.charAt(j) - 'A'][j]++;
+                mp[s.charAt(j) - 'A'][len] = s.charAt(j) - 'A';
+            }
+        }
+
+
+        Arrays.sort(mp, (a, b) -> {
+            for (int i = 0; i < len; i++) {
+                if (a[i] < b[i]) return 1;
+                if (a[i] > b[i]) return -1;
+            }
+            return 0;
+        });
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            sb.append((char)('A' + mp[i][len]));
+        }
+        return sb.toString();
+    }
+
+    static String alt(String[] votes) {
         // Olympic standings :)
         // Comparator sorting
 
