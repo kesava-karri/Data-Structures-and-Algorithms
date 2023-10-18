@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import tst.QueuesAndLinkedListTest;
+
 public class QueuesAndLinkedList {
     public class RemoveLinkedListElements {
         public ListNode solution(ListNode head, int val) {
@@ -284,6 +286,53 @@ public class QueuesAndLinkedList {
     }
 
     public class ReverseNodesInKGroup {
+        public ListNode solution(ListNode head, int k) {
+            if(head == null || head.next == null || k == 1)
+                return head;
+
+            int count = 0;
+            ListNode e = head;
+            ListNode dummy = new ListNode(-1, head);
+            ListNode before = dummy;
+
+            while (e != null) { // assuming current goes to null
+                count++;
+                if (count % k == 0) {
+                    ListNode s = before.next;
+                    ListNode temp = e.next;
+                    reverse(s, e);
+                    // Set broken links or more like override links:)
+                    before.next = e;
+                    s.next = temp;
+                    // move pointers
+                    before = s;
+                    e = temp;
+                } else {
+                    e = e.next;
+                }
+            }
+            QueuesAndLinkedListTest.printLinkedList(dummy);
+            return dummy.next;
+        }
+
+        public void reverse(ListNode s, ListNode e) {
+            ListNode p = null;
+            ListNode c = s;
+            ListNode n = s.next;
+            // ListNode next = curr.next;
+            // System.out.println(prev.val + " " + curr.val + " " + next.val);
+            while (p != e) {
+                c.next = p;
+                p = c;
+                c = n;
+
+                if (n != null) {
+                    n = n.next;
+                }
+            }
+        }
+
+
         public ListNode approach(ListNode head, int k) {
             ListNode curr = head;
             ListNode prev = null;

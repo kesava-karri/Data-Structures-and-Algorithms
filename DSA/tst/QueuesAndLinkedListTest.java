@@ -182,13 +182,14 @@ public class QueuesAndLinkedListTest {
         return head;
     }
 
-    private void printLinkedList(ListNode head) {
+    public static void printLinkedList(ListNode head) {
         System.out.println("\nStart of Linked List");
         ListNode curr = head;
         while (curr != null) {
-            System.out.println(curr.val);
+            System.out.print(curr.val + " ");
             curr = curr.next;
         }
+        System.out.println();
         System.out.println("End of Linked List\n");
     }
 

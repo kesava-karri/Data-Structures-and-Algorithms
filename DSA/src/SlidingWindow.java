@@ -31,6 +31,8 @@ public class SlidingWindow {
             }
             int l2 = solution(s.substring(l), k);
             return Math.max(l1, l2);
+            // Can you do it without recursion? it makes it really complicated 'cause look at this example "ababacb" & k=3, char c breaks the string, in turn breaks the solution without char b which leads it to have char a either
+            // So with that break point we'll be left with 2 strings which needs similar calculation so we gotta recursion.
         }
 
         public int approach(String s, int k) {
