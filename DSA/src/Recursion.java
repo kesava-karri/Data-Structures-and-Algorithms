@@ -86,4 +86,23 @@ public class Recursion {
             return i % 2 == 0 && divideByTwo(i / 2);
         }
     }
+
+    public class CountGoodNumbers {
+        public long givenMod = 1000000007;
+        public int countGoodNumbers(long n) {
+            long numOfEvenIndices = n % 2 == 0 ? n / 2 : n / 2 + 1;
+            long numOfOddIndices = n / 2;
+            return (int) ((f(5, numOfEvenIndices) % givenMod * f(4, numOfOddIndices) % givenMod) % givenMod);
+        }
+
+        public long f(long a, long i) {
+            if (i == 0) return 1;
+            if (i % 2 == 0) {
+                long temp = f(a, i / 2);
+                return (temp * temp) % givenMod;
+            } else {
+                return (a * f(a, i - 1)) % givenMod;
+            }
+        }
+    }
 }

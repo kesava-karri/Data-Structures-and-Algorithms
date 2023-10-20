@@ -7,6 +7,8 @@ import src.Recursion.Factorial;
 import src.Recursion.ReverseAString;
 import src.Recursion.ValidPalindrome;
 
+import java.math.BigInteger;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -18,6 +20,7 @@ public class RecursionTest {
     public void testCountGoodNumbers() {
         CountGoodNumbers o1 = recursionObj.new CountGoodNumbers();
         System.out.println(o1.countGoodNumbers(50));
+//        System.out.println(o1.countGoodNumbers(BigInteger.valueOf((BigInteger) 806166225460393)));
     }
     @Test
     public void testReverseAString() {
