@@ -1,20 +1,28 @@
 package tst;
 
 import org.junit.Test;
-import src.Recursion;
-import src.Recursion.CountGoodNumbers;
-import src.Recursion.Factorial;
-import src.Recursion.ReverseAString;
-import src.Recursion.ValidPalindrome;
+import src.RecursionAndStacks;
+import src.RecursionAndStacks.CountGoodNumbers;
+import src.RecursionAndStacks.Factorial;
+import src.RecursionAndStacks.NearestSmallestElementOnLeft;
+import src.RecursionAndStacks.ReverseAString;
+import src.RecursionAndStacks.ValidPalindrome;
 
-import java.math.BigInteger;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class RecursionTest {
-    Recursion recursionObj = new Recursion();
+public class RecursionAndStacksTest {
+    RecursionAndStacks recursionObj = new RecursionAndStacks();
+
+    @Test
+    public void testNearestSmallestElementOnLeft() {
+        NearestSmallestElementOnLeft o1 = recursionObj.new NearestSmallestElementOnLeft();
+//        assertEquals(Arrays.asList(-1, 1, 1, 4, 1, 2), o1.solution(new int[] {1, 6, 4, 10, 2, 5}));
+        System.out.println(o1.solution(new int[] {19, 19, 19, 19, 19, 19, 19}));
+    }
 
     @Test
     public void testCountGoodNumbers() {

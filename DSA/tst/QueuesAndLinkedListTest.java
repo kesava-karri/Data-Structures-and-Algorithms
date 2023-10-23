@@ -171,6 +171,7 @@ public class QueuesAndLinkedListTest {
         assertEquals(8,o1.approach(new int[] { 5,1,1,1 }, 0));
     }
 
+    // Helper methods
     private ListNode generateLinkedListReturnListNode(int[] arr) {
         ListNode head = queuesAndLinkedList.new ListNode(arr[0]);
         ListNode temp = head;

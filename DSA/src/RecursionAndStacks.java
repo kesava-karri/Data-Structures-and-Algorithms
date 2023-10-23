@@ -1,9 +1,13 @@
 package src;
 
-import java.math.BigInteger;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
+import java.util.stream.Collectors;
 
-public class Recursion {
+public class RecursionAndStacks {
     public class Factorial {
         public int solution(int n) {
             return factorial(n);
@@ -104,5 +108,45 @@ public class Recursion {
                 return (a * f(a, i - 1)) % givenMod;
             }
         }
+    }
+
+    public class NearestSmallestElementOnLeft {
+        public List<Integer> solution(int[] nums) {
+            // nums = [1, 6, 4, 10, 2, 5]
+            // ans  = [-1, 1, 1, 4, 1, 2]
+            Stack<Integer> stack = new Stack<>();
+
+            ArrayList<Integer> arr = new ArrayList<>();
+            arr.add(-1); // since the first element has no elements to its left
+            stack.push(nums[0]); // pushing the first element since no element its left
+
+            for (int i = 1; i < nums.length; i++) {
+                while (!stack.empty() && stack.peek() >= nums[i]) {
+                    stack.pop();
+                }
+                if (stack.empty()) arr.add(-1);
+                else arr.add(stack.peek());
+                stack.push(nums[i]);
+                printStack(stack);
+            }
+
+            return arr;
+        }
+    }
+
+    // Helper methods
+    public void printStack(Stack<Integer> s) {
+        System.out.print("------stack start ------\n");
+        printStackRecursion(s);
+        System.out.print("------stack end ------\n\n");
+    }
+
+    private void printStackRecursion(Stack<Integer> s) {
+        if (s.empty()) return;
+        int x = s.peek();
+        s.pop();
+        System.out.println(x);
+        printStackRecursion(s);
+        s.push(x);
     }
 }
