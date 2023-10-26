@@ -127,10 +127,122 @@ public class RecursionAndStacks {
                 if (stack.empty()) arr.add(-1);
                 else arr.add(stack.peek());
                 stack.push(nums[i]);
-                printStack(stack);
+//                printStack(stack);
             }
 
             return arr;
+        }
+    }
+
+    public class NearestSmallestElementOnRight {
+        public List<Integer> solution(int[] nums) {
+            Stack<Integer> stack = new Stack<>();
+            int n = nums.length;
+            int[] ans = new int[n];
+            // since right most element wouldn't have anything on it's right
+            ans[n - 1] = -1;
+            stack.push(nums[n - 1]);
+
+            for (int i = n - 2; i >=0; i--) {
+                while (!stack.empty() && nums[i] < stack.peek()) {
+                    stack.pop();
+                }
+                if (stack.empty()) ans[i] = -1;
+                else ans[i] = stack.peek();
+                stack.push(nums[i]);
+//                printStack(stack);
+            }
+
+            return Arrays.stream(ans).boxed().collect(Collectors.toList());
+        }
+    }
+
+    public class LargestRectangleInHistogram {
+        public int solution(int[] heights) {
+            Stack<Integer> stack = new Stack<>();
+            int len = heights.length;
+            if (len == 1) return heights[0];
+            int[] smallestOnLeft = new int[len];
+
+            // Smallest to figure out the max our current rectangle could stretch upto
+            smallestOnLeft[0] = -1;
+            stack.push(0);
+            // Finding nearest smallest on the left
+            for (int i = 1; i < len; i++) {
+                while (!stack.empty() && heights[i] <= heights[stack.peek()]) {
+                    stack.pop();
+                }
+                if (stack.empty()) smallestOnLeft[i] = -1;
+                else smallestOnLeft[i] = stack.peek();
+                stack.push(i);
+            }
+
+            stack.clear();
+            // Finding nearest smallest on the right
+            int[] smallestOnRight = new int[len];
+            smallestOnRight[len - 1] = len; // len + 1 for easy calculation of width
+            stack.push(len - 1);
+
+            for (int i = len - 2; i >= 0; i--) {
+                while (!stack.empty() && heights[i] <= heights[stack.peek()]) {
+                    stack.pop();
+                }
+                if (stack.empty()) smallestOnRight[i] = len;
+                else smallestOnRight[i] = stack.peek();
+                stack.push(i);
+            }
+
+            int ans = 0;
+            int area = 0;
+            for (int i = 0; i < len; i++) {
+                area = heights[i] * (smallestOnRight[i] - smallestOnLeft[i] - 1);
+                ans = area > ans ? area : ans;
+            }
+            return ans;
+        }
+
+        public int brokenApproach(int[] heights) {
+            Stack<Integer> stack = new Stack<>();
+            int len = heights.length;
+            if (len == 1) return heights[0];
+            int[] smallestOnLeft = new int[len];
+
+            smallestOnLeft[0] = -1;
+            stack.push(heights[0]);
+            // Finding nearest smallest on the left
+            for (int i = 1; i < len; i++) {
+                while (!stack.empty() && heights[i] < stack.peek()) {
+                    stack.pop();
+                }
+                if (stack.empty()) smallestOnLeft[i] = -1;
+                else smallestOnLeft[i] = stack.peek();
+                stack.push(heights[i]);
+            }
+
+            stack.clear();
+            // Finding nearest smallest on the right
+            int[] smallestOnRight = new int[len];
+            smallestOnRight[len - 1] = -1;
+            stack.push(heights[len - 1]);
+
+            for (int i = len - 2; i >= 0; i--) {
+                while (!stack.empty() && heights[i] < stack.peek()) {
+                    stack.pop();
+                }
+                if (stack.empty()) smallestOnRight[i] = -1;
+                else smallestOnRight[i] = stack.peek();
+                stack.push(heights[i]);
+            }
+
+            int ans = 0;
+            int area = 0;
+            for (int i = 0; i < len; i++) {
+                area = Math.max(smallestOnLeft[i], smallestOnRight[i]) * 2;
+                // This below here, is incorrect, there's a need to store the indices as well which would help to find the actual width :)
+                // times 2 cause the width of each histogram is 1 unit and the histogram we take is nearest smallest element to form proper rectanlge width max area.
+                ans = area > ans ? area : ans;
+            }
+            return ans;
         }
     }
 

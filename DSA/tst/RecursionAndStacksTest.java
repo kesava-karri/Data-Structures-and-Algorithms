@@ -4,7 +4,9 @@ import org.junit.Test;
 import src.RecursionAndStacks;
 import src.RecursionAndStacks.CountGoodNumbers;
 import src.RecursionAndStacks.Factorial;
+import src.RecursionAndStacks.LargestRectangleInHistogram;
 import src.RecursionAndStacks.NearestSmallestElementOnLeft;
+import src.RecursionAndStacks.NearestSmallestElementOnRight;
 import src.RecursionAndStacks.ReverseAString;
 import src.RecursionAndStacks.ValidPalindrome;
 
@@ -18,10 +20,22 @@ public class RecursionAndStacksTest {
     RecursionAndStacks recursionObj = new RecursionAndStacks();
 
     @Test
+    public void testLargestRectangleInHistogram() {
+        LargestRectangleInHistogram o1 = recursionObj.new LargestRectangleInHistogram();
+        o1.brokenApproach(new int[] {0, 9}); // Expected: 9, Output: 0;
+    }
+
+    @Test
+    public void testNearestSmallestElementOnRight() {
+        NearestSmallestElementOnRight o1 = recursionObj.new NearestSmallestElementOnRight();
+        System.out.println(o1.solution(new int[] {1, 6, 4, 10, 2, 5}));
+    }
+
+    @Test
     public void testNearestSmallestElementOnLeft() {
         NearestSmallestElementOnLeft o1 = recursionObj.new NearestSmallestElementOnLeft();
-//        assertEquals(Arrays.asList(-1, 1, 1, 4, 1, 2), o1.solution(new int[] {1, 6, 4, 10, 2, 5}));
-        System.out.println(o1.solution(new int[] {19, 19, 19, 19, 19, 19, 19}));
+        assertEquals(Arrays.asList(-1, 1, 1, 4, 1, 2), o1.solution(new int[] {1, 6, 4, 10, 2, 5}));
+        assertEquals(Arrays.asList(-1, -1,-1,-1,-1,-1,-1), o1.solution(new int[] {19, 19, 19, 19, 19, 19, 19}));
     }
 
     @Test
