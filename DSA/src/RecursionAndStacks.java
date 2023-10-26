@@ -8,6 +8,44 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class RecursionAndStacks {
+    public class myPow {
+        public double solution(double x, int n) {
+            // When negative powers exist, reciprocate the x
+            if (n < 0) {
+                x = 1 / x;
+                n = -n;
+            }
+            return pow(x, n);
+        }
+        public double pow(double x, int n) {
+            if (n == 0) return 1;
+
+            double temp = pow(x, n/2);
+            if (n % 2 == 0) {
+                return temp * temp;
+            } else {
+                return x * temp * temp;
+            }
+        }
+
+        public double brokenApproach(double x, int n) {
+            return pow1(x, n);
+        }
+        public double pow1(double x, int n) {
+            if (n == 0) return 1;
+            if (n % 2 == 0) {
+                double temp = pow1(x, n/2);
+                return temp * temp;
+            } else {
+                return x * pow1(x, n - 1); // Throws StackOverflow error here
+            }
+        }
+
+        public double approach(double x, int n) {
+            return Math.pow(x, n);
+        }
+    }
+
     public class Factorial {
         public int solution(int n) {
             return factorial(n);
@@ -243,6 +281,24 @@ public class RecursionAndStacks {
                 ans = area > ans ? area : ans;
             }
             return ans;
+        }
+    }
+
+    public class NearestLargestElementOnLeft {
+        public List<Integer> solution(int[] nums) {
+            Stack<Integer> stack = new Stack<>();
+            int[] ans = new int[nums.length];
+            ans[0] = -1;
+            stack.push(nums[0]);
+            for (int i = 1; i < nums.length; i++) {
+                while (!stack.empty() && nums[i] > stack.peek()) {
+                    stack.pop();
+                }
+                if (stack.empty()) ans[i] = -1;
+                else ans[i] = stack.peek();
+                stack.push(nums[i]);
+            }
+            return Arrays.stream(ans).boxed().collect(Collectors.toList());
         }
     }
 

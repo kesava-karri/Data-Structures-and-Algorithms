@@ -5,6 +5,7 @@ import src.RecursionAndStacks;
 import src.RecursionAndStacks.CountGoodNumbers;
 import src.RecursionAndStacks.Factorial;
 import src.RecursionAndStacks.LargestRectangleInHistogram;
+import src.RecursionAndStacks.NearestLargestElementOnLeft;
 import src.RecursionAndStacks.NearestSmallestElementOnLeft;
 import src.RecursionAndStacks.NearestSmallestElementOnRight;
 import src.RecursionAndStacks.ReverseAString;
@@ -19,6 +20,11 @@ import static org.junit.Assert.assertTrue;
 public class RecursionAndStacksTest {
     RecursionAndStacks recursionObj = new RecursionAndStacks();
 
+    @Test
+    public void testNearestLargestElementOnLeft() {
+        NearestLargestElementOnLeft o1 = recursionObj.new NearestLargestElementOnLeft();
+        System.out.println(o1.solution(new int[] {1, 6, 4, 10, 2, 5}));
+    }
     @Test
     public void testLargestRectangleInHistogram() {
         LargestRectangleInHistogram o1 = recursionObj.new LargestRectangleInHistogram();
