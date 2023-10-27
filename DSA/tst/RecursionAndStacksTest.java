@@ -10,6 +10,7 @@ import src.RecursionAndStacks.NearestSmallestElementOnLeft;
 import src.RecursionAndStacks.NearestSmallestElementOnRight;
 import src.RecursionAndStacks.ReverseAString;
 import src.RecursionAndStacks.ValidPalindrome;
+import util.MyUtilityClass;
 
 import java.util.Arrays;
 
@@ -19,6 +20,12 @@ import static org.junit.Assert.assertTrue;
 
 public class RecursionAndStacksTest {
     RecursionAndStacks recursionObj = new RecursionAndStacks();
+
+    @Test
+    public void testMinNonZeroProduct() {
+        System.out.println(MyUtilityClass.productOfInclusiveRange(2, 6));
+        MyUtilityClass.printBinaryRepresentation(4);
+    }
 
     @Test
     public void testNearestLargestElementOnLeft() {

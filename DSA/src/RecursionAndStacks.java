@@ -8,6 +8,35 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class RecursionAndStacks {
+    public class MinNonZeroProduct {
+        public long givenMod = 1_000_000_007;
+        public int solution(int p) {
+            // To represent 2^p we need p number of digits in base 2 :)
+            // conclusion: After doing the math on paper, looks like we need to make one of the 2 numbers to 1 to get the min. product.
+            // And since they could be turned into pairs of 1 & corresponding value 1 less than 2^p - 1.
+
+            // Eg: when p = 4 => return 15 * (1 * 14)^7
+            // 7 is 14/2 number of pairs of 1 & 14
+
+            long end = (long)Math.pow(2, p) - 1;
+            long temp = end - 1;
+            long pairedNum = pow(temp, temp/2);
+            return (int)((end % givenMod) * pairedNum % givenMod);
+        }
+
+        public long pow(long a, long i) {
+            if (i == 0) return 1;
+
+            long newVal = ((a % givenMod) * (a % givenMod)) % givenMod;
+            if (i % 2 == 0) {
+                return pow(newVal, i/2) % givenMod;
+            } else {
+                return ((pow(newVal, i/2) % givenMod) * (a % givenMod)) % givenMod;
+            }
+
+        }
+    }
+
     public class myPow {
         public double solution(double x, int n) {
             // When negative powers exist, reciprocate the x
