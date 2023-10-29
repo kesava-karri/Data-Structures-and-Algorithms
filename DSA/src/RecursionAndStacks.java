@@ -1,5 +1,6 @@
 package src;
 
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +8,41 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
+import util.MyUtilityClass.ListNode;
+import util.MyUtilityClass;
+
+import static util.MyUtilityClass.printLinkedList;
+
 public class RecursionAndStacks {
+
+    public class SwapNodesInPairs {
+        public ListNode swapPairs(ListNode head) {
+            // i/p: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+            // o/p: 2 -> 1 -> 4 -> 3 -> 6 -> 5
+            if (head == null || head.next == null) return head;
+            ListNode dummy = head.next;
+            ListNode prev = new ListNode(-1, head);
+            ListNode curr = head;
+            ListNode nextNode = curr.next;
+            f(prev, curr, nextNode);
+            return dummy;
+        }
+
+        public void f(ListNode prev, ListNode curr, ListNode next) {
+            if (curr == null || next == null) return;
+            ListNode temp = next.next;
+            next.next = curr;
+            curr.next = temp;
+            prev.next = next;
+            prev = curr;
+            curr = temp;
+            if (temp != null) {
+                next = temp.next;
+            }
+            f(prev, curr, next);
+        }
+    }
+
     public class MinNonZeroProduct {
         public long givenMod = 1_000_000_007;
         public int solution(int p) {

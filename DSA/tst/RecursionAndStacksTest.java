@@ -9,17 +9,37 @@ import src.RecursionAndStacks.NearestLargestElementOnLeft;
 import src.RecursionAndStacks.NearestSmallestElementOnLeft;
 import src.RecursionAndStacks.NearestSmallestElementOnRight;
 import src.RecursionAndStacks.ReverseAString;
+import src.RecursionAndStacks.SwapNodesInPairs;
 import src.RecursionAndStacks.ValidPalindrome;
+
 import util.MyUtilityClass;
+import util.MyUtilityClass.ListNode;
 
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static util.MyUtilityClass.printLinkedList;
 
 public class RecursionAndStacksTest {
     RecursionAndStacks recursionObj = new RecursionAndStacks();
+
+    @Test
+    public void testSwapNodesInPairs() {
+        // Arrange
+        SwapNodesInPairs o1 = recursionObj.new SwapNodesInPairs();
+        ListNode headEvenLen = MyUtilityClass.generateLinkedListReturnListNode(new int[] {1, 2, 3, 4, 5, 6});
+        ListNode headOddLen = MyUtilityClass.generateLinkedListReturnListNode(new int[] {1, 2, 3});
+
+        // Act
+        ListNode result1 = o1.swapPairs(headEvenLen);
+        ListNode result2 = o1.swapPairs(headOddLen);
+
+        // Assert
+        printLinkedList(result1); // 2 1 4 3 6 5
+        printLinkedList(result2); // 2 1 3
+    }
 
     @Test
     public void testMinNonZeroProduct() {

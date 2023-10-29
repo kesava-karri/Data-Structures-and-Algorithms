@@ -19,7 +19,7 @@ import src.QueuesAndLinkedList.TimeNeededToBuyTickets;
 import src.QueuesAndLinkedList.ListNode;
 
 public class QueuesAndLinkedListTest {
-    QueuesAndLinkedList queuesAndLinkedList = new QueuesAndLinkedList();
+    static QueuesAndLinkedList queuesAndLinkedList = new QueuesAndLinkedList();
 
     @Test
     public void testRemoveLinkedListElements() {
@@ -172,7 +172,7 @@ public class QueuesAndLinkedListTest {
     }
 
     // Helper methods
-    private ListNode generateLinkedListReturnListNode(int[] arr) {
+    public static ListNode generateLinkedListReturnListNode(int[] arr) {
         ListNode head = queuesAndLinkedList.new ListNode(arr[0]);
         ListNode temp = head;
         for (int i = 1; i < arr.length; i++) {
