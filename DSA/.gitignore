@@ -1,0 +1,9 @@
+extras/
+AssignmentFiles/
+.gitignore
+.DS_Store
+.vscode
+*.class
+DSA.iml
+.idea/
+out/

@@ -1,11 +1,25 @@
 package util;
 
 import org.apache.commons.lang3.StringUtils;
+import src.QueuesAndLinkedList;
+import src.QueuesAndLinkedList.ListNode;
+
+import java.util.Arrays;
 
 import static java.lang.Math.pow;
 
 public class MyUtilityClass {
     private MyUtilityClass() {}
+
+    public static void print2DArray(int[][] arr) {
+        System.out.println(arr.length);
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(Arrays.toString(arr[i]));
+        }
+    }
+    public static void visualizeArrays() {
+        // continue later;
+    }
 
     public static int productOfInclusiveRange(int a, int b) {
         int product = 1;
@@ -32,5 +46,35 @@ public class MyUtilityClass {
                 System.out.println(binaryValue);
             }
         }
+    }
+
+    public static class ListNode {
+        public int val;
+        public ListNode next;
+        public ListNode() {}
+        public ListNode(int val) { this.val = val; }
+        public ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
+    public static ListNode generateLinkedListReturnListNode(int[] arr) {
+        ListNode head = new ListNode(arr[0]);
+        ListNode temp = head;
+        for (int i = 1; i < arr.length; i++) {
+            ListNode node = new ListNode(arr[i]);
+            temp.next = node;
+            temp = node;
+        }
+        return head;
+    }
+
+    public static void printLinkedList(ListNode head) {
+        System.out.println("\nStart of Linked List");
+        ListNode curr = head;
+        while (curr != null) {
+            System.out.print(curr.val + " ");
+            curr = curr.next;
+        }
+        System.out.println();
+        System.out.println("End of Linked List\n");
     }
 }
