@@ -80,8 +80,9 @@ public class MyLinkedList {
     public void addAtIndex(int index, int val) {
         if (index == 0) {
             addAtHead(val);
-        }  else if (index == 1 && this.next == null) { // can happen when single node exist and also when freshly created node exist
-            addAtTail(val);
+        }  else if (this.next == null) { // can happen when single node exist and also when freshly created node exist
+            if (this.val == -1 && index > 0) return;
+            else if (index == 1) addAtTail(val);
         } else {
             int counter = 1;
             MyLinkedList prev = this;
