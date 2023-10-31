@@ -191,6 +191,38 @@ public class RecursionAndStacks {
             if (i == 1) return true;
             return i % 2 == 0 && divideByTwo(i / 2);
         }
+
+        public boolean solution(int n) {
+            // Follow-up: No loop/recursion
+            // Note that all powers of 2 would have only 1 bit as 1 in the binary representation
+            // and the rest are zeros
+
+            // Using Brian Kernighan’s Algorithm
+            if (n <= 0) return false;
+            int temp = n & n -1;
+            return temp == 0;
+        }
+
+        public boolean altApproach(int n) {
+            /*
+            Time complexity: O(logn) - since we'll only loop over 32 bits, the for loop runs for constant time
+            and the log n comes from Integer.toBinaryString(n);
+            Space complexity: O(1)
+             */
+            if (n < 0) return false;
+
+            String binaryString = Integer.toBinaryString(n);
+            int numOfOnes = 0;
+
+            // Since n is int, it could only have atmost 32 bits, so constant time.
+            for (int i = 0; i < binaryString.length(); i++) {
+                if (binaryString.charAt(i) == '1') {
+                    numOfOnes += 1;
+                    if (numOfOnes > 1) return false;
+                }
+            }
+            return numOfOnes == 1;
+        }
     }
 
     public class CountGoodNumbers {
