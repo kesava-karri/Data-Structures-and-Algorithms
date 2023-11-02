@@ -3,28 +3,24 @@ package src;
 public class Search {
     public class FindMinRotatedSortedArray {
         public int solution(int[] nums) {
-            // Binary Search
-            // Assuming the first is the leastValue
-            int min = nums[0];
+        // take the first element for the comparison
+        int firstNum = nums[0];
+        int start = 0, end = nums.length - 1;
+        int ans = Integer.MAX_VALUE;
 
-            int start = 0;
-            int end = nums.length - 1;
-            int mid = -1; // randomValue
-
-            while (start <= end) {
-                mid = (start + end) / 2;
-                int midNum = nums[mid];
-                if (midNum > min) {
-                    start = mid + 1;
-                } else if (midNum == min) {
-                    start = mid + 1;
-                } else if (midNum < min) {
-                    min = midNum;
-                    end = mid - 1;
-                }
+        // Binary Search
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (nums[mid] >= firstNum) {
+                start = mid + 1;
+            } else if (nums[mid] < firstNum) {
+                end = mid - 1;
+                ans = nums[mid];
             }
-            return min;
         }
+        // min of firstNum and ans 'cause there could be a case where the given array hasn't been rotated at all
+        // or rotated by it's length number of times which would lead to firstNum being the least.
+        return Math.min(firstNum, ans);
     }
 
     public class FirstAndLastPosOfElementInSortedArray {
@@ -32,21 +28,17 @@ public class Search {
             // Binary Search
             int start = 0;
             int end = nums.length - 1;
-            int leastStartPos = -1;
-            int farthestEndPos = -1;
+            int[] ans = new int[] {-1, -1};
 
-            // To find the least i.e., starting pos
+            // Binary Search to find the first pos
             while (start <= end) {
                 int mid = (start + end) / 2;
-                int midNum = nums[mid];
-
-                if (midNum < target) {
+                if (nums[mid] < target) {
                     start = mid + 1;
-                } else if (midNum == target) {
-                    leastStartPos = mid; // assuming whichever we got to be least & there can be a chance that even lower answer is available, since non-increasing array.
-                    // And we know that the least index could not exist to the right, so bringing our end to the one less than mid
+                } else if (nums[mid] == target) {
+                    ans[0] = mid; // there's a chance that the first position could be in the left of this region, so continue the binary search in that region
                     end = mid - 1;
-                } else if (midNum > target) {
+                } else if (nums[mid] > target) {
                     end = mid - 1;
                 }
             }
@@ -55,21 +47,19 @@ public class Search {
             start = 0;
             end = nums.length - 1;
 
-            // To find the farthest i.e., ending pos
+            // Binary search to find the last pos
             while (start <= end) {
                 int mid = (start + end) / 2;
-                int midNum = nums[mid];
-
-                if (midNum < target) {
+                if (nums[mid] < target) {
                     start = mid + 1;
-                } else if (midNum == target) {
-                    farthestEndPos = mid;
+                } else if (nums[mid] == target) {
+                    ans[1] = mid; // there's a chance that the first position could be on the region right of this value, so continue the binary search in that region
                     start = mid + 1;
-                } else if (midNum > target) {
+                } else if (nums[mid] > target) {
                     end = mid - 1;
                 }
             }
-            return new int[] { leastStartPos, farthestEndPos};
+            return ans;
         }
     }
 }
