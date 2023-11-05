@@ -1,6 +1,65 @@
 package src;
 
 public class Search {
+    public class SearchInRotatedSortedArray {
+        public int search(int[] nums, int target) {
+            int start = 0, end = nums.length - 1, mid = 0;
+
+            while (start <= end) {
+                mid = (start + end) / 2;
+                if (nums[mid] == target) return mid;
+                if (nums[mid] >= nums[start]) {
+                    if (nums[mid] > target && target >= nums[start]) {
+                        end = mid - 1;
+                    } else {
+                        start = mid + 1;
+                    }
+                } else {
+                    if (nums[mid] < target && target <= nums[end]) {
+                        start = mid + 1;
+                    } else {
+                        end = mid - 1;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        public int brokenApproach(int[] nums, int target) {
+            int start = 0, end = nums.length - 1, mid = (start + end) / 2;
+            int ans = -1;
+
+            // 2 binary searches - left half, right half
+            end = mid;
+            while (start <= end) {
+                int tempMid = (start + end) / 2;
+                if (nums[tempMid] > target) {
+                    end = tempMid - 1;
+                } else if (nums[tempMid] < target) {
+                    start = tempMid + 1;
+                } else {
+                    ans = tempMid;
+                    System.out.println("1. " + ans);
+                    return ans;
+                }
+            }
+            // not present in left half so looking in left half
+            start = mid; end = nums.length - 1;
+            while (start <= end) {
+                int tempMid = (start + end) / 2;
+                if (nums[tempMid] > target) {
+                    end = tempMid - 1;
+                } else if(nums[tempMid] < target) {
+                    start = tempMid + 1;
+                } else {
+                    ans = tempMid;
+                    return ans;
+                }
+            }
+            return ans;
+        }
+    }
+
     public class MinSizeSubArraySum {
         int n;
         int[] prefix;

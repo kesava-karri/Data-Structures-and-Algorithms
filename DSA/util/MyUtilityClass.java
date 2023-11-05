@@ -4,12 +4,24 @@ import org.apache.commons.lang3.StringUtils;
 import src.QueuesAndLinkedList;
 import src.QueuesAndLinkedList.ListNode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import org.javatuples.Pair;
 
 import static java.lang.Math.pow;
 
 public class MyUtilityClass {
     private MyUtilityClass() {}
+
+    public static void desmosPointsGenerator(List<Integer> arr) {
+        List<String> coordinates = new ArrayList<>();
+        for (int i = 0; i < arr.size(); i++) {
+            coordinates.add("(" + i + ", " + arr.get(i) + ")");
+        }
+        System.out.println(coordinates);
+    }
 
     public static void print2DArray(int[][] arr) {
         System.out.println(arr.length);
