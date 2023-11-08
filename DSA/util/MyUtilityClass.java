@@ -20,7 +20,10 @@ public class MyUtilityClass {
         for (int i = 0; i < arr.size(); i++) {
             coordinates.add("(" + i + ", " + arr.get(i) + ")");
         }
-        System.out.println(coordinates);
+        System.out.println("l = " + coordinates);
+        // Use below statements to show only array values as labels on the graph
+        System.out.println("Label\n${n}");
+        System.out.println("n = f(" + arr + ")");
     }
 
     public static void print2DArray(int[][] arr) {
