@@ -1,6 +1,104 @@
 package src;
 
 public class Search {
+    public class Search2DMatrixII {
+        public boolean optimizedSearchMatrix(int[][] matrix, int target) {
+            int m = matrix.length;
+            int n = matrix[0].length;
+
+            int start = 0, end = n - 1;
+            while (start <= m - 1 && end >= 0) {
+                if (target == matrix[start][end]) return true;
+                else if (target < matrix[start][end]) {
+                    end--; // eliminate the last col
+                } else if(target > matrix[start][end]) {
+                    start++; // elimate the first row if the last ele of first row is less than target :o
+                }
+            }
+            return false;
+        }
+
+        public boolean searchMatrix(int[][] matrix, int target) {
+            int m = matrix.length;
+
+            // approach:
+            // (i) binary search on first row then
+            // (ii) binary search on first column and get potential search space
+            // (iii) Linear search over the potential search space :)
+
+            // TC: log m + log n + (o * p) + m; o * p < m * n
+
+            int newSearchableRow = binarySearch(matrix[0], target);
+
+            // This iteration is needed to find the first column :)
+            int[] firstCol = new int[m];
+            for (int i = 0; i < m; i++) {
+                firstCol[i] = matrix[i][0];
+            }
+
+            int newSearchableCol = binarySearch(firstCol, target);
+
+            for (int i = 0; i <= newSearchableCol; i++) {
+                for (int j = 0; j <= newSearchableRow; j++) {
+                    if (target == matrix[i][j]) return true;
+                }
+            }
+            return false;
+        }
+
+        public int binarySearch(int[] nums, int target) {
+            // Binary search to find the best potential mate
+            int start = 0, end = nums.length - 1, mid = 0, potentialSearchSpace = 0;
+            while(start <= end) {
+                mid = (start + end) / 2;
+                if (target >= nums[mid]) {
+                    potentialSearchSpace = mid;
+                    start = mid + 1;
+                } else {
+                    end = mid - 1;
+                }
+            }
+            return potentialSearchSpace;
+        }
+    }
+
+    public class Search2DMatrix {
+        public boolean searchMatrix(int[][] matrix, int target) {
+            int n = matrix.length; // rows
+            int m = matrix[0].length; // columns
+
+            int rowStart = 0, rowEnd = n - 1, rowMid = 0;
+            while (rowStart <= rowEnd) {
+                rowMid = (rowStart + rowEnd) / 2;
+                if (matrix[rowMid][0] <= target && target <= matrix[rowMid][m - 1]) {
+                    return binarySearch(matrix[rowMid], target);
+                } else { // target is neither equal nor in range of the current row
+                    // target will have 2 chances - whether in prev rows or rows after
+                    if (target < matrix[rowMid][0]) {
+                        rowEnd = rowMid - 1;
+                    } else {
+                        rowStart = rowMid + 1;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public boolean binarySearch(int[] row, int target) {
+            int start = 0, end = row.length - 1, mid = 0;
+            while(start <= end) {
+                mid = (start + end) / 2;
+                if(row[mid] == target) return true;
+                if (row[mid] > target) {
+                    end = mid - 1;
+                } else {
+                    start = mid + 1;
+                }
+            }
+            return false;
+        }
+    }
+
     public class FindMinRotatedSortedArrayII {
         public int findMin(int[] nums) {
             int start = 0, end = nums.length - 1, mid = 0, ans = Integer.MAX_VALUE;
