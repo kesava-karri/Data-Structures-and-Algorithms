@@ -2,8 +2,10 @@ package tst;
 
 import org.junit.Test;
 import src.Search;
+import src.Search.FindInMountainArr;
 import src.Search.FindMinRotatedSortedArrayII;
 import src.Search.FindPeakElement;
+import src.Search.PeakIndexMoutainArr;
 import src.Search.SearchInRotatedSortedArray;
 import src.Search.SearchInRotatedSortedArrayII;
 import util.MyUtilityClass;
@@ -16,6 +18,13 @@ import static org.junit.Assert.assertTrue;
 
 public class SearchTest {
     Search obj = new Search();
+
+    @Test
+    public void testPeakIndexInMoutainArray() {
+        PeakIndexMoutainArr o1 = obj.new PeakIndexMoutainArr();
+        assertEquals(1, o1.peakIndexInMountainArray(new int[] {3,5,3,2,0}));
+    }
+
 
     @Test
     public void testFindMinRotatedSortedArrayII() {

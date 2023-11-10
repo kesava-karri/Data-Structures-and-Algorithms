@@ -1,6 +1,112 @@
 package src;
 
 public class Search {
+    public class FindInMountainArr {
+        /**
+         * // This is MountainArray's API interface.
+         * interface MountainArray {
+         *     public int get(int index) {}
+         *     public int length() {}
+         * }
+         */
+        // Commenting out the code since MountainArray is not implemented
+        /*
+        public int findInMountainArray(int target, MountainArray mountainArr) {
+            int len = mountainArr.length();
+            int start = 0, end = len - 1, mid = 0, peak = -2;
+            while (start <= end) {
+                mid = (start + end) / 2; // based on eq, since mid tends to zero, so better check mid < mid+1 than going for mid > mid - 1 :)
+                // And it is not a valid mountain if the peak is on its edges ;) [1,2,3] is not a moutain as no element exist after 3 :)
+                // if (mountainArr.get(mid) > mountainArr.get(mid - 1)) { // read above why this wouldn't work
+                int midNum = mountainArr.get(mid);
+                int next = mountainArr.get(mid + 1);
+                if (midNum < next) {
+                    start = mid + 1;
+                    peak = start;
+                } else {
+                    end = mid - 1;
+                }
+            }
+
+            // left slope
+            start = 0;
+            end = peak;
+            while (start <= end) {
+                mid = (start + end) / 2;
+                int midNum = mountainArr.get(mid);
+                if (midNum == target) {
+                    return mid; // 'cause left slope will have min index
+                } else if (midNum > target) {
+                    end = mid - 1;
+                } else if (midNum < target){
+                    start = mid + 1;
+                }
+            }
+
+            // right slope
+            start = peak + 1;
+            end = len - 1;
+            while (start <= end) {
+                mid = (start + end) / 2;
+                int midNum = mountainArr.get(mid);
+                if (midNum == target) return mid;
+                else if (midNum > target) start = mid + 1;
+                else if (midNum < target)end = mid - 1;
+            }
+            return -1;
+        }
+        */
+        /*
+        public int brokenApproach(int target, MountainArray mountainArr) {
+            int start = 0, end = mountainArr.length() - 1, mid = 0, ans = -1;
+            // Left slope
+            while (start <= end) {
+                mid = (start + end) / 2;
+                int midElement = mountainArr.get(mid);
+                if (midElement == target) {
+                    ans = mid;
+                    end = mid - 1;
+                } else if (midElement > target) {
+                    end = mid - 1;
+                } else if (midElement < target) {
+                    start = mid + 1;
+                }
+            }
+            if (ans != -1) return ans; // 'cause if our target is found on the left slope then ovio it would the minimum
+            // if target didn't exist on left slope, search for right
+            start = 0;
+            end = mountainArr.length() - 1;
+
+            while (start <= end) {
+                mid = (start + end) / 2;
+                int midElement = mountainArr.get(mid);
+                if (midElement == target) {
+                    ans = mid;
+                }
+                start = mid + 1;
+            }
+            return ans;
+        }
+         */
+    }
+
+    public class PeakIndexMoutainArr {
+        public int peakIndexInMountainArray(int[] arr) {
+            int start = 0, end = arr.length - 1, mid = 0;
+            while (start <= end) {
+                mid = (start + end) / 2;
+                if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) {
+                    return mid;
+                } else if (arr[mid] > arr[mid + 1]) {
+                    end = mid;
+                } else if (arr[mid] > arr[mid - 1]) {
+                    start = mid;
+                }
+            }
+            return -1;
+        }
+    }
+
     public class Search2DMatrixII {
         public boolean optimizedSearchMatrix(int[][] matrix, int target) {
             int m = matrix.length;
