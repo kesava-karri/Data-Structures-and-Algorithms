@@ -1,5 +1,7 @@
 package src;
 
+import util.MyUtilityClass;
+
 import java.lang.StringBuilder;
 import java.lang.Integer;
 
@@ -208,7 +210,7 @@ class NextGreaterElementIIIQ12 {
             j--;
         }
 
-        swap(i, j, nums);
+        MyUtilityClass.swap(i, j, nums);
 
         // Now take all the elements till i
         for (int k = 0; k <= i; k++) {
@@ -221,12 +223,6 @@ class NextGreaterElementIIIQ12 {
         }
 
         return Long.parseLong(result.toString()) <= Integer.MAX_VALUE ? Integer.parseInt(result.toString()) : -1;
-    }
-
-    static void swap(int i, int j, List<Integer> nums) {
-        int temp = nums.get(i);
-        nums.set(i, nums.get(j));
-        nums.set(j, temp);
     }
 }
 

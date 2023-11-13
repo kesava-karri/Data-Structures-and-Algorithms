@@ -15,6 +15,18 @@ import static java.lang.Math.pow;
 public class MyUtilityClass {
     private MyUtilityClass() {}
 
+    public static void swap(int i, int j, int[] nums) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    public static void swap(int i, int j, List<Integer> nums) {
+        int temp = nums.get(i);
+        nums.set(i, nums.get(j));
+        nums.set(j, temp);
+    }
+
     public static void desmosPointsGenerator(List<Integer> arr) {
         List<String> coordinates = new ArrayList<>();
         for (int i = 0; i < arr.size(); i++) {
