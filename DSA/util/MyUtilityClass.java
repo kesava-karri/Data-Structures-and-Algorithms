@@ -1,27 +1,21 @@
 package util;
 
 import org.apache.commons.lang3.StringUtils;
-import src.QueuesAndLinkedList;
-import src.QueuesAndLinkedList.ListNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.javatuples.Pair;
-
-import static java.lang.Math.pow;
-
 public class MyUtilityClass {
     private MyUtilityClass() {}
 
-    public static void swap(int i, int j, int[] nums) {
+    public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
     }
 
-    public static void swap(int i, int j, List<Integer> nums) {
+    public static void swap(List<Integer> nums, int i, int j) {
         int temp = nums.get(i);
         nums.set(i, nums.get(j));
         nums.set(j, temp);

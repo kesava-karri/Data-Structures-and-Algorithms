@@ -10,7 +10,7 @@ public class SelectionSort {
             for (int j = i + 1; j < len; j++) {
                 if (arr[j] < arr[min_index]) min_index = j;
             }
-            MyUtilityClass.swap(i, min_index, arr);
+            MyUtilityClass.swap(arr, i, min_index);
         }
         return arr;
     }

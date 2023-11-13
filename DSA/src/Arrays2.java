@@ -210,7 +210,7 @@ class NextGreaterElementIIIQ12 {
             j--;
         }
 
-        MyUtilityClass.swap(i, j, nums);
+        MyUtilityClass.swap(nums, i, j);
 
         // Now take all the elements till i
         for (int k = 0; k <= i; k++) {
