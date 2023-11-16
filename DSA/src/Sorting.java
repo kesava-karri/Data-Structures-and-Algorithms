@@ -7,6 +7,36 @@ import java.util.List;
 import static util.MyUtilityClass.swap;
 
 public class Sorting {
+
+    public class IntersectionOfTwoArrays {
+        public int[] intersection(int[] nums1, int[] nums2) {
+            Arrays.sort(nums1);
+            Arrays.sort(nums2);
+            List<Integer> ans = new ArrayList<>();
+
+            int i = 0, j = 0;
+            int len1 = nums1.length, len2 = nums2.length;
+
+            while(i < len1 && j < len2) {
+                if (nums1[i] < nums2[j]) {
+                    i++;
+                } else if (nums1[i] > nums2[j]) {
+                    j++;
+                } else { // nums1[i] == nums2[j]
+                    if (ans.isEmpty() || ans.get(ans.size() - 1) != nums1[i]) {
+                        // Since the arrays are already sorted,
+                        // when an intersection element is already added,
+                        // then we can be sure that the last ele added could only be the possible duplicate
+                        // if not then it must be a new intersection element.
+                        ans.add(nums1[i]);
+                    }
+                    i++;
+                    j++;
+                }
+            }
+            return ans.stream().mapToInt(Integer::intValue).toArray();
+        }
+    }
     public class MergeIntervals {
         public int[][] merge(int[][] intervals) {
             // sort based on first element of each inner array
@@ -102,6 +132,54 @@ public class Sorting {
                     start++;
                 }
             }
+        }
+    }
+
+    public class InversionCount {
+        public long inversionCount(long arr[], long N) {
+            long[] temp = new long[arr.length];
+            return divideAndMerge(arr, temp, 0, N - 1);
+        }
+
+        public long divideAndMerge(long[] arr, long[] temp, long start, long end) {
+            long ans = 0;
+            if (start >= end) return ans;
+
+            long mid = (start + end) / 2;
+
+            ans += divideAndMerge(arr, temp, start, mid);
+            ans += divideAndMerge(arr, temp, mid + 1, end);
+
+            ans += conquer(arr, temp, start, end, mid);
+            return ans;
+        }
+
+        public long conquer(long[] arr, long[] temp, long start, long end, long mid) {
+            int i = (int) start, j = (int) mid + 1, k = 0;
+            long ans = 0;
+
+            while (i <= mid && j <= end) {
+                if (arr[j] < arr[i]) {
+                    ans += (mid - i + 1);
+                    temp[k++] = arr[j++];
+                } else {
+                    temp[k++] = arr[i++];
+                }
+            }
+
+            while (i <= mid) {
+                temp[k++] = arr[i++];
+            }
+
+            while (j <= end) {
+                temp[k++] = arr[j++];
+            }
+
+            k = 0;
+            for (i = (int) start; i <= (int) end; i++) {
+                arr[i] = temp[k++];
+            }
+            return ans;
         }
     }
 }

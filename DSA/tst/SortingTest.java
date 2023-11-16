@@ -2,6 +2,7 @@ package tst;
 
 import org.junit.Test;
 import src.Sorting;
+import src.Sorting.InversionCount;
 import src.Sorting.MergeIntervals;
 import src.Sorting.SortColors;
 
@@ -26,12 +27,11 @@ public class SortingTest {
         o1.sortColors(nums);
         assertEquals(Arrays.toString(new int[] {1, 2, 2}), Arrays.toString(nums));
     }
-//    SortColors
-//    [2,1,2]
-//    Expected: [1,2,2]
 
-
-//    MergeIntervals
-//    [[1,6],[5,8]]
-//    Expected [[1,8]]
+    @Test
+    public void testInversionCount() {
+        InversionCount o1 = obj.new InversionCount();
+        long[] nums = new long[] {2, 4, 1, 3, 5};
+        assertEquals(3, o1.inversionCount(nums, nums.length));
+    }
 }
