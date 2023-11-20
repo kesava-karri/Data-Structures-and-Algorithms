@@ -32,6 +32,7 @@ public class SortingTest {
     public void testInversionCount() {
         InversionCount o1 = obj.new InversionCount();
         long[] nums = new long[] {2, 4, 1, 3, 5};
+
         assertEquals(3, o1.inversionCount(nums, nums.length));
     }
 }

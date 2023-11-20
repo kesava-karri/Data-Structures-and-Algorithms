@@ -2,17 +2,61 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import static util.MyUtilityClass.swap;
 
 public class Sorting {
+    public class MajorityElementII {
+        public List<Integer> majorityElementUsingQuickSort(int[] nums) {
+            return new ArrayList();
+        }
+
+        public List<Integer> majorityElement(int[] nums) {
+            // We can atmost have only 2 majority elements & minimum no majority elements
+            int num1 = 0, num2 = 0, count1 = 0, count2 = 0;
+            int n = nums.length;
+
+            for (int num : nums) {
+                if (num == num1) {
+                    count1++;
+                } else if (num == num2) {
+                    count2++;
+                } else if (count1 == 0) {
+                    num1 = num;
+                    count1++;
+                } else if (count2 == 0) {
+                    num2 = num;
+                    count2++;
+                } else {
+                    count1--;
+                    count2--;
+                }
+            }
+
+            count1 = 0;
+            count2 = 0;
+            for (int num : nums) {
+                if (num == num1) count1++;
+                else if (num == num2) count2++;
+            }
+
+            if (count1 > n / 3 && count2 > n / 3) return Arrays.asList(num1, num2);
+            else if (count1 > n / 3) return Arrays.asList(num1);
+            else if (count2 > n / 3) return Arrays.asList(num2);
+            return new ArrayList();
+        }
+    }
 
     public class IntersectionOfTwoArrays {
         public int[] intersection(int[] nums1, int[] nums2) {
             Arrays.sort(nums1);
             Arrays.sort(nums2);
             List<Integer> ans = new ArrayList<>();
+            List<Integer> comp = new LinkedList<>();
+            System.out.println("1" + ans.getClass().isAssignableFrom(comp.getClass()));
 
             int i = 0, j = 0;
             int len1 = nums1.length, len2 = nums2.length;
