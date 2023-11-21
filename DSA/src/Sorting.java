@@ -9,6 +9,48 @@ import java.util.List;
 import static util.MyUtilityClass.swap;
 
 public class Sorting {
+    class BestTeamWNoConflicts {
+        public int bestTeamScore(int[] scores, int[] ages) {
+            Pair[] players = new Pair[scores.length];
+
+            for (int i = 0; i < players.length; i++) {
+                players[i] = new Pair(ages[i], scores[i]);
+            }
+
+            // Sort both age & scores in such a way that when the age matches
+            // then sort based on scores otherwise sort based on age :)
+            Arrays.sort(players, (player1, player2) ->
+                    player1.age == player2.age
+                            ? player1.score - player2.score
+                            : player1.age - player2.age
+            );
+
+            int dp[] = new int[players.length];
+            int ans = 0;
+
+            for (int i = 0; i < players.length; i++) {
+                dp[i] = players[i].score;
+                for (int j = 0; j < i; j++) {
+                    if (players[j].score <= players[i].score) { // no conflict
+                        dp[i] = Math.max(dp[i], dp[j] + players[i].score);
+                    }
+                }
+                ans = Math.max(ans, dp[i]);
+            }
+            return ans;
+        }
+
+        class Pair {
+            public int age;
+            public int score;
+
+            public Pair(int age, int score) {
+                this.age = age;
+                this.score = score;
+            }
+        }
+    }
+
     public class MajorityElementII {
         public List<Integer> majorityElementUsingQuickSort(int[] nums) {
             return new ArrayList();
