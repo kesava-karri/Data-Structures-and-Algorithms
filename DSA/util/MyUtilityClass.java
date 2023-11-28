@@ -5,9 +5,18 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class MyUtilityClass {
     private MyUtilityClass() {}
+
+    // GCD using recursion
+    public static int gcd(int n1, int n2) {
+        if (n2 == 0) {
+            return n1;
+        }
+        return gcd(n2, n1 % n2);
+    }
 
     public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
@@ -98,4 +107,27 @@ public class MyUtilityClass {
         System.out.println();
         System.out.println("End of Linked List\n");
     }
+
+    public static class Pair<T1, T2> {
+        private int i;
+        private int j;
+        public Pair(int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Pair pair = (Pair) o;
+            return i == pair.i && j == pair.j;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(i, j);
+        }
+    }
 }
+
