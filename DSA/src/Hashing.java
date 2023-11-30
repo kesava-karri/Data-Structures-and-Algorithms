@@ -1,13 +1,152 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import util.MyUtilityClass.Pair;
 
 public class Hashing {
+
+    class FairCandySwap {
+        public int[] fairCandySwap(int[] aliceSizes, int[] bobSizes) {
+            int aSum = Arrays.stream(aliceSizes).sum();
+            int bSum = Arrays.stream(bobSizes).sum();
+            int[] ans = new int[2];
+            // splitting the extra candies should be enough :)
+            int extras = (aSum - bSum) / 2;
+
+            HashSet<Integer> set = new HashSet<>();
+            for (int num : aliceSizes) set.add(num);
+            for (int num : bobSizes) {
+                if (set.contains(num + extras)) {
+                    ans[0] = num + extras;
+                    ans[1] = num;
+                    return ans;
+                }
+            }
+            return ans;
+        }
+    }
+
+    class SubstringWConcatenationOfAllWords {
+        public List<Integer> findSubstring(String s, String[] words) {
+            // s = "barfoothefoobarman"
+            // words = ["foo","bar"]
+            List<Integer> ans = new ArrayList<>();
+
+            int wordLen = words[0].length();
+            int n = words.length;
+            int total = n * wordLen; // len of each substring
+            int k = 0;
+
+            if (s.length() < total) return ans;
+
+            HashMap<String, Integer> freq = new HashMap<>();
+            for (int j = 0; j < n; j++) {
+                freq.put(words[j], freq.getOrDefault(words[j], 0) + 1);
+            }
+
+            outerLoop:
+            for (int i = 0; i < s.length() - total + 1; i++) {
+                HashMap<String, Integer> mp = new HashMap<>();
+                mp.putAll(freq);
+
+                // get substring from s of word length  & check if it exits in our words
+                // when all words match our substrings that is our match, so note the index
+                // else continue to next char
+                for (k = 0; k < n; k++) {
+                    // substring starting from index i
+                    String temp = s.substring(i + k * wordLen, i + (k + 1) * wordLen);
+                    if (mp.get(temp) == null) {
+                        continue outerLoop;
+                    } else {
+                        if (mp.get(temp) != 0) { // for repeated words
+                            mp.put(temp, mp.get(temp) - 1);
+                        } else {
+                            continue outerLoop;
+                        }
+                    }
+                }
+                if (k == n) {
+                    ans.add(i);
+                }
+            }
+            return ans;
+        }
+
+        public List<Integer> brokenApproach(String s, String[] words) {
+            // create all substrings & store in map
+            Set<String> set = new HashSet<>();
+            List<Integer> ans = new ArrayList<>();
+            for (int i = 0; i < words.length; i++) {
+
+                StringBuilder sb = new StringBuilder(words[i]);
+                for (int j = 0; j < words.length; j++) {
+                    if (j != i) {
+                        sb.append(words[j]);
+                    }
+                    System.out.println(sb.toString());
+                }
+                set.add(sb.toString());
+            }
+            System.out.println(set);
+            Iterator<String> iterator = set.iterator();
+            while (iterator.hasNext()) {
+                String item = iterator.next();
+                int index = s.lastIndexOf(item);
+                if (index != -1) {
+                    ans.add(index);
+                }
+
+            }
+
+            // iterate over String s & find if each substring is available
+            // for (int i = 0; i < s.length(); i++) {
+            //     set.contains(s)
+            // }
+
+            // Note start indices & return them as list
+            return ans;
+        }
+    }
+
+    public class VerifyingAlienDictionary {
+        public boolean isAlienSorted(String[] words, String order) {
+            Map<Character, Integer> linkedHashMap = new LinkedHashMap();
+            // LinkedHashMap to preserve the order
+            for (int i = 0; i < order.length(); i++) {
+                linkedHashMap.put(order.charAt(i), i + 1);
+            }
+
+            for (int i = 0; i < words.length - 1; i++) {
+                int p = 0;
+                String first = words[i];
+                String second = words[i + 1];
+
+                while (p < first.length() && p < second.length()) {
+                    char one = first.charAt(p);
+                    char two = second.charAt(p);
+                    if (linkedHashMap.get(one) < linkedHashMap.get(two)) break; // check the next words
+                    else if (linkedHashMap.get(one) == linkedHashMap.get(two)) {
+                        p++;
+                    }
+                    else return false; // linkedHashMap.get(one) > linkedHashMap.get(two)
+                }
+                if (p == second.length() && p < first.length()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     public class SubArrayWSumZero {
         public boolean solution(int arr[],int n) {
             HashMap<Integer, Boolean> map = new HashMap<>();
