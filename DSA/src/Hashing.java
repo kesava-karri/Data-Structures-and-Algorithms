@@ -6,15 +6,55 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 import util.MyUtilityClass.Pair;
 
 public class Hashing {
 
-    class FairCandySwap {
+    public class WordLadder {
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            // whenever shortest path is asked think about the shortest path algorimths like BFS
+            Set<String> set = new HashSet<>();
+            set.addAll(wordList);
+            if (!set.contains(endWord)) return 0;
+
+            Queue<String> q = new LinkedList<>();
+            q.add(beginWord);
+
+            Set<String> visited = new HashSet<>();
+            visited.add(beginWord);
+
+            int ans = 1; // number of changes
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+                for (int i = 0; i < size; i++) {
+                    String word = q.poll();
+                    if (word.equals(endWord)) return ans;
+                    for (int j = 0; j < word.length(); j++) {
+                        for (int k = 'a'; k <= 'z'; k++) {
+                            char[] arr = word.toCharArray();
+                            arr[j] = (char) k;
+                            String str = new String(arr);
+                            if(set.contains(str) && !visited.contains(str)) {
+                                q.add(str);
+                                visited.add(str);
+                            }
+                        }
+                    }
+                }
+                ans++;
+            }
+            return 0;
+        }
+    }
+
+    public class FairCandySwap {
         public int[] fairCandySwap(int[] aliceSizes, int[] bobSizes) {
             int aSum = Arrays.stream(aliceSizes).sum();
             int bSum = Arrays.stream(bobSizes).sum();
@@ -35,7 +75,7 @@ public class Hashing {
         }
     }
 
-    class SubstringWConcatenationOfAllWords {
+    public class SubstringWConcatenationOfAllWords {
         public List<Integer> findSubstring(String s, String[] words) {
             // s = "barfoothefoobarman"
             // words = ["foo","bar"]
