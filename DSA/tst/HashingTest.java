@@ -5,6 +5,11 @@ import src.Hashing;
 import src.Hashing.ConsecutiveArrayEle;
 import src.Hashing.LargestSubArrayWSumZero;
 import src.Hashing.MaxPointsOnALine;
+import src.Hashing.WordLadder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,6 +17,13 @@ import static org.junit.Assert.assertTrue;
 
 public class HashingTest {
     Hashing obj = new Hashing();
+
+    @Test
+    public void testWordLadder() {
+        WordLadder o1 =obj.new WordLadder();
+        List<String> words = new ArrayList(Arrays.asList("ce", "mo", "ko", "me", "co"));
+        assertEquals(4, o1.ladderLength("be", "ko", words));
+    }
 
     @Test
     public void testMaxPointsOnALine() {

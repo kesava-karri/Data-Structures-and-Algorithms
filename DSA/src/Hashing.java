@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import util.MyUtilityClass.ListNode;
 import util.MyUtilityClass.Pair;
 
 public class Hashing {
@@ -319,6 +320,18 @@ public class Hashing {
                 return n1;
             }
             return gcd(n2, n1 % n2);
+        }
+    }
+
+    public class LinkedListCycle {
+        public boolean hasCycle(ListNode head) {
+            Set<ListNode> set = new HashSet<>();
+            while (head != null) {
+                if (set.contains(head)) return true;
+                set.add(head);
+                head = head.next;
+            }
+            return false;
         }
     }
 }
