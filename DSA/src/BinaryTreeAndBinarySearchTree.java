@@ -74,6 +74,66 @@ public class BinaryTreeAndBinarySearchTree {
         }
     }
 
+    class BTLevelOrderTraversal {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> ans = new ArrayList<>();
+            Queue<TreeNode> q = new LinkedList<>();
+            if (root == null) return ans;
+
+            q.add(root);
+            while(!q.isEmpty()) {
+                int size = q.size();
+                List<Integer> temp = new ArrayList<>();
+                for (int i = 0; i < size; i++) {
+                    root = q.poll();
+
+                    if (root != null) temp.add(root.val);
+                    if (root.left != null) q.add(root.left);
+                    if (root.right != null) q.add(root.right);
+                }
+                ans.add(temp);
+            }
+            return ans;
+        }
+    }
+
+    class BTZigZagLevelOrderTraversal {
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            List<List<Integer>> ans = new ArrayList<>();
+            Queue<TreeNode> q = new LinkedList<>();
+            int height = 1;
+            if (root == null) return ans;
+
+            q.add(root);
+            while(!q.isEmpty()) {
+                int size = q.size();
+                List<Integer> temp = new ArrayList<>();
+
+                for (int i = 0; i < size; i++) {
+                    root = q.poll();
+
+                    if (root != null) temp.add(root.val);
+                    if (root.left != null) q.add(root.left);
+                    if (root.right != null) q.add(root.right);
+                }
+                if (height % 2 == 0) { // reverse the order for even height
+                    int j = temp.size() - 1;
+                    for (int i = 0; i < temp.size() / 2; i++) {
+                        swap(temp, i, j - i);
+                    }
+                }
+                ans.add(temp);
+                height++;
+            }
+            return ans;
+        }
+        private void swap(List<Integer> arr, int idx1, int idx2) {
+            int temp = arr.get(idx1);
+            arr.set(idx1, arr.get(idx2));
+            arr.set(idx2, temp);
+        }
+    }
+
     class CountCompleteTreeNodes {
         int ans;
         public int inorderCountNodes(TreeNode root) {
@@ -166,4 +226,5 @@ public class BinaryTreeAndBinarySearchTree {
             return ans;
         }
     }
+
 }
