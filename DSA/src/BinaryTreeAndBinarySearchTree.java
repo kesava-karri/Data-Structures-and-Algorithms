@@ -227,4 +227,115 @@ public class BinaryTreeAndBinarySearchTree {
         }
     }
 
+    class AvgOfLevelsInBT {
+        public List<Double> averageOfLevels(TreeNode root) {
+            List<Double> ans = new ArrayList<>();
+            Queue<TreeNode> q = new LinkedList();
+            q.add(root);
+            while(!q.isEmpty()) {
+                int size = q.size(), counter = 0;
+                double sum = 0;
+                for (int i = 0; i < size; i++) {
+                    root = q.poll();
+                    sum += root.val;
+                    counter++;
+                    if (root.left != null) q.add(root.left);
+                    if (root.right != null) q.add(root.right);
+                }
+                ans.add(sum / counter);
+            }
+            return ans;
+        }
+    }
+
+    class DiameterOfBT {
+        int ans = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            // the diameter could be finding the deepest node on both left & right branches and summing the depth of them.
+            // find max depth on left and right
+            // return the sum
+            f(root);
+            return ans;
+        }
+
+        private int f(TreeNode root) {
+            if (root == null) return 0;
+            int leftDepth = f(root.left);
+            int rightDepth = f(root.right);
+            ans = Math.max(ans, leftDepth + rightDepth);
+            return Math.max(leftDepth, rightDepth) + 1;
+        }
+    }
+
+    class PathSum {
+        public boolean hasPathSum(TreeNode root, int targetSum) {
+            if (root == null) return false;
+            return f(root, targetSum, 0);
+
+        }
+        public boolean f(TreeNode root, int target, int sum) {
+            if (root == null) return false;
+            sum += root.val;
+            // check if leaf node & path needed
+            if (root.left == null && root.right == null && sum == target) {
+                return true;
+            }
+            boolean left = f(root.left, target, sum);
+            if (left) return left;
+            boolean right = f(root.right, target, sum);
+            if (right) return right;
+            // at some point subtract the excess sum if any
+            if (sum > target) sum -= root.val;
+            return false;
+        }
+    }
+
+    class PathSumII {
+        List<List<Integer>> ans = new ArrayList<>();
+        public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+            f(root, targetSum, new ArrayList());
+            return ans;
+        }
+
+        private void f(TreeNode root, int remainingSum, List<Integer> arr) {
+            if (root == null) return;
+            arr.add(root.val);
+
+            if (remainingSum - root.val == 0 && root.left == null && root.right == null) {
+                ans.add(new ArrayList(arr));
+            }
+
+            f(root.left, remainingSum - root.val, arr);
+            f(root.right, remainingSum - root.val, arr);
+            arr.remove(arr.size() - 1);
+        }
+    }
+
+    class PathSumIII {
+        int ans;
+        public int pathSum(TreeNode root, int targetSum) {
+            if (root == null) return ans;
+            Queue<TreeNode> q = new LinkedList<>();
+            q.add(root);
+
+            // Since the path can start from any node, combining a BFS w DFS
+            while (!q.isEmpty()) {
+                root = q.poll();
+                f(root, targetSum);
+                if (root.left != null) q.add(root.left);
+                if (root.right != null) q.add(root.right);
+            }
+            return ans;
+        }
+
+        private void f(TreeNode root, long remainingSum) {
+            if (root == null) return;
+            if (remainingSum - root.val == 0) { // indicates the sum upto current node is equal to target
+                ans++;
+            }
+
+            f(root.left, remainingSum - root.val);
+            f(root.right, remainingSum - root.val);
+        }
+    }
 }
