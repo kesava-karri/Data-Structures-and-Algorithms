@@ -338,4 +338,34 @@ public class BinaryTreeAndBinarySearchTree {
             f(root.right, remainingSum - root.val);
         }
     }
+
+
+
+    class ConstructStringfromBT {
+        StringBuilder sb = new StringBuilder();
+        public String tree2str(TreeNode root) {
+            f(root);
+            return sb.toString();
+        }
+
+        private void f(TreeNode root) {
+            if (root == null) return;
+            sb.append(root.val);
+            if (root.left == null && root.right == null) return;
+            sb.append("(");
+            f(root.left);
+            sb.append(")");
+            // Add the parenthesis to right child if
+            // 1. right child is present [the case when both children exist]
+            // 2. left is null [the case when only right child exist]
+            // Note: parenthesis will not be added if child doesn't exist, why? -> 'cause null wouldn't be appended to our string
+            if (root.left == null || root.right != null) {
+                sb.append("(");
+            }
+            f(root.right);
+            if (root.left == null || root.right != null) {
+                sb.append(")");
+            }
+        }
+    }
 }
