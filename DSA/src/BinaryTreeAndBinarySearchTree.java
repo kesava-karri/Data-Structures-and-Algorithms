@@ -1,8 +1,10 @@
 package src;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 import util.MyUtilityClass.TreeNode;
@@ -339,7 +341,61 @@ public class BinaryTreeAndBinarySearchTree {
         }
     }
 
+    class DistributeCoinsInBinaryTree {
+        int ans;
+        public int distributeCoins(TreeNode root) {
+            f(root);
+            return ans;
+        }
+        private int f(TreeNode root) {
+            if (root == null) return 0;
+            int left = f(root.left);
+            int right = f(root.right);
+            ans += Math.abs(left) + Math.abs(right);
+            return (root.val - 1) + (left + right);
+            // (root.val - 1) is to keep 1 coin w the node & send the rest and
+            // in-case of internal nodes we should also accomodate the coins from their left & right child so (left + right)
+            // when no coin(s) are present with a node it would return -1 indicating coin would come from parent to child :)
+        }
+    }
 
+    public class PathSumIV {
+        int ans;
+        Map<Integer, Integer> mp = new HashMap<>();
+        /**
+         * @param nums: the list
+         * @return: the sum of all paths from the root towards the leaves
+         */
+        public int pathSumIV(int[] nums) {
+            // build the tree structure with a map, with Depth,Position as key & V as value
+            for (int num : nums) {
+                mp.put(num / 10, num % 10);
+            }
+
+            // each element in the array, is represented by three digits named as DPV
+            // so for the first i.e., root node DP (Depth & Position) would be 11
+            f(11, 0);
+            return ans;
+        }
+
+        public void f(int root, int sum) {
+            if (!mp.containsKey(root)) return;
+
+            sum += mp.get(root);
+
+            int depth = root / 10;
+            int position = root % 10;
+
+            int left = 10 * (depth + 1) + (position * 2) - 1;
+            int right = left + 1;
+            if (!mp.containsKey(left) && !mp.containsKey(right)) { // leaf node
+                ans += sum;
+                return;
+            }
+            f(left, sum);
+            f(right, sum);
+        }
+    }
 
     class ConstructStringfromBT {
         StringBuilder sb = new StringBuilder();
