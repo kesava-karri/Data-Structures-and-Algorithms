@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import util.MyUtilityClass.TreeNode;
+import util.MyUtilityClass.Node;
 
 /**
  * Definition for a binary tree node.
@@ -394,6 +395,121 @@ public class BinaryTreeAndBinarySearchTree {
             }
             f(left, sum);
             f(right, sum);
+        }
+    }
+
+    class SumRootToLeafNumbers {
+        int sum;
+        public int sumNumbers(TreeNode root) {
+            f(root, "");
+            return sum;
+        }
+        // build a string from root to node
+        // once leaf node is reached, convert to integer and add to sum
+        private void f(TreeNode root, String str) {
+            if (root == null) return;
+
+            str += root.val;
+            if (root.left == null && root.right == null) {
+                sum += Integer.parseInt(str);
+            }
+
+            f(root.left, str);
+            f(root.right, str);
+        }
+    }
+
+    class LongestUnivaluePath {
+        // track two paths left & right
+        int ans;
+        public int longestUnivaluePath(TreeNode root) {
+            f(root);
+            return ans;
+        }
+
+        private int f(TreeNode root) {
+            if (root == null) return 0;
+            int left = f(root.left);
+            int right = f(root.right);
+            // We need to reset left & right longest paths when they are not equal to the root, resulting in correct path calculation.
+            if (root.left != null && root.left.val == root.val) {
+                left++;
+            } else {
+                left = 0;
+            }
+            if (root.right != null && root.right.val == root.val) {
+                right++;
+            } else {
+                right = 0;
+            }
+            // Check if the new (left + right) path is greater than earlier path & choose the longer one.
+            ans = Math.max(ans, left + right);
+            // when same nodes extend to both branches & we only choose the longest path to compare with its parent
+            return Math.max(left, right);
+        }
+    }
+
+    class SubTreeOfAnotherTree {
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+        public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+            f(root, sb1);
+            f(subRoot, sb2);
+            return sb1.toString().contains(sb2.toString());
+        }
+        private void f(TreeNode root, StringBuilder sb) {
+            if (root == null) {
+                sb.append("null");
+                return;
+            }
+            sb.append("*" + root.val);
+            f(root.left, sb);
+            f(root.right, sb);
+        }
+    }
+
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+    public Node next;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, Node _left, Node _right, Node _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
+    }
+};
+*/
+
+    class PopulatingNextRightPointersInEachNode {
+        public Node connect(Node root) {
+            Queue<Node> q = new LinkedList<>();
+            q.add(root);
+            Node temp = new Node();
+            while (!q.isEmpty()) {
+                int size = q.size();
+                for (int i = 0; i < size; i++) {
+                    temp = q.poll();
+                    // for last element in the level, there will be no next node so let's assign null to it
+                    // otherwise add the next queue value
+                    if (temp != null) {
+                        temp.next = i == size - 1 ? null : q.peek();
+                        if (temp.left != null) q.add(temp.left);
+                        if (temp.right != null) q.add(temp.right);
+                    }
+                }
+            }
+            return root;
         }
     }
 
