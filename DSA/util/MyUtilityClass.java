@@ -142,7 +142,7 @@ public class MyUtilityClass {
             right = _right;
             next = _next;
         }
-    };
+    }
 
     public static class Pair<T1, T2> {
         private int i;

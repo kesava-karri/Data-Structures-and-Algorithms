@@ -1,12 +1,15 @@
 package src;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.TreeMap;
 
+import org.apache.commons.math3.util.Pair;
 import util.MyUtilityClass.TreeNode;
 import util.MyUtilityClass.Node;
 
@@ -510,6 +513,188 @@ class Node {
                 }
             }
             return root;
+        }
+    }
+
+    class PopulatingNextRightPointersInEachNodeII {
+
+        public Node connect(Node root) { // The regular lvl order traversal kind of appraoch
+            Queue<Node> q = new LinkedList<>();
+            if (root != null) q.add(root);
+            while(!q.isEmpty()) {
+                int size = q.size();
+                for (int i = 0; i < size; i++) {
+                    Node temp = q.poll();
+                    temp.next = q.peek();
+                    // set last element of the level order traversal to null
+                    if (i == size - 1) temp.next = null;
+                    if (temp.left != null) q.add(temp.left);
+                    if (temp.right != null) q.add(temp.right);
+                }
+            }
+            return root;
+        }
+    }
+
+    class MaxWidthOfBT {
+        public int widthOfBinaryTree(TreeNode root) {
+            // indexing each node during BFS and storing the index & node as a pair
+            // start index with 0 for root node
+            Pair<Integer, TreeNode> pair = new Pair(0, root);
+            Queue<Pair<Integer, TreeNode>> q = new LinkedList<>();
+            q.offer(pair);
+            int maxWidth = 0;
+
+            while(!q.isEmpty()) {
+                int size = q.size();
+                // left keeps a note of the start index & idx keeps updating with respect to node
+                int left = q.peek().getKey(), idx = left;
+                for (int i = 0; i < size; i++) {
+                    pair = q.poll();
+                    idx = pair.getKey();
+                    root = pair.getValue();
+                    // when root is zero then left child is one & right is two
+                    // which implies left = 2 * idx + 1, right = 2 * idx + 2
+                    // we can observe this pattern by numbering the nodes in bfs way
+                    if (root.left != null) q.offer(new Pair(2 * idx + 1, root.left));
+                    if (root.right != null) q.offer(new Pair(2 * idx + 2, root.right));
+                }
+                maxWidth = Math.max(maxWidth, idx - left + 1); // inclusive subtraction
+            }
+            return maxWidth;
+        }
+    }
+
+    class VerticalOrderTraversalOfBT {
+        TreeMap<Integer, TreeMap<Integer, ArrayList<Integer>>> mpp = new TreeMap<>();
+        public List<List<Integer>> verticalTraversalDFS(TreeNode root) {
+            List<List<Integer>> ans = new ArrayList<>();
+            f(root, 0, 0);
+            for (Integer col : mpp.keySet()) {
+                List<Integer> arr = new ArrayList<>();
+                for (Integer row : mpp.get(col).keySet()) {
+                    Collections.sort(mpp.get(col).get(row));
+                    arr.addAll(mpp.get(col).get(row));
+                }
+                ans.add(arr);
+            }
+            return ans;
+        }
+        private void f(TreeNode root, int row, int col) {
+            if (root == null) return;
+
+            ArrayList<Integer> arr = new ArrayList<>();
+            TreeMap<Integer, ArrayList<Integer>> hMap = new TreeMap<>();
+            if (mpp.containsKey(col)) {
+                hMap = mpp.get(col);
+                if (hMap.containsKey(row)) {
+                    arr = hMap.get(row);
+                    arr.add(root.val);
+                } else {
+                    arr.add(root.val);
+                    hMap.put(row, arr);
+                }
+            } else { // col
+                arr.add(root.val);
+                hMap.put(row, arr);
+                mpp.put(col, hMap);
+            }
+
+            f(root.left, row + 1, col - 1);
+            f(root.right, row + 1, col + 1);
+        }
+
+        public List<List<Integer>> verticalTraversalBFS(TreeNode root) {
+            // we need to group the nodes based on same columns & rows
+            // using a map to store them like {-1 -> {1 : [9]}, 0 -> {0: [3],2: [15]}, ...}
+            // Tree map is preferred to maintain order
+            TreeMap<Integer, TreeMap<Integer, ArrayList<Integer>>> mpp = new TreeMap<>();
+            // storing row, column values as keys
+            Pair<Pair<Integer, Integer>, TreeNode> pair = new Pair<>(new Pair<>(0, 0), root);
+            Queue<Pair<Pair<Integer, Integer>, TreeNode>> q = new LinkedList<>();
+            q.add(pair);
+
+            while(!q.isEmpty()) {
+                int size = q.size();
+                int row = q.peek().getKey().getKey();
+                int col = q.peek().getKey().getValue();
+                root = q.poll().getValue();
+                // if an element has added to same column earlier then append to it
+                // otherwise create a new array
+                TreeMap<Integer, ArrayList<Integer>> hMap = new TreeMap<>();
+                ArrayList<Integer> arr = new ArrayList<>();
+                if (mpp.containsKey(col)) {
+                    hMap = mpp.get(col);
+                    if (hMap.containsKey(row)) {
+                        arr = hMap.get(row);
+                        arr.add(root.val);
+                    } else {
+                        arr.add(root.val);
+                        hMap.put(row, arr);
+                    }
+                } else { // no col
+                    arr.add(root.val);
+                    hMap.put(row, arr);
+                    mpp.put(col, hMap);
+                }
+
+                if (root.left != null) q.add(new Pair(new Pair(row + 1, col - 1), root.left));
+                if (root.right != null) q.add(new Pair(new Pair(row + 1, col + 1), root.right));
+            }
+            // System.out.println(mpp);
+            List<List<Integer>> ans = new ArrayList<>();
+            mpp.forEach((col, hMap) -> {
+                List<Integer> temp = new ArrayList<>();
+                hMap.forEach((row, arr) -> {
+                    if (arr.size() > 1) {
+                        // When on same level & same column, sort them based on the value
+                        Collections.sort(arr);
+                    }
+                    temp.addAll(arr);
+                });
+                ans.add(temp);
+            });
+            return ans;
+        }
+
+        public List<List<Integer>> brokenApproach(TreeNode root) {
+            // The values should be sorted only when both row & column
+            // not only when they belong to same col
+
+            // we need to group the nodes based on same columns
+            // using a map to store them like {-1 -> [9], 0 -> [3, 15], ...}
+            // Tree map is preferred to maintain order
+            Map<Integer, List<Integer>> mpp = new TreeMap<>();
+            // storing the column values as keys
+            Pair<Integer, TreeNode> pair = new Pair(0, root);
+            Queue<Pair<Integer, TreeNode>> q = new LinkedList<>();
+            q.add(pair);
+            while(!q.isEmpty()) {
+                int size = q.size();
+                int col = q.peek().getKey();
+                root = q.poll().getValue();
+                // if an element has added to same column earlier then append to it
+                // otherwise create a new array
+                if (mpp.containsKey(col)) {
+                    List<Integer> arr = mpp.get(col);
+                    arr.add(root.val);
+                    mpp.put(col, arr);
+                } else {
+                    List<Integer> arr = new ArrayList<>();
+                    arr.add(root.val);
+                    mpp.put(col, arr);
+                }
+
+                if (root.left != null) q.add(new Pair(col - 1, root.left));
+                if (root.right != null) q.add(new Pair(col + 1, root.right));
+            }
+
+            // When on same level, sort them based on the value
+            List<List<Integer>> ans = new ArrayList<>(mpp.values());
+            for (List<Integer> arr : ans) {
+                Collections.sort(arr);
+            }
+            return ans;
         }
     }
 
