@@ -16,6 +16,50 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Set;
 
+class DifferenceBetweenOnesAndZerosInRowAndColumn {
+    public int[][] onesMinusZeros(int[][] grid) {
+        // since diff[i][j] = (onesRowi - zerosRowi) + (onesColj  - zerosColj)
+        // I would like to iterate over each row & find it's ith diff & also follow the same for col & find jth diff
+        // once we have both creating a diff matrix should be simply adding rows & cols values :)
+
+        int m = grid.length;
+        int n = grid[0].length;
+        // rowDiff has every row's diff for each row {0 : 1, 1 : 1, 2 : -1}
+        // i.e., For row 0: 2 (no. of ones) - 1 (no. of zeros) = 1 & so on.
+        Map<Integer, Integer> rowDiff = new HashMap<>();
+        Map<Integer, Integer> colDiff = new HashMap<>();
+
+        // Filling up rowDiff
+        for (int i = 0; i < m; i++) {
+            int ones = 0, zeroes = 0;
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) ones++;
+                else zeroes++;
+            }
+            rowDiff.put(i, ones - zeroes);
+        }
+
+        // Filling up colDiff
+        for (int j = 0; j < n; j++) {
+            int ones = 0, zeroes = 0;
+            for (int i = 0; i < m; i++) {
+                if (grid[i][j] == 1) ones++;
+                else zeroes++;
+            }
+            colDiff.put(j, ones - zeroes);
+        }
+
+        int[][] diff = new int[m][n];
+        // Fill diff matrix with values we accumulated
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                diff[i][j] = rowDiff.get(i) + colDiff.get(j);
+            }
+        }
+        return diff;
+    }
+}
+
 class ReduceArraySizeToHalfQ14 {
     static int approach1(int[] arr) {
         Map<Integer, Integer> map = new HashMap<>();
