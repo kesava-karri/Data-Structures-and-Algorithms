@@ -4,6 +4,34 @@ import java.math.BigInteger;
 
 
 public class BitManipulation {
+    class MissingNumber {
+        public int missingNumber(int[] nums) {
+            int n = nums.length, i = 0, ans = 0;
+            for (i = 0; i < n; i++) {
+                ans = ans ^ i ^ nums[i];
+            }
+            // when ans = 0 after iteration it implies that no number is missing
+            // within the given range, so the only missing should be n;
+            // or when some missing number exists then we xor with n
+            // cancelling the n & to get that num :)
+            return ans ^ n;
+        }
+    }
+
+    public class NumberOf1Bits {
+        // you need to treat n as an unsigned value
+        public int hammingWeight(int n) {
+            int ans = 0;
+            while (n != 0) {
+                // get last bit, all other bits would become zeroes
+                if ((n & 1) == 1) ans++;
+                // unsigned right shift by 1 bit
+                n = n >>> 1;
+            }
+            return ans;
+        }
+    }
+
     class PowerOfII {
         public boolean isPowerOfTwo(int n) {
             if (n <= 0) return false;
@@ -12,7 +40,30 @@ public class BitManipulation {
         }
     }
 
+    class SingleNumberIII {
+        public int[] singleNumber(int[] nums) {
+            int n = nums.length;
+            if (n == 2) return nums;
 
+            int a = 0;
+            for (int num : nums) {
+                a ^= num;
+            }
+
+            // find the position of ith bit where those 2 numbers have set & unset bit
+            a &= -a;
+
+            // Since we know the ith bit, we can divide those 2 single occuring numbers into 2 groups and xor
+            int ans1 = 0, ans2 = 0;
+            for (int num : nums) {
+                if ((a & num) == 0) ans1 ^= num;
+                else {
+                    ans2 ^= num;
+                }
+            }
+            return new int[] { ans1, ans2 };
+        }
+    }
 
     class SingleNumberII {
         public int singleNumber(int[] nums) {
