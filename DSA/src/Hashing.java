@@ -334,4 +334,21 @@ public class Hashing {
             return false;
         }
     }
+
+    class DestinationCity {
+        public String destCity(List<List<String>> paths) {
+            Map<String, String> mp = new HashMap<>();
+            StringBuilder ans = new StringBuilder();
+            paths.forEach(path -> {
+                mp.put(path.get(0), path.get(1));
+            });
+
+            mp.entrySet().forEach(set -> {
+                if (mp.get(set.getValue()) == null) {
+                    ans.append(set.getValue());
+                }
+            });
+            return ans.toString();
+        }
+    }
 }
