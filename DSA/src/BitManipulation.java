@@ -18,6 +18,24 @@ public class BitManipulation {
         }
     }
 
+    public class ReverseBits {
+        // you need treat n as an unsigned value
+        public int reverseBits(int n) {
+            int ans = 0;
+            for (int i = 0; i < 32; i++) {
+                // shift one bit to make space for new bit
+                ans = ans << 1;
+                // get the last bit from n;
+                int temp = n & 1;
+                // the new bit has zero & or operation with anything from the last bit of n would result in that bit and also kind of replacing the last bit
+                ans = ans | temp;
+                // unsigned right shift to ignore the value that has been used
+                n = n >>> 1;
+            }
+            return ans;
+        }
+    }
+
     public class NumberOf1Bits {
         // you need to treat n as an unsigned value
         public int hammingWeight(int n) {

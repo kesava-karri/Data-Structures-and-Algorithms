@@ -351,4 +351,25 @@ public class Hashing {
             return ans.toString();
         }
     }
+
+    class ValidAnagram {
+        public boolean isAnagram(String s, String t) {
+            if (s.length() != t.length()) return false;
+            Map<Character, Integer> mpp = new HashMap<>();
+            for (int i = 0; i < s.length(); i++) {
+                char ch = s.charAt(i);
+                mpp.put(ch, mpp.getOrDefault(ch, 0) + 1);
+            }
+
+            for (int i = 0; i < t.length(); i++) {
+                char ch = t.charAt(i);
+                if (mpp.containsKey(ch)) {
+                    int val = mpp.get(ch) - 1;
+                    if (val <= 0) mpp.remove(ch);
+                    else mpp.put(ch, val);
+                }
+            }
+            return mpp.size() == 0;
+        }
+    }
 }
