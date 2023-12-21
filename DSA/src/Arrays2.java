@@ -16,6 +16,54 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Set;
 
+class ImageSmoother {
+    int m, n;
+    public int[][] imageSmoother(int[][] img) {
+        m = img.length;
+        n = img[0].length;
+        int[][] ans = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                ans[i][j] = smoothenCell(img, i, j);
+            }
+        }
+        return ans;
+    }
+
+    private int smoothenCell(int[][] img, int i, int j) {
+        // Consider avg. from all 9 cells and when some index
+        // doesn't exist we can ignore it;
+        // If our element is at (0, 0) then the outer boundary indexes look like these,
+        // follow same for other border indices
+        // (-1,-1) (-1,0) (-1,1)
+        // (0, -1) (0, 0) (0, 1)
+        // (1, -1) (1, 0) (1, 1)
+        // So we need to calculate in all eight directions for
+        // each cell
+        int sum = 0, count = 0;
+        for (int k = -1; k <= 1; k++) {
+            for (int l = -1; l <= 1; l++) {
+                if ((i + k) < 0 || (i + k) >= m
+                        || (j + l) < 0 || (j + l) >= n) {
+                    continue;
+                }
+                sum += img[i + k][j + l];
+                count++;
+            }
+        }
+
+        return sum/count;
+    }
+}
+
+class MaxProductDiffBetweenTwoPairs {
+    public int maxProductDifference(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        return (nums[n - 1] * nums[n - 2]) - (nums[0] * nums[1]);
+    }
+}
+
 class DifferenceBetweenOnesAndZerosInRowAndColumn {
     public int[][] onesMinusZeros(int[][] grid) {
         // since diff[i][j] = (onesRowi - zerosRowi) + (onesColj  - zerosColj)
