@@ -16,6 +16,40 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Set;
 
+class MaxScoreAfterSplittingString {
+    public int maxScore(String s) {
+        int score = 0;
+        int zeros = 0; // only on left substring
+        int ones = 0; // only on right substring
+        int n = s.length();
+        for (int i = 1; i < n; i++) {
+            // count zeros
+            zeros = countNums(s.substring(0, i), 0);
+            // count ones
+            ones = countNums(s.substring(i , n), 1);
+
+            if (zeros + ones > score) {
+                score = zeros + ones;
+            }
+        }
+        return score;
+    }
+
+    private int countNums(String s, int i) {
+        int count = 0;
+        if (i == 0) {
+            for (char c : s.toCharArray()) {
+                if (c == '0') count++;
+            }
+        } else { // i == 1
+            for (char c : s.toCharArray()) {
+                if (c == '1') count++;
+            }
+        }
+        return count;
+    }
+}
+
 class ImageSmoother {
     int m, n;
     public int[][] imageSmoother(int[][] img) {

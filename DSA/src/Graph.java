@@ -9,11 +9,64 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class Graph {
-    public class FindCheapestPrice {
+    class NetworkDelayTime {
+        public int networkDelayTime(int[][] times, int n, int k) {
+            // 1 extra space to leave 0th index and start from 1 to be similar to node labeling
+            List<Pair<Integer, Integer>>[] adj = new ArrayList[n + 1];
+
+            for (int i = 0; i < n + 1; i++) {
+                adj[i] = new ArrayList<>();
+            }
+
+            for (int i = 0; i < times.length; i++) {
+                int u = times[i][0];
+                int v = times[i][1];
+                int w = times[i][2];
+                adj[u].add(new Pair(v, w));
+            }
+
+            int[] weights = new int[n + 1];
+            // starting at source node, so set weight to 0 & rest infinity
+            Arrays.fill(weights, Integer.MAX_VALUE);
+            weights[k] = 0;
+            // Pair(v, w)
+            PriorityQueue<Pair<Integer, Integer>> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.getValue(), b.getValue()));
+            pq.add(new Pair(k, weights[k]));
+
+            while (!pq.isEmpty()) {
+                Pair<Integer, Integer> pair = pq.poll();
+                int u = pair.getKey();
+                int w = pair.getValue();
+
+                for (Pair<Integer, Integer> neighbor : adj[u]) {
+                    int v = neighbor.getKey();
+                    int newWeight = w + neighbor.getValue();
+                    if (newWeight < weights[v]) {
+                        weights[v] = newWeight;
+                        pq.add(new Pair(v, newWeight));
+                    }
+                }
+            }
+
+            int ans = -1;
+            for (int i = 1; i <= n; i++) {
+                if (weights[i] == Integer.MAX_VALUE) {
+                    return -1; // There is an unreachable node
+                }
+                ans = Math.max(ans, weights[i]);
+            }
+
+            return ans;
+        }
+    }
+
+    public class CheapestFlightsWithinKStops {
         public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
             // Dijkstra's Algorithm :)
             // Create Adjacency List
             List<int[]>[] adj = new ArrayList[104];
+            // [ [[1, 2, 3], [2,3,4]], [[], [], []] ]
+
             for (int i = 0; i < 104; i++) {
                 adj[i] = new ArrayList<>();
             }
@@ -35,7 +88,7 @@ public class Graph {
                 dist[1] = Integer.MAX_VALUE;
                 visited[i] = 0;
                 dist[src] = 0;
-
+                // { stops, dis, u}
                 PriorityQueue<Pair<Integer, Pair<Integer, Integer>>> pq = new PriorityQueue<>(
                         Comparator.comparingInt(a -> a.getKey())
                 );
