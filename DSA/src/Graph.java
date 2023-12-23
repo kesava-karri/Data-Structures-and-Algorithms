@@ -5,10 +5,70 @@ import org.apache.commons.math3.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Graph {
+    class CourseSchedule {
+        public boolean canFinish(int numCourses, int[][] prerequisites) {
+            // look for all the courses from a vertex (course here) & get it done with that course
+            // Cyclic graphs can also exist where it each course is linked to another making it
+            // impossible to finish those courses so we should also avoid cyclic graphs
+            // Map of Lists; bi -> [ai1, ai2]
+            // Create adjacency list
+            Map<Integer, List<Integer>> adj = new HashMap<>();
+            int[] inDegrees = new int[numCourses];
+
+            for (int i = 0; i < prerequisites.length; i++) {
+                int ai = prerequisites[i][0];
+                int bi = prerequisites[i][1];
+
+                List<Integer> list = adj.getOrDefault(bi, new ArrayList<>());
+                list.add(ai);
+                adj.put(bi, list);
+
+                inDegrees[ai]++;
+            }
+
+            // Queue for topological sorting
+            Queue<Integer> queue = new LinkedList<>();
+            for (int i = 0; i < numCourses; i++) {
+                // we can start with the nodes which doesn't have any incoming edges
+                // i.e., these are the courses which doesn't have any pre-reqs
+                // If inDegrees are not 0 for at least 1 vertex it implies that a cycle exist
+                if (inDegrees[i] == 0) {
+                    queue.add(i);
+                }
+            }
+
+            // Perform topological sorting
+            while (!queue.isEmpty()) {
+                int course = queue.poll();
+                if (adj.containsKey(course)) {
+                    for (int nextCourse : adj.get(course)) {
+                        inDegrees[nextCourse]--;
+                        if (inDegrees[nextCourse] == 0) {
+                            queue.add(nextCourse);
+                        }
+                    }
+                }
+            }
+
+            // Check if all courses have been visited implies no cycles
+            for (int i = 0; i < numCourses; i++) {
+                if (inDegrees[i] > 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
     class NetworkDelayTime {
         public int networkDelayTime(int[][] times, int n, int k) {
             // 1 extra space to leave 0th index and start from 1 to be similar to node labeling
