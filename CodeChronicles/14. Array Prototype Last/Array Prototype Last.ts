@@ -8,8 +8,8 @@ Array.prototype.last = function () {
 };
 
 Array.prototype.last = function () {
-  const lastIndex = this.length - 1;
-  return lastIndex < 0 ? -1 : this.at(lastIndex);
+  const lastElement = this.at(-1);
+  return lastElement === undefined ? -1 : lastElement;
 };
 
 Object.defineProperty(Array.prototype, "last", {
