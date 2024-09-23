@@ -1,3 +1,25 @@
+// Using Iterator Protocol - w/o Generator
+function fibIteratorProtocol(): Iterator<number> {
+  return new Fib();
+}
+
+class Fib implements Iterator<number> {
+  private first = 0;
+  private last = 1;
+  private res = 0;
+  next = () => {
+    const obj = {
+      done: false,
+      value: this.first,
+    };
+    this.res = this.first + this.last;
+    this.first = this.last;
+    this.last = this.res;
+    return obj;
+  };
+}
+
+// -----------------------------------------------------------
 function* fibGenerator(): Generator<number, any, number> {
   yield 0;
   yield 1;
