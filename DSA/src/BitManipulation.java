@@ -1,9 +1,37 @@
 package src;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 
 public class BitManipulation {
+    public class MaxPossibleNumByBinaryConcatenation {
+        public int maxGoodNumber(int[] nums) {
+            // The length of nums is always 3
+            // So the total permutations would be 3! = 6
+            int result = -1;
+            for (int i = 0; i < nums.length; i++) {
+                for (int j = 0; j < nums.length; j++) {
+                    if (j != i) {
+                        for (int k = 0; k < nums.length; k++) {
+                            if (k != j && k != i) {
+                                StringBuilder temp = new StringBuilder();
+                                temp.append(intToBinary(nums[i]));
+                                temp.append(intToBinary(nums[j]));
+                                temp.append(intToBinary(nums[k]));
+                                result = Math.max(result, Integer.parseInt(temp.toString(), 2));
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        private String intToBinary(int i) {
+            return Integer.toBinaryString(i);
+        }
+    }
+
     class MissingNumber {
         public int missingNumber(int[] nums) {
             int n = nums.length, i = 0, ans = 0;
