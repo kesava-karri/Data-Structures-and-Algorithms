@@ -18,6 +18,21 @@ import java.util.Set;
 import java.util.Scanner;
 
 public class Arrays_ {
+    public class SecondSmallestNumber {
+        public int secondSmallestNum(int[] nums) {
+            int first = Integer.MAX_VALUE, second = Integer.MAX_VALUE;
+            for (int num : nums) {
+                if (num < first) {
+                    second = first;
+                    first = num;
+                } else if (num < second && num != first) {
+                    second = num;
+                }
+            }
+            return second == Integer.MAX_VALUE ? -1 : second;
+        }
+    }
+
     public class SubArraySumPattern {
         public void subArraySum() {
             /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
