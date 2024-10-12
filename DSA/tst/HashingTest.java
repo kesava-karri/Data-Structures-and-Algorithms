@@ -3,6 +3,7 @@ package tst;
 import org.junit.Test;
 import src.Hashing;
 import src.Hashing.ConsecutiveArrayEle;
+import src.Hashing.FirstUniqueCharacterInAString;
 import src.Hashing.LargestSubArrayWSumZero;
 import src.Hashing.MaxPointsOnALine;
 import src.Hashing.WordLadder;
@@ -18,6 +19,21 @@ import static org.junit.Assert.assertTrue;
 public class HashingTest {
     Hashing obj = new Hashing();
 
+    @Test
+    public void testFirstUniqueCharacterInAString() {
+        // Arrange
+        FirstUniqueCharacterInAString o = obj.new FirstUniqueCharacterInAString();
+        String s0 = "leetcode";
+        String s1 = "aabb";
+
+        // Act
+        int result0 = o.firstUniqChar(s0);
+        int result1 = o.firstUniqChar(s1);
+
+        // Assert
+        assertEquals(0, result0);
+        assertEquals(-1, result1);
+    }
     @Test
     public void testWordLadder() {
         WordLadder o1 =obj.new WordLadder();
