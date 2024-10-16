@@ -447,7 +447,25 @@ public class Arrays_ {
         }
     }
 
-    class IntersectionOfTwoArraysIIQ9 {
+    public class IntersectionOfTwoArraysIIQ9 {
+        public int[] intersect(int[] nums1, int[] nums2) {
+            Map<Integer, Integer> map = new HashMap<>();
+            List<Integer> result = new ArrayList<>();
+            for (int num : nums1) {
+                map.put(num, map.getOrDefault(num, 0) + 1);
+            }
+            for (int num : nums2) {
+                if (map.containsKey(num)) {
+                    result.add(num);
+                    map.replace(num, map.get(num) - 1);
+                    if (map.get(num) == 0) {
+                        map.remove(num);
+                    }
+                }
+            }
+            return result.stream().mapToInt(Integer::intValue).toArray();
+        }
+
         public int[] approach1(int[] nums1, int[] nums2) {
             // Input: nums1 = [1,2,2,1], nums2 = [2,2]
             // Output: [2,2]

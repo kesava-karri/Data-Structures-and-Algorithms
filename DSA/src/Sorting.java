@@ -2,13 +2,45 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static util.MyUtilityClass.swap;
 
 public class Sorting {
+    public class TopKFrequentWords {
+        public List<String> topKFrequent(String[] words, int k) {
+            // Declaring comparator - based on value(frequency)
+            // first then key (lexicographical order)
+            // Note: Notice how we use reversed(),
+            // since comparison is usually ascending in order
+            Comparator<Map.Entry<String, Integer>> comparator
+                    = Map.Entry
+                    .<String, Integer>comparingByValue()
+                    .reversed()
+                    .thenComparing(Map.Entry.comparingByKey());
+            // Creating the frequency of words map
+            Map<String, Integer> map = new HashMap<>();
+            for (int i = 0; i < words.length; i++) {
+                String curr = words[i];
+                map.put(curr, map.getOrDefault(curr, 0) + 1);
+            }
+
+            List<String> result
+                    = map
+                    .entrySet()
+                    .stream()
+                    .sorted(comparator)
+                    .limit(k)
+                    .map(Map.Entry::getKey)
+                    .collect(Collectors.toList());
+            return result;
+        }
+    }
     class BestTeamWNoConflicts {
         public int bestTeamScore(int[] scores, int[] ages) {
             Pair[] players = new Pair[scores.length];
