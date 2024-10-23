@@ -403,6 +403,26 @@ public class Search {
     }
 
     public class FindMinRotatedSortedArray {
+        public int alt(int[] nums) {
+            int min = nums[0];
+            int start = 0, end = nums.length - 1;
+
+            while (start <= end) {
+                int midIdx = (start + end) / 2;
+                int mid = nums[midIdx];
+
+                if (min < mid) {
+                    start = midIdx + 1;
+                } else if (min > mid) {
+                    end = midIdx - 1;
+                    min = mid;
+                } else {
+                    start += 1;
+                }
+            }
+            return min;
+        }
+
         public int solution(int[] nums) {
             // take the first element for the comparison
             int firstNum = nums[0];

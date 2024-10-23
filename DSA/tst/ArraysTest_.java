@@ -1,7 +1,5 @@
 package tst;
 
-//import src.Arrays_.SecondSmallestNumber;
-
 import org.junit.Test;
 import src.Arrays_;
 import src.Arrays_.IntersectionOfTwoArraysIIQ9;

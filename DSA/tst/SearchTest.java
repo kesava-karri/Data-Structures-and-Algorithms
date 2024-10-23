@@ -3,6 +3,7 @@ package tst;
 import org.junit.Test;
 import src.Search;
 import src.Search.FindInMountainArr;
+import src.Search.FindMinRotatedSortedArray;
 import src.Search.FindMinRotatedSortedArrayII;
 import src.Search.FindPeakElement;
 import src.Search.PeakIndexMoutainArr;
@@ -25,6 +26,15 @@ public class SearchTest {
         assertEquals(1, o1.peakIndexInMountainArray(new int[] {3,5,3,2,0}));
     }
 
+    @Test
+    public void testFindMinRotatedSortedArray() {
+        FindMinRotatedSortedArray o1 = obj.new FindMinRotatedSortedArray();
+        assertEquals(1,o1.alt(new int[] {3,4,5,1,2}));
+        assertEquals(1,o1.alt(new int[] {3,5,1}));
+        assertEquals(0,o1.alt(new int[] {4,5,6,7,0,1,2}));
+        assertEquals(1,o1.alt(new int[] {1,3,5}));
+        assertEquals(1,o1.alt(new int[] {1}));
+    }
 
     @Test
     public void testFindMinRotatedSortedArrayII() {
