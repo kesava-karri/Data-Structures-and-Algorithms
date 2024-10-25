@@ -11,6 +11,28 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class DynamicProgramming {
+    public class FindMinimumPathSum {
+        public int minPathSum(int[][] grid) {
+            int rows = grid.length, cols = grid[0].length;
+            int[][] dp = new int[rows][cols];
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    int currentGrid = grid[i][j];
+                    int leftDP = j - 1 < 0 ? 0 : dp[i][j - 1];
+                    int topDP = i - 1 < 0 ? 0 : dp[i-1][j];
+                    int addOn;
+                    if (i - 1 < 0 || j - 1 < 0) {
+                        addOn = Math.max(leftDP, topDP);
+                    } else {
+                        addOn = Math.min(leftDP, topDP);
+                    }
+                    dp[i][j] = currentGrid + addOn;
+                }
+            }
+            return dp[rows - 1][cols - 1];
+        }
+    }
+
     public class FindMaximumPathSum {
         public int maxPathSum(int[][] grid) {
         /*

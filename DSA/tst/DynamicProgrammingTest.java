@@ -5,12 +5,20 @@ import src.DynamicProgramming;
 import src.DynamicProgramming.ClimbStairs;
 import src.DynamicProgramming.FibonacciSeries;
 import src.DynamicProgramming.FindMaximumPathSum;
+import src.DynamicProgramming.FindMinimumPathSum;
 import src.DynamicProgramming.HouseRobber;
 
 import static org.junit.Assert.assertEquals;
 
 public class DynamicProgrammingTest {
     DynamicProgramming dpObj = new DynamicProgramming();
+
+    @Test
+    public void testFindMinimumPathSum() {
+        FindMinimumPathSum o = dpObj.new FindMinimumPathSum();
+        int[][] grid = new int[][] {{1,3,1}, {1,5,1}, {4,2,1}};
+        assertEquals(7, o.minPathSum(grid));
+    }
 
     @Test
     public void testFindMaximumPathSum() {
