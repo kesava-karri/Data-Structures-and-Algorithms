@@ -11,14 +11,59 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class DynamicProgramming {
-    int[][] dp = new int[101][2];
-    public class HouseRobber {
-        public int solution(int[] nums) {
-            for (int[] row : dp) {
-                Arrays.fill(row, -1);
+    public class FindMaximumPathSum {
+        public int maxPathSum(int[][] grid) {
+        /*
+            - Movement is limited to up or right
+            Input:
+            [[0,0,0,0,5]]
+            [[0,1,1,1,0]]
+            [[2,0,0,0,0]]
+
+            Output:
+            10
+         */
+            int rows = grid.length, cols = grid[0].length;
+            int[][] dp = new int[rows][cols];
+            for (int i = rows - 1; i >=0; i--) {
+                for (int j = 0; j < cols; j++) {
+                    // Assign current grid value
+                    // then add prev dp value based on the curr position
+                    int currentGrid = grid[i][j];
+                    int leftDP = j - 1 < 0 ? 0 : dp[i][j - 1];
+                    int bottomDP = i + 1 >= rows ? 0 : dp[i + 1][j];
+                    dp[i][j] = Math.max(currentGrid + leftDP, currentGrid + bottomDP);
+
+                }
             }
-            MyUtilityClass.print2DArray(dp);
-            return - 1;
+            // Since we're storing the max value at the destination
+            return dp[0][cols - 1];
+        }
+    }
+
+    public class HouseRobber {
+        int[][] dp = new int[101][2];
+        public int rob(int[] nums) {
+            for (int i = 0; i < nums.length; i++) {
+                Arrays.fill(dp[i], -1);
+            }
+            int isRobbed = 0;
+            return f(nums, 0, isRobbed);
+        }
+
+        public int f(int[] nums, int currIndex, int isRobbed) {
+            if (currIndex == nums.length) return 0;
+            if (dp[currIndex][isRobbed] != -1) return dp[currIndex][isRobbed];
+
+            int ans = 0;
+
+            if (isRobbed == 1) {
+                ans = f(nums, currIndex + 1, 0);
+            } else {
+                ans = Math.max(f(nums, currIndex + 1, 0), nums[currIndex] + f(nums, currIndex + 1, 1));
+            }
+            dp[currIndex][isRobbed] = ans;
+            return ans;
         }
     }
 
