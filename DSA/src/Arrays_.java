@@ -18,6 +18,69 @@ import java.util.Set;
 import java.util.Scanner;
 
 public class Arrays_ {
+    public class CheckIfExist {
+            public boolean checkIfExistUsingBinarySearch(int[] arr) {
+                // Using Binary Search
+                // Since binary search needs some sort pattern, I'm going to sort the given array
+                Arrays.sort(arr);
+                int zeroCounter = 0;
+                for (int num: arr) {
+                    if (num == 0) {
+                        zeroCounter++;
+                    } else {
+                        if(binarySearch(arr, num * 2)) return true;
+                    }
+                }
+                return zeroCounter > 1;
+            }
+
+            private boolean binarySearch(int[] arr, int temp) {
+                int start = 0;
+                int end = arr.length - 1;
+                while (start <= end) {
+                    int mid = (start + end) / 2;
+                    int midNum = arr[mid];
+                    if (midNum < temp) {
+                        start = mid + 1;
+                    } else if (midNum > temp) {
+                        end = mid - 1;
+                    } else {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+        public boolean checkIfExistUsingHashMap(int[] arr) {
+            // Using HashMap
+            Map<Integer, Integer> mp = new HashMap<>();
+            for (int num: arr) {
+                mp.put(num, mp.getOrDefault(num, 0) + 1);
+            }
+            for (int num: arr) {
+                if (num == 0) {
+                    if (mp.get(num) > 1) return true;
+                } else if (mp.get(2 * num) != null) return true;
+            }
+            return false;
+        }
+
+        public boolean checkIfExist(int[] arr) {
+            // Brute force
+            for (int i = 0; i < arr.length; i++) {
+                int currNum = arr[i];
+                for (int j = 0; j < arr.length; j++) {
+                    if(i != j) {
+                        if (currNum == 2 * arr[j]) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
     public class SecondSmallestNumber {
         public int secondSmallestNum(int[] nums) {
             int first = Integer.MAX_VALUE, second = Integer.MAX_VALUE;
